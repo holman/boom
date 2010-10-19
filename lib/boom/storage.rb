@@ -7,18 +7,20 @@ module Boom
     #
     # Returns the Storage instance.
     def initialize
+      @lists = []
+      explode_json(JSON_FILE)
     end
 
     # Public: the list of Lists in your JSON data.
     #
     # Returns an Array of List objects.
-    attr_writer :lists
+    attr_accessor :lists
 
     # Public: persists your in-memory objects to disk in JSON format.
     #
     # Returns true if successful, false if unsuccessful.
     def save
-      to_json
+      File.open(JSON_FILE, 'w') {|f| f.write(to_json) }
     end
 
     # Public: the JSON representation of the current List and Item assortment
@@ -26,7 +28,11 @@ module Boom
     #
     # Returns a String JSON representation of its Lists and their Items.
     def to_json
-      lists.collect(&:to_json)
+      Yajl::Encoder.encode(to_hash)
+    end
+
+    def to_hash
+      { :lists => lists.collect(&:to_hash) }
     end
 
 
@@ -37,6 +43,20 @@ module Boom
     #
     # Returns nothing.
     def explode_json(json)
+      FileUtils.touch(json)
+      storage = Yajl::Parser.new.parse(File.new(json, 'r'))
+      
+      storage['lists'].each do |lists|
+        lists.each do |list_name, items|
+          @lists << list = List.new(list_name)
+
+          items.each do |item|
+            item.each do |name,value|
+              list.add_item(Item.new(name,value))
+            end
+          end
+        end
+      end
     end
 
   end

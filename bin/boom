@@ -2,11 +2,7 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-# require 'rubygems' rescue LoadError ; end
-
 require 'boom'
-require 'boom/item'
-require 'boom/list'
-require 'boom/storage'
 
 storage = Boom::Storage.new
+storage.save
