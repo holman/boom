@@ -6,7 +6,7 @@ module Boom
 
       def execute(storage,args)
         @storage = storage
-        command = args.pop
+        command = args.shift
 
         return list unless command 
 
