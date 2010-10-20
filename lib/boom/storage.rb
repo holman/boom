@@ -18,7 +18,7 @@ module Boom
     #
     # Returns an Array of List objects.
     def lists
-      @lists.sort_by{|list| list.items.size}
+      @lists.sort_by{ |list| -list.items.size }
     end
 
     # Public: all Items in storage.
