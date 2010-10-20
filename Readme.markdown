@@ -65,6 +65,13 @@ can have multiple piles.
     $ boom delete jayz
     Boom! "jayz" => "http://cl.ly/2U4n/content" is gone forever.
 
+** List everything **
+
+    $ boom list
+      urls
+        github: http://github.com
+        google: http://google.com
+
 ## Install
 
     gem install boom
