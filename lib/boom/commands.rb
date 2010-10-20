@@ -65,6 +65,41 @@ module Boom
         puts "Boom! Created a new list called \"#{name}\"."
       end
 
+      # Public: deletes an Item or List, depending upon context.
+      #
+      # target  - either "list" or the Item name.
+      # value   - the String name of the List to delete (Optional)
+      #
+      # Example
+      #
+      #   Commands.delete("list","snippets")
+      #   Commands.delete("test-item")
+      #
+      # Returns the newly created List or Item.
+      def delete(target,name=nil)
+        if target == 'list'
+          delete_list(name)
+        else
+
+        end
+        storage.save!
+      end
+
+      # Public: remove a named List.
+      #
+      # name - the String name of the List.
+      #
+      # Example
+      #
+      #   Commands.delete("snippets")
+      #
+      # Returns nothing.
+      def delete_list(name)
+        lists = storage.lists.reverse.reject { |list| list.name == name }
+        storage.lists = lists
+        puts "Boom! Deleted the \"#{name}\" list."
+      end
+
       # Public: search for an Item in all lists by name. Drops the 
       # corresponding entry into your clipboard.
       #

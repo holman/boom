@@ -54,6 +54,11 @@ can have multiple piles.
     $ boom add urls jayz http://cl.ly/2U4n/content
     Cool. "jayz" => "http://cl.ly/2U4n/content" in "urls". Got it.
 
+** Delete a List **
+
+    $ boom delete list ellen-page
+    Boom! Deleted the "ellen-page" list.
+
 ** Delete an item **
 
     # boom delete <name>
