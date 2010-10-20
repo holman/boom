@@ -3,8 +3,10 @@ require 'rubygems' rescue LoadError
 require 'fileutils'
 require 'yajl'
 
+require 'boom/commands'
 require 'boom/item'
 require 'boom/list'
+require 'boom/runner'
 require 'boom/storage'
 
 module Boom

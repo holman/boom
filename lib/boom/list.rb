@@ -12,12 +12,6 @@ module Boom
     def self.create_from_json(json)
     end
 
-    # Public: a list of all Lists that boom knows about.
-    #
-    # Returns an Array of Lists.
-    def self.all
-    end
-
     # Public: creates a new List instance in-memory.
     #
     # name - The name of the List. Fails if already used.

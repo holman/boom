@@ -11,11 +11,23 @@ module Boom
       explode_json(JSON_FILE)
     end
 
-    # Public: the list of Lists in your JSON data.
+    attr_writer :lists
+
+    # Public: the list of Lists in your JSON data, sorted by number of items
+    # descending.
     #
     # Returns an Array of List objects.
-    attr_accessor :lists
+    def lists
+      @lists.sort_by{|list| list.items.size}
+    end
 
+    # Public: all Items in storage.
+    #
+    # Returns an Array of all Items.
+    def items
+      @lists.collect(&:items).flatten
+    end
+  
     # Public: persists your in-memory objects to disk in JSON format.
     #
     # Returns true if successful, false if unsuccessful.
