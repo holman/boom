@@ -22,12 +22,6 @@ module Boom
       @name  = name
     end
 
-    # Public: deletes the List object.
-    #
-    # Returns true deletion if successful, false if unsuccessful.
-    def delete
-    end
-
     # Public: lets you access the array of items contained within this List.
     #
     # Returns an Array of Items.
@@ -41,6 +35,15 @@ module Boom
     #
     # Returns the current set of items.
     def add_item(item)
+      @items << item
+    end
+
+    # Public: removes an Item from this List.
+    #
+    # item - the Item object to associate with this List.
+    #
+    # Returns the current set of items.
+    def delete_item(item)
       @items << item
     end
 

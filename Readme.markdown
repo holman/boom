@@ -63,7 +63,7 @@ can have multiple piles.
 
     # boom delete <name>
     $ boom delete jayz
-    Boom! "jayz" => "http://cl.ly/2U4n/content" is gone forever.
+    Boom! "jayz" is gone forever.
 
 ** List everything **
 

@@ -80,7 +80,7 @@ module Boom
         if target == 'list'
           delete_list(name)
         else
-
+          delete_item(target)
         end
         storage.save!
       end
@@ -91,13 +91,29 @@ module Boom
       #
       # Example
       #
-      #   Commands.delete("snippets")
+      #   Commands.delete_list("snippets")
       #
       # Returns nothing.
       def delete_list(name)
         lists = storage.lists.reverse.reject { |list| list.name == name }
         storage.lists = lists
         puts "Boom! Deleted the \"#{name}\" list."
+      end
+
+      # Public: remove a named Item.
+      #
+      # name - the String name of the Item.
+      #
+      # Example
+      #
+      #   Commands.delete_item("an-item-name")
+      #
+      # Returns nothing.
+      def delete_item(name)
+        storage.lists = storage.lists.each do |list|
+          list.items.reject! { |item| item.name == name }
+        end
+        puts "Boom! \"#{name}\" is gone forever."
       end
 
       # Public: search for an Item in all lists by name. Drops the 
