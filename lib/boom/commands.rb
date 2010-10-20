@@ -39,7 +39,7 @@ module Boom
           item.name == name
         end
 
-        puts item
+        Clipboard.copy item
       end
 
       # Public: prints a tidy overview of your Lists in descending order of
