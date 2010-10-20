@@ -29,6 +29,11 @@ can have multiple piles.
     urls (3)
     email (4)
 
+** Create a List **
+
+    $ boom add cutiepies
+    Boom! Created a new list called "cutiepies".
+
 ** List the name and value of items in a pile **
 
     # boom <list-name>

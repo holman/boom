@@ -31,7 +31,7 @@ module Boom
     # Public: persists your in-memory objects to disk in JSON format.
     #
     # Returns true if successful, false if unsuccessful.
-    def save
+    def save!
       File.open(JSON_FILE, 'w') {|f| f.write(to_json) }
     end
 
