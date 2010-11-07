@@ -47,7 +47,9 @@ module Boom
       #
       # Returns the newly created Item.
       def add_item(list,name,value)
-        
+        list = storage.lists.find{|storage_list| storage_list.name == list}
+        list.add_item(Item.new(name,value))
+        puts "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
       end
 
       # Public: add a new List.

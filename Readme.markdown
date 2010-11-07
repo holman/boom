@@ -52,7 +52,7 @@ can have multiple piles.
 
     # boom add <list> <name> <value>
     $ boom add urls jayz http://cl.ly/2U4n/content
-    Cool. "jayz" => "http://cl.ly/2U4n/content" in "urls". Got it.
+    Boom! "jayz" in "urls" is "http://cl.ly/2U4n/content". Got it.
 
 ** Delete a List **
 

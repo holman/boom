@@ -11,7 +11,7 @@ module Boom
           `echo '#{item.value}' | tr -d "\n" | pbcopy`
         end
 
-        puts "We just copied #{item.value} to your clipboard."
+        puts "Boom! We just copied #{item.value} to your clipboard."
       end
 
     end
