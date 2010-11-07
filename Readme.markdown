@@ -72,6 +72,14 @@ can have multiple piles.
         github: http://github.com
         google: http://google.com
 
+## Aliases
+
+Aliases work as you'd expect: `l` instead of `list`, `a` instead of `add`, and
+so on. For example:
+
+    $ boom l a new-list
+    Boom! Created a new list called "new-list".
+
 ## Install
 
     gem install boom
