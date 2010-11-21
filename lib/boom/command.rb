@@ -6,12 +6,13 @@ module Boom
 
       def execute(storage,*args)
         @storage = storage
-        command = args.shift
 
-        return overview unless command 
+        command = args[0]
+        major   = args[1]
+        minor   = args[2]
 
-        return send(command, *args) if respond_to?(command)
-        search(command)
+        return overview unless command
+        delegate(command, major, minor)
       end
 
       # Public: prints any given string.
@@ -31,6 +32,56 @@ module Boom
       def overview
         storage.lists.each do |list|
            output "  #{list.name} (#{list.items.size})"
+        end
+      end
+
+      # Public: allows main access to most commands.
+      #
+      # Returns output based on method calls.
+      def delegate(command, major, minor)
+        if storage.list_exists?(command)
+          list_detail(command)
+        else
+          list_create(command)
+        end
+      end
+
+      # Public: prints all Items over a List.
+      #
+      # list - the List object to iterate over
+      #
+      # Returns nothing.
+      def list_detail(list_name)
+        list = storage.lists.first { |list| list.name == list_name } 
+        list.items.each do |item|
+          output "    #{item.name}: #{item.value}"
+        end
+      end
+
+      # Public: add a new List.
+      #
+      # name - the String name of the List.
+      #
+      # Example
+      #
+      #   Commands.list_create("snippets")
+      #
+      # Returns the newly created List.
+      def list_create(name)
+        lists = (storage.lists << List.new(name))
+        storage.lists = lists
+        output "Boom! Created a new list called \"#{name}\"."
+      end
+
+      # Public: prints all Items over all Lists.
+      #
+      # Returns nothing.
+      def list
+        storage.lists.each do |list|
+          puts "  #{list.name}"
+          list.items.each do |item|
+            puts "    #{item.name}: #{item.value}"
+          end
         end
       end
 
@@ -70,21 +121,6 @@ module Boom
         list = storage.lists.find{|storage_list| storage_list.name == list}
         list.add_item(Item.new(name,value))
         puts "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
-      end
-
-      # Public: add a new List.
-      #
-      # name - the String name of the List.
-      #
-      # Example
-      #
-      #   Commands.add_list("snippets")
-      #
-      # Returns the newly created List.
-      def add_list(name)
-        lists = (storage.lists << List.new(name))
-        storage.lists = lists
-        puts "Boom! Created a new list called \"#{name}\"."
       end
 
       # Public: deletes an Item or List, depending upon context.
@@ -150,18 +186,6 @@ module Boom
         end
 
         Clipboard.copy item
-      end
-
-      # Public: prints all Items over all Lists.
-      #
-      # Returns nothing.
-      def list
-        storage.lists.each do |list|
-          puts "  #{list.name}"
-          list.items.each do |item|
-            puts "    #{item.name}: #{item.value}"
-          end
-        end
       end
 
     end
