@@ -5,4 +5,4 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'boom'
 
 storage = Boom::Storage.new
-Boom::Runner.new(storage,*ARGV)
+Boom::Commands.execute(storage,*ARGV)

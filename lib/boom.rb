@@ -7,7 +7,6 @@ require 'boom/clipboard'
 require 'boom/commands'
 require 'boom/item'
 require 'boom/list'
-require 'boom/runner'
 require 'boom/storage'
 
 module Boom
