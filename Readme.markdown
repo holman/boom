@@ -18,67 +18,59 @@ more. The targeted use cases are:
   with the responses, boom gives me them on my ever-present command line.
 
 We store everything in one JSON file in your home directory: `~/.boom`. The
-structure is simple, too. Each individual item is tossed on a `pile`, and you
-can have multiple piles.
+structure is simple, too. Each individual item is tossed on a `list`, and you
+can have multiple lists.
 
 ## Show me the boom
 
-** List all the piles **
+** Overview **
 
     $ boom
-    urls (3)
+    gifs (5)
     email (4)
 
 ** Create a List **
 
-    $ boom add cutiepies
-    Boom! Created a new list called "cutiepies".
-
-** List the name and value of items in a pile **
-
-    # boom <list-name>
     $ boom urls
-    karaoke http://cl.ly/2X13/content
-    tomwink http://cl.ly/2azg/content
-    jayz    http://cl.ly/2U4n/content
-
-** Copy an item's value to your clipboard **
-
-    # boom <name-of-any-list-item>
-    $ boom karaoke
-    We just copied http://cl.ly/2X13/content to your clipboard.
+    Boom! Created a new list called "urls".
 
 ** Add an item **
 
-    # boom add <list> <name> <value>
-    $ boom add urls jayz http://cl.ly/2U4n/content
-    Boom! "jayz" in "urls" is "http://cl.ly/2U4n/content". Got it.
+    # boom <list> <name> <value>
+    $ boom urls github https://github.com
+    Boom! "github" in "urls" is "https://github.com". Got it.
+
+** List items in a list **
+
+    $ boom urls
+    blog   http://zachholman.com
+    github http://github.com
+
+** Copy an item's value to your clipboard **
+
+    $ boom github
+    Boom! Just copied https://github.com to your clipboard.
+
+    $ boom urls github
+    Boom! Just copied https://github.com to your clipboard.
 
 ** Delete a List **
 
-    $ boom delete list ellen-page
-    Boom! Deleted the "ellen-page" list.
+    $ boom urls delete
+    You sure you want to delete everything in "urls"? (y/n): y
+    Boom! Deleted all your urls.
 
 ** Delete an item **
 
-    # boom delete <name>
-    $ boom delete jayz
-    Boom! "jayz" is gone forever.
+    # boom urls github delete
+    Boom! "github" is gone forever.
 
 ** List everything **
 
     $ boom list
       urls
-        github: http://github.com
-        google: http://google.com
-
-## Aliases
-
-Aliases work as you'd expect: `l` instead of `list`, `a` instead of `add`, and
-so on. For example:
-
-    $ boom l a new-list
-    Boom! Created a new list called "new-list".
+        blog:   http://zachholman.com
+        github: https://github.com
 
 ## Install
 
