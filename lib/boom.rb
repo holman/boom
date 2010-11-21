@@ -4,7 +4,7 @@ require 'fileutils'
 require 'yajl'
 
 require 'boom/clipboard'
-require 'boom/commands'
+require 'boom/command'
 require 'boom/item'
 require 'boom/list'
 require 'boom/storage'

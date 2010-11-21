@@ -1,5 +1,5 @@
 module Boom
-  class Commands
+  class Command
     class << self
 
       attr_accessor :storage
