@@ -51,4 +51,14 @@ class TestCommand < Test::Unit::TestCase
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('urls github')
   end
+
+  def test_list_deletion_no
+    Boom::Command.stubs(:gets).returns('n')
+    assert_match /Just kidding then/, command('urls delete')
+  end
+
+  def test_list_deletion_yes
+    Boom::Command.stubs(:gets).returns('y')
+    assert_match /Deleted all your urls/, command('urls delete')
+  end
 end
