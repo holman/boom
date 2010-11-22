@@ -24,8 +24,9 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def command(cmd)
+    cmd = cmd.split(' ') if cmd
     Boom::Command.capture_output
-    Boom::Command.execute(@storage,cmd)
+    Boom::Command.execute(@storage,*cmd)
     Boom::Command.captured_output
   end
 
@@ -39,5 +40,15 @@ class TestCommand < Test::Unit::TestCase
 
   def test_list_creation
     assert_match /a new list called "newlist"/, command('newlist')
+  end
+
+  def test_item_access
+    assert_match /copied https:\/\/github\.com to your clipboard/,
+      command('github')
+  end
+
+  def test_item_access_scoped_by_list
+    assert_match /copied https:\/\/github\.com to your clipboard/,
+      command('urls github')
   end
 end

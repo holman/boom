@@ -37,14 +37,22 @@ module Boom
       @lists.detect { |list| list.name == name }
     end
 
-
     # Public: all Items in storage.
     #
     # Returns an Array of all Items.
     def items
       @lists.collect(&:items).flatten
     end
-  
+
+    # Public: tests whether a named Item exists.
+    #
+    # name - the String name of an Item
+    #
+    # Returns true if found, false if not.
+    def item_exists?(name)
+      items.detect { |item| item.name == name }
+    end
+
     # Public: persists your in-memory objects to disk in JSON format.
     #
     # Returns true if successful, false if unsuccessful.

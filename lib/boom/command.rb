@@ -39,11 +39,19 @@ module Boom
       #
       # Returns output based on method calls.
       def delegate(command, major, minor)
+
+        # if we're operating on a List
         if storage.list_exists?(command)
-          list_detail(command)
-        else
-          list_create(command)
+          return list_detail(command) unless major
+          return search_list_for_item(command, major)
         end
+
+        if storage.item_exists?(command)
+          return search_items(command)
+        end
+
+        return list_create(command)
+
       end
 
       # Public: prints all Items over a List.
@@ -180,12 +188,26 @@ module Boom
       # name - the String term to search for in all Item names
       #
       # Returns the matching Item.
-      def search(name)
+      def search_items(name)
         item = storage.items.detect do |item|
           item.name == name
         end
 
-        Clipboard.copy item
+        output Clipboard.copy(item)
+      end
+
+      # Public: search for an Item in a particular list by name. Drops the 
+      # corresponding entry into your clipboard.
+      #
+      # list_name - the String name of the List in which to scope the search
+      # item_name - the String term to search for in all Item names
+      #
+      # Returns the matching Item.
+      def search_list_for_item(list_name, item_name)
+        list = storage.lists.first { |list| list.name == list_name }
+        item = list.items.first { |item| item.name == item_name }
+
+        output Clipboard.copy(item)
       end
 
     end
