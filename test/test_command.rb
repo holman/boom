@@ -2,6 +2,7 @@ require 'helper'
 
 # Intercept STDOUT and collect it
 class Boom::Command
+
   def self.capture_output
     @output = ''
   end
@@ -13,12 +14,17 @@ class Boom::Command
   def self.output(s)
     @output << s
   end
+
+  def self.save!
+    # no-op
+  end
+
 end
 
 class TestCommand < Test::Unit::TestCase
 
   def setup
-    Boom::Storage.any_instance.expects(:json_file).
+    Boom::Storage.any_instance.stubs(:json_file).
       returns('test/examples/urls.json')
     @storage = Boom::Storage.new
   end

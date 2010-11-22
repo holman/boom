@@ -98,6 +98,7 @@ module Boom
         lists = (storage.lists << List.new(name))
         storage.lists = lists
         output "Boom! Created a new list called \"#{name}\"."
+        save!
       end
 
       # Public: prints all Items over all Lists.
@@ -127,6 +128,7 @@ module Boom
         if gets == 'y'
           storage.lists = lists
           output "Boom! Deleted all your #{name}."
+          save!
         else
           output "Just kidding then."
         end
@@ -147,6 +149,7 @@ module Boom
         list = storage.lists.find{|storage_list| storage_list.name == list}
         list.add_item(Item.new(name,value))
         puts "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
+        save!
       end
 
       # Public: remove a named Item.
@@ -163,6 +166,7 @@ module Boom
           list.items.reject! { |item| item.name == name }
         end
         output "Boom! \"#{name}\" is gone forever."
+        save!
       end
 
       # Public: search for an Item in all lists by name. Drops the 
@@ -191,6 +195,13 @@ module Boom
         item = list.items.first { |item| item.name == item_name }
 
         output Clipboard.copy(item)
+      end
+
+      # Public: save in-memory data to disk.
+      #
+      # Returns whether or not data was saved.
+      def save!
+        storage.save!
       end
 
     end
