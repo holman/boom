@@ -52,7 +52,6 @@ module Boom
       #
       # Returns output based on method calls.
       def delegate(command, major, minor)
-
         return all if command == 'all'
 
         # if we're operating on a List
@@ -68,9 +67,7 @@ module Boom
           return item_delete(major)
         end
 
-
         return list_create(command)
-
       end
 
       # Public: prints all Items over a List.
