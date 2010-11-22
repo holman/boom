@@ -67,7 +67,7 @@ can have multiple lists.
 
 ** List everything **
 
-    $ boom list
+    $ boom all
       urls
         blog:   http://zachholman.com
         github: https://github.com

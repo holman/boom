@@ -38,6 +38,12 @@ class TestCommand < Test::Unit::TestCase
     assert_match /github/, command('urls')
   end
 
+  def test_list_all
+    cmd = command('all')
+    assert_match /urls/,    cmd
+    assert_match /github/,  cmd
+  end
+
   def test_list_creation
     assert_match /a new list called "newlist"/, command('newlist')
   end
@@ -60,5 +66,9 @@ class TestCommand < Test::Unit::TestCase
   def test_list_deletion_yes
     Boom::Command.stubs(:gets).returns('y')
     assert_match /Deleted all your urls/, command('urls delete')
+  end
+
+  def test_item_deletion
+    assert_match /"github" is gone forever/, command('urls github delete')
   end
 end
