@@ -116,18 +116,6 @@ module Boom
         save!
       end
 
-      # Public: prints all Items over all Lists.
-      #
-      # Returns nothing.
-      def list
-        storage.lists.each do |list|
-          puts "  #{list.name}"
-          list.items.each do |item|
-            puts "    #{item.name}: #{item.value}"
-          end
-        end
-      end
-
       # Public: remove a named List.
       #
       # name - the String name of the List.
