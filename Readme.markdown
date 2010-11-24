@@ -33,7 +33,7 @@ can have multiple lists.
     gifs (5)
     email (4)
 
-** Create a List **
+** Create a list **
 
     $ boom urls
     Boom! Created a new list called "urls".
@@ -58,7 +58,7 @@ can have multiple lists.
     blog   http://zachholman.com
     github http://github.com
 
-** Delete a List **
+** Delete a list **
 
     $ boom urls delete
     You sure you want to delete everything in "urls"? (y/n): y
@@ -75,7 +75,7 @@ can have multiple lists.
       enemies
         @kneath:          he's got dreamy eyes. he must die.
         @rtomayko:        i must murder him for his mac and cheese recipe.
-        @luckiestmonkey:  she hates recycling
+        @luckiestmonkey:  she hates recycling.
       urls
         blog:   http://zachholman.com
         github: https://github.com
