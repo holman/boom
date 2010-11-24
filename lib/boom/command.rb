@@ -12,6 +12,13 @@ module Boom
 
       attr_accessor :storage
 
+      # Public: executes a command.
+      #
+      # storage - The Storage instance off which to run commands. This is
+      #           likely just Boom::Storage.new, since Boom::Storage should 
+      #           pick up the appropriate JSON file paths on its own.
+      # args    - The actual commands to operate on. Can be as few as zero
+      #           arguments or as many as three.
       def execute(storage,*args)
         @storage = storage
 
