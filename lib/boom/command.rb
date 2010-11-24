@@ -128,7 +128,7 @@ module Boom
       def list_delete(name)
         lists = storage.lists.reverse.reject { |list| list.name == name }
         output "You sure you want to delete everything in \"#{name}\"? (y/n):"
-        if gets == 'y'
+        if $stdin.gets.chomp == 'y'
           storage.lists = lists
           output "Boom! Deleted all your #{name}."
           save!
