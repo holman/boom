@@ -80,6 +80,13 @@ can have multiple lists.
         blog:   http://zachholman.com
         github: https://github.com
 
+** It's just the command line, silly **
+
+So don't forget all your other favorites are there to help you, too:
+
+    $ boom all | grep @luckiestmonkey
+        @luckiestmonkey:  she hates recycling.
+
 ## Install
 
     gem install boom
