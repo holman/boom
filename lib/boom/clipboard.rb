@@ -1,7 +1,9 @@
 # Clipboard is a centralized point to shell out to each individual platform's
 # clipboard, pasteboard, or whatever they decide to call it.
 #
-module Boom class Clipboard class << self
+module Boom
+  class Clipboard
+    class << self
       
       # Public: copies a given Item's value to the clipboard. This method is
       # designed to handle multiple platforms.
