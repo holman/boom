@@ -58,7 +58,10 @@ module Boom
         if storage.list_exists?(command)
           return list_delete(command) if major == 'delete'
           return list_detail(command) unless major
-          return search_list_for_item(command, major) unless minor == 'delete'
+          unless minor == 'delete'
+            return add_item(command,major,minor) if minor
+            return search_list_for_item(command, major)
+          end
         end
 
         return search_items(command) if storage.item_exists?(command)
@@ -145,7 +148,7 @@ module Boom
       def add_item(list,name,value)
         list = storage.lists.find{|storage_list| storage_list.name == list}
         list.add_item(Item.new(name,value))
-        puts "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
+        output "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
         save!
       end
 

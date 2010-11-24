@@ -64,6 +64,11 @@ class TestCommand < Test::Unit::TestCase
       command('urls github')
   end
 
+  def test_item_creation
+    assert_match /"twitter" in "urls"/,
+      command('urls twitter http://twitter.com/holman')
+  end
+
   def test_list_deletion_no
     Boom::Command.stubs(:gets).returns('n')
     assert_match /Just kidding then/, command('urls delete')
