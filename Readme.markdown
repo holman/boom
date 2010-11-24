@@ -4,11 +4,11 @@ See? Look, a tiny explosion: \*
 
 ## What's a boom?
 
-boom lets you access text snippets over your command line. I aim currently
+boom lets you access text snippets over your command line. I'm personally
 aiming for exactly two use cases, but I'm almost positive there are thirteen
-more. The targeted use cases are:
+more. Here's a couple examples:
 
-- **A pile of funny URLs.** When I make [clever animated
+- **Your own Delicious URL tracker.** When I make [clever animated
   gifs](http://github.com/holman/dotfiles/blob/master/bin/gifme) of my
   coworkers, I tend to lose the URL, which is a total bummer since I want to
   repeatedly repost these images well past their funny expiration date. boom
@@ -16,6 +16,10 @@ more. The targeted use cases are:
 - **Commonly-used email replies.** Everyone's got those stock replies in their
   pocket for a few common use cases. Rather than keep some files strewn about
   with the responses, boom gives me them on my ever-present command line.
+- **Simple todos.** You can super-quickly drop items into lists and remove them
+  when finished. I'm a big fan of simple, straightforward stuff. Plus, it's a
+  Dropbox away from simple cloud syncing. Someone get Cultured Code on the
+  line THIS MAY BE RELEVANT TO THEIR INTERESTS!
 
 We store everything in one JSON file in your home directory: `~/.boom`. The
 structure is simple, too. Each individual item is tossed on a `list`, and you
