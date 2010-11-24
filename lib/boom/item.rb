@@ -1,7 +1,10 @@
 module Boom
   class Item
     
+    # Public: the String name of the Item
     attr_accessor :name
+
+    # Public: the String value of the Item
     attr_accessor :value
 
     # Public: creates a new Item object.
@@ -19,12 +22,6 @@ module Boom
       @value = value
     end
 
-    # Public: deletes the Item object.
-    #
-    # Returns true deletion if successful, false if unsuccessful.
-    def delete
-    end
-    
     # Public: creates a Hash for this Item.
     #
     # Returns a Hash of its data.
