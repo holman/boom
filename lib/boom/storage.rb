@@ -1,3 +1,7 @@
+# Storage is the middleman between changes the client makes in-memory and how
+# it's actually persisted to disk (and vice-versa). There are also a few
+# convenience methods to run searches and operations on the in-memory hash.
+#
 module Boom
   class Storage
     
@@ -18,6 +22,12 @@ module Boom
       explode_json(json_file)
     end
 
+    # Public: the in-memory collection of all Lists attached to this Storage
+    # instance.
+    #
+    # lists - an Array of individual List items
+    #
+    # Returns nothing.
     attr_writer :lists
 
     # Public: the list of Lists in your JSON data, sorted by number of items
@@ -68,12 +78,17 @@ module Boom
       Yajl::Encoder.encode(to_hash)
     end
 
+    # Public: creates a Hash of the representation of the in-memory data
+    # structure. This percolates down to Items by calling to_hash on the List,
+    # which in tern calls to_hash on individual Items.
+    #
+    # Returns a Hash of the entire data set.
     def to_hash
       { :lists => lists.collect(&:to_hash) }
     end
 
 
-  # INTERNAL METHODS ########################################################
+  # INTERNAL METHODS ##########################################################
 
     # Take a JSON representation of data and explode it out into the consituent
     # Lists and Items for the given Storage instance.
@@ -97,6 +112,10 @@ module Boom
       end
     end
 
+    # Takes care of bootstrapping the JSON file, both in terms of creating the
+    # file and in terms of creating a skeleton JSON schema.
+    #
+    # Return true if successfully saved.
     def bootstrap_json
       FileUtils.touch json_file
       save!

@@ -1,3 +1,11 @@
+# Command is the main point of entry for boom commands; shell arguments are
+# passd through to Command, which then filters and parses through indivdual
+# commands and reroutes them to constituent object classes.
+#
+# Command also keeps track of one connection to Storage, which is how new data
+# changes are persisted to disk. It takes care of any data changes by calling
+# #persist!.
+#
 module Boom
   class Command
     class << self
