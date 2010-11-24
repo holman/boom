@@ -194,8 +194,8 @@ module Boom
       #
       # Returns the matching Item.
       def search_list_for_item(list_name, item_name)
-        list = storage.lists.first { |list| list.name == list_name }
-        item = list.items.first { |item| item.name == item_name }
+        list = storage.lists.find { |list| list.name == list_name }
+        item = list.items.find { |item| item.name == item_name }
 
         output Clipboard.copy(item)
       end
