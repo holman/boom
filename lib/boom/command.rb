@@ -4,7 +4,7 @@
 #
 # Command also keeps track of one connection to Storage, which is how new data
 # changes are persisted to disk. It takes care of any data changes by calling
-# #persist!.
+# Boom::Command#save!.
 #
 module Boom
   class Command
