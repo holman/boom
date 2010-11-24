@@ -13,14 +13,20 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'boom'
-  s.version           = '0.0'
-  s.date              = '2010-01-01'
+  s.version           = '0.0.1'
+  s.date              = '2010-11-24'
   s.rubyforge_project = 'boom'
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
   s.summary     = "boom lets you access text snippets over your command line."
-  s.description = "boom lets you access text snippets over your command line."
+  s.description = "God it's about every day where I think to myself, gadzooks,
+  I keep typing *REPETITIVE_BORING_TASK* over and over. Wouldn't it be great if
+  I had something like boom to store all these commonly-used text snippets for
+  me? Then I realized that was a worthless idea since boom hadn't been created
+  yet and I had no idea what that statement meant. At some point I found the
+  code for boom in a dark alleyway and released it under my own name because I
+  wanted to look smart."
 
   ## List the primary authors. If there are a bunch of authors, it's probably
   ## better to set the email to an email list or something. If you don't have
@@ -34,31 +40,48 @@ Gem::Specification.new do |s|
   s.require_paths = %w[lib]
 
   ## This sections is only necessary if you have C extensions.
-  s.require_paths << 'ext'
-  s.extensions = %w[ext/extconf.rb]
+  #s.require_paths << 'ext'
+  #s.extensions = %w[ext/extconf.rb]
 
   ## If your gem includes any executables, list them here.
-  s.executables = ["name"]
-  s.default_executable = 'name'
+  s.executables = ["boom"]
+  s.default_executable = 'boom'
 
   ## Specify any RDoc options here. You'll want to add your README and
   ## LICENSE files to the extra_rdoc_files list.
   s.rdoc_options = ["--charset=UTF-8"]
-#s.extra_rdoc_files = %w[README LICENSE]
+  s.extra_rdoc_files = %w[Readme.markdown License]
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
-#s.add_dependency('DEPNAME', [">= 1.1.0", "< 2.0.0"])
+  s.add_dependency('yajl-ruby', "~> 0.7.8")
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
-#s.add_development_dependency('DEVDEPNAME', [">= 1.1.0", "< 2.0.0"])
+  s.add_development_dependency('mocha', "~> 0.9.9")
 
   ## Leave this section as-is. It will be automatically generated from the
   ## contents of your Git repository via the gemspec task. DO NOT REMOVE
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
-  s.files = %w[]
+  s.files = %w[
+    License
+    Rakefile
+    Readme.markdown
+    bin/boom
+    boom.gemspec
+    lib/boom.rb
+    lib/boom/clipboard.rb
+    lib/boom/command.rb
+    lib/boom/item.rb
+    lib/boom/list.rb
+    lib/boom/storage.rb
+    test/examples/urls.json
+    test/helper.rb
+    test/test_command.rb
+    test/test_item.rb
+    test/test_list.rb
+  ]
   # = MANIFEST =
 
   ## Test files will be grabbed from the file list. Make sure the path glob

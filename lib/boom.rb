@@ -1,4 +1,7 @@
-require 'rubygems' rescue LoadError
+begin
+  require 'rubygems'
+rescue LoadError
+end
 
 require 'fileutils'
 require 'yajl'
@@ -12,5 +15,5 @@ require 'boom/list'
 require 'boom/storage'
 
 module Boom
-  VERSION = '0.0.0'
+  VERSION = '0.0.1'
 end
