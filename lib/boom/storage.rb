@@ -80,7 +80,8 @@ module Boom
     #
     # Returns nothing.
     def explode_json(json)
-      FileUtils.touch(json)
+      bootstrap_json unless File.exist?(json)
+
       storage = Yajl::Parser.new.parse(File.new(json, 'r'))
       
       storage['lists'].each do |lists|
@@ -94,6 +95,11 @@ module Boom
           end
         end
       end
+    end
+
+    def bootstrap_json
+      FileUtils.touch json_file
+      save!
     end
 
   end
