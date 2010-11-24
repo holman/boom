@@ -84,6 +84,21 @@ can have multiple lists.
 
     gem install boom
 
+## Current Status
+
+Precarious. I'm starting to use this a bunch now, but if you're tossing in
+important information like my list of animated .gifs, you'd be sitting pretty
+if you made a backup of `~/.boom`. Just in case something goes wrong.
+
+Also, don't mistype anything. Everything should be 100% perfect if you type all
+the commands correctly. If you don't, it'll probably ungracefully error out and
+a puppy in Kansas will probably be murdered. You should be fine, though. As
+long as you don't have butter fingers.
+
 ## I love you
 
-- [@holman](http://twitter.com/holman)
+[Zach Holman](http://zachholman.com) made this. Ping me on Twitter —
+[@holman](http://twitter.com/holman) — if you're having issues, want me to
+merge in your pull request, or are using boom in a cool way. I'm kind of hoping
+this is generic enough that people do some fun things with it. First one to use
+`boom` to calculate their tax liability wins.
