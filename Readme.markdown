@@ -44,12 +44,6 @@ can have multiple lists.
     $ boom urls github https://github.com
     Boom! "github" in "urls" is "https://github.com". Got it.
 
-** List items in a list **
-
-    $ boom urls
-    blog   http://zachholman.com
-    github http://github.com
-
 ** Copy an item's value to your clipboard **
 
     $ boom github
@@ -57,6 +51,12 @@ can have multiple lists.
 
     $ boom urls github
     Boom! Just copied https://github.com to your clipboard.
+
+** List items in a list **
+
+    $ boom urls
+    blog   http://zachholman.com
+    github http://github.com
 
 ** Delete a List **
 
@@ -72,6 +72,10 @@ can have multiple lists.
 ** List everything **
 
     $ boom all
+      enemies
+        @kneath:          he's got dreamy eyes. he must die.
+        @rtomayko:        i must murder him for his mac and cheese recipe.
+        @luckiestmonkey:  she hates recycling
       urls
         blog:   http://zachholman.com
         github: https://github.com
