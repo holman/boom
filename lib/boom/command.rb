@@ -94,7 +94,7 @@ module Boom
       #
       # Returns nothing.
       def list_detail(list_name)
-        list = storage.lists.first { |list| list.name == list_name } 
+        list = storage.lists.find { |list| list.name == list_name } 
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
           output "    #{item.name}: #{item.value}"
         end
