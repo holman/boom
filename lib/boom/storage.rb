@@ -30,6 +30,15 @@ module Boom
     # Returns nothing.
     attr_writer :lists
 
+    # Public: Finds a list by name
+    #
+    # name - list name to find
+    #
+    # Returns the found list
+    def find_list(name)
+      @lists.find { |l| l.name == name }
+    end
+
     # Public: the list of Lists in your JSON data, sorted by number of items
     # descending.
     #

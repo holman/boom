@@ -81,8 +81,11 @@ module Boom
 
         return search_items(command) if storage.item_exists?(command)
 
-        if minor == 'delete' and storage.item_exists?(major)
-          return item_delete(major)
+        if minor == 'delete'
+          list = storage.find_list(command)
+          if item = list.find_item(major)
+            return item_delete(command, major)
+          end
         end
 
         return list_create(command)
@@ -94,7 +97,7 @@ module Boom
       #
       # Returns nothing.
       def list_detail(list_name)
-        list = storage.lists.find { |list| list.name == list_name } 
+        list = storage.find_list(list_name)
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
           output "    #{item.name}: #{item.value}"
         end
@@ -149,7 +152,7 @@ module Boom
       #
       # Returns the newly created Item.
       def add_item(list,name,value)
-        list = storage.lists.find{|storage_list| storage_list.name == list}
+        list = storage.find_list(list)
         list.add_item(Item.new(name,value))
         output "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
         save!
@@ -157,18 +160,17 @@ module Boom
 
       # Public: remove a named Item.
       #
-      # name - the String name of the Item.
+      # list_name - the String name of the List.
+      # item_name - the String name of the Item.
       #
       # Example
       #
-      #   Commands.delete_item("an-item-name")
+      #   Commands.delete_item("a list name", "an-item-name")
       #
       # Returns nothing.
-      def item_delete(name)
-        storage.lists = storage.lists.each do |list|
-          list.items.reject! { |item| item.name == name }
-        end
-        output "Boom! \"#{name}\" is gone forever."
+      def item_delete(list_name, item_name)
+        storage.find_list(list_name).delete_item(item_name)
+        output "Boom! \"#{item_name}\" is gone forever."
         save!
       end
 
@@ -194,8 +196,8 @@ module Boom
       #
       # Returns the matching Item.
       def search_list_for_item(list_name, item_name)
-        list = storage.lists.find { |list| list.name == list_name }
-        item = list.items.find { |item| item.name == item_name }
+        list = storage.find_list(list_name)
+        item = list.find_item(item_name)
 
         output Clipboard.copy(item)
       end

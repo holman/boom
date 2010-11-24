@@ -33,6 +33,33 @@ module Boom class List
       @items << item
     end
 
+
+    # Public: Retrieves an item from the list
+    #
+    # item_name - Name or array index of item
+    #
+    # Returns the item
+    def find_item(item_name)
+      if item_name =~ /\[(\d+)\]/
+        self.items[$1.to_i]
+      else
+        self.items.find { |item| item.name == item_name }
+      end
+    end
+
+    # Public: Deletes an item from the list
+    #
+    # item_name - Name or array index of item
+    #
+    def delete_item(item_name)
+      if item_name =~ /\[(\d+)\]/
+        self.items.delete_at($1.to_i)
+      else
+        self.items.reject { |item| item.name == item_name }
+      end
+    end
+
+
     # Public: a Hash representation of this List.
     #
     # Returns a Hash of its own data and its child Items.
