@@ -67,7 +67,8 @@ module Boom
       #
       # Returns output based on method calls.
       def delegate(command, major, minor)
-        return all if command == 'all'
+        return all  if command == 'all'
+        return edit if command == 'edit'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -204,6 +205,15 @@ module Boom
       # Returns whether or not data was saved.
       def save!
         storage.save!
+      end
+
+      # Public: launches JSON file in an editor for you to edit manually. Uses
+      # the $EDITOR environment variable for editing.
+      #
+      # Returns nothing.
+      def edit
+        system "`echo $EDITOR` #{storage.json_file} &"
+        output "Boom! Make your edits, and do be sure to save."
       end
 
     end

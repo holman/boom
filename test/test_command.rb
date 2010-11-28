@@ -80,4 +80,9 @@ class TestCommand < Test::Unit::TestCase
   def test_item_deletion
     assert_match /"github" is gone forever/, command('urls github delete')
   end
+
+  def test_edit
+    Boom::Command.stubs(:system).returns('')
+    assert_match 'Make your edits', command('edit')
+  end
 end

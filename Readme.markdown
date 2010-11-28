@@ -81,6 +81,13 @@ can have multiple lists.
         blog:   http://zachholman.com
         github: https://github.com
 
+** Manual edit **
+
+If you want to edit the underlying JSON directly, make sure your `$EDITOR`
+environment variable is set, and run:
+
+    $ boom edit
+
 ** It's just the command line, silly **
 
 So don't forget all your other favorites are there to help you, too:
