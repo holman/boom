@@ -2,7 +2,8 @@
 # individual Items. The relationship is maintained in a simple array on the
 # List-level.
 #
-module Boom class List
+module Boom
+  class List
     
     # Public: creates a new List instance in-memory.
     #
