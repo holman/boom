@@ -24,9 +24,7 @@ end
 class TestCommand < Test::Unit::TestCase
 
   def setup
-    Boom::Storage.any_instance.stubs(:json_file).
-      returns('test/examples/urls.json')
-    Boom.stubs(:storage).returns(Boom::Storage.new)
+    boom_json :urls
   end
 
   def command(cmd)

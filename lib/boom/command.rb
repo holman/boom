@@ -90,11 +90,11 @@ module Boom
 
       # Public: prints all Items over a List.
       #
-      # list - the List object to iterate over
+      # name - the List object to iterate over
       #
       # Returns nothing.
-      def list_detail(list_name)
-        list = storage.lists.find { |list| list.name == list_name } 
+      def list_detail(name)
+        list = List.find(name)
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
           output "    #{item.name}: #{item.value}"
         end
@@ -149,7 +149,7 @@ module Boom
       #
       # Returns the newly created Item.
       def add_item(list,name,value)
-        list = storage.lists.find{|storage_list| storage_list.name == list}
+        list = List.find(list)
         list.add_item(Item.new(name,value))
         output "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
         save!
@@ -194,7 +194,7 @@ module Boom
       #
       # Returns the matching Item.
       def search_list_for_item(list_name, item_name)
-        list = storage.lists.first { |list| list.name == list_name }
+        list = List.find(list_name)
         item = list.items.first { |item| item.name == item_name }
 
         output Clipboard.copy(item)
