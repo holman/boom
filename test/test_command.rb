@@ -26,13 +26,13 @@ class TestCommand < Test::Unit::TestCase
   def setup
     Boom::Storage.any_instance.stubs(:json_file).
       returns('test/examples/urls.json')
-    @storage = Boom::Storage.new
+    Boom.stubs(:storage).returns(Boom::Storage.new)
   end
 
   def command(cmd)
     cmd = cmd.split(' ') if cmd
     Boom::Command.capture_output
-    Boom::Command.execute(@storage,*cmd)
+    Boom::Command.execute(*cmd)
     Boom::Command.captured_output
   end
 

@@ -16,4 +16,8 @@ require 'boom/storage'
 
 module Boom
   VERSION = '0.0.2'
+
+  def self.storage
+    @storage ||= Boom::Storage.new
+  end
 end
