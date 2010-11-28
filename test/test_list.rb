@@ -28,4 +28,16 @@ class TestList < Test::Unit::TestCase
     assert_equal 'urls', Boom::List.find('urls').name
   end
 
+  def test_delete_success
+    assert_equal 1, Boom.storage.lists.size
+    assert Boom::List.delete('urls')
+    assert_equal 0, Boom.storage.lists.size
+  end
+
+  def test_delete_fail
+    assert_equal 1, Boom.storage.lists.size
+    assert !Boom::List.delete('robocop')
+    assert_equal 1, Boom.storage.lists.size
+  end
+
 end
