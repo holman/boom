@@ -81,6 +81,10 @@ can have multiple lists.
         blog:   http://zachholman.com
         github: https://github.com
 
+** Help **
+
+    $ boom help
+
 ** Manual edit **
 
 If you want to edit the underlying JSON directly, make sure your `$EDITOR`

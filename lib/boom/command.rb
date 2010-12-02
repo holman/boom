@@ -69,6 +69,7 @@ module Boom
       def delegate(command, major, minor)
         return all  if command == 'all'
         return edit if command == 'edit'
+        return help if command == 'help'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -214,6 +215,34 @@ module Boom
       def edit
         system "`echo $EDITOR` #{storage.json_file} &"
         output "Boom! Make your edits, and do be sure to save."
+      end
+
+      # Public: prints all the commands of boom.
+      #
+      # Returns nothing.
+      def help
+        text = %{
+          - boom: help ---------------------------------------------------
+
+          boom                          display high-level overview
+          boom all                      show all items in all lists
+          boom edit                     edit the boom JSON file in $EDITOR
+          boom help                     this help text
+          
+          boom <list>                   create a new list
+          boom <list>                   show items for a list
+          boom <list> delete            deletes a list
+
+          boom <list> <name> <value>    create a new list item
+          boom <name>                   copy item's value to clipboard
+          boom <list> <name>            copy item's value to clipboard
+          boom <list> <name> delete     deletes an item
+
+          all other documentation is located at:
+            https://github.com/holman/boom
+        }.gsub(/^ {8}/, '') # strip the first eight spaces of every line
+
+        output text
       end
 
     end
