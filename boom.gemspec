@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'boom'
-  s.version           = '0.0.3'
-  s.date              = '2010-11-28'
+  s.version           = '0.0.4'
+  s.date              = '2010-12-20'
   s.rubyforge_project = 'boom'
 
   ## Make sure your summary is short. The description may be as long
@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   ## Specify any RDoc options here. You'll want to add your README and
   ## LICENSE files to the extra_rdoc_files list.
   s.rdoc_options = ["--charset=UTF-8"]
-  s.extra_rdoc_files = %w[Readme.markdown License]
+  s.extra_rdoc_files = %w[readme.markdown license.markdown]
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
@@ -65,17 +65,18 @@ Gem::Specification.new do |s|
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
   s.files = %w[
-    License
     Rakefile
-    Readme.markdown
     bin/boom
     boom.gemspec
+    changelog.markdown
     lib/boom.rb
     lib/boom/clipboard.rb
     lib/boom/command.rb
     lib/boom/item.rb
     lib/boom/list.rb
     lib/boom/storage.rb
+    license.markdown
+    readme.markdown
     test/examples/urls.json
     test/helper.rb
     test/test_command.rb
