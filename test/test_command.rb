@@ -88,5 +88,12 @@ class TestCommand < Test::Unit::TestCase
 
   def test_help
     assert_match 'boom help', command('help')
+    assert_match 'boom help', command('-h')
+    assert_match 'boom help', command('--help')
+  end
+
+  def test_noop_options
+    assert_match 'boom help', command('--anything')
+    assert_match 'boom help', command('-d')
   end
 end
