@@ -78,7 +78,7 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_item_deletion
-    assert_match /"github" is gone forever/, command('urls github delete')
+    assert_match /"github" in "urls" is gone forever/, command('urls github delete')
   end
 
   def test_edit
@@ -86,7 +86,7 @@ class TestCommand < Test::Unit::TestCase
     assert_match 'Make your edits', command('edit')
   end
 
-  def test_edit
+  def test_help
     assert_match 'boom help', command('help')
   end
 end

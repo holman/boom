@@ -41,6 +41,15 @@ module Boom
       @items << item
     end
 
+    # Public: delete item by name 
+    #
+    # name - String name of the item to search for
+    #
+    # Returns whether if an item was removed.
+    def delete_item(name)
+	  @items.reject! { |item| item.name == name}
+    end
+	
     # Public: finds any given List by name.
     #
     # name - String name of the list to search for
