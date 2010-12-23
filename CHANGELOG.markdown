@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+
+## 0.0.5
 - Item deletes are now scoped by list rather than GLOBAL DESTRUCTION! (thanks
   [natebean](https://github.com/natebean)).
 - Command line options, like `boop --help` are translated into `boom help`. In
