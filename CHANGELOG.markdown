@@ -5,6 +5,10 @@
   [natebean](https://github.com/natebean)).
 - Command line options, like `boop --help` are translated into `boom help`. In
   the future we play around with options a bit more.
+- Non-Mac-based platforms get clipboard support with `xclip`. If it's
+  problematic (which it almost certainly is; I'm breaking this more or less on
+  purpose), please patch it and send me a pull request for your particular
+  platform.
 
 ## 0.0.4
 - Adds `boom help`. You know, for help.

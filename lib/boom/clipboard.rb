@@ -10,9 +10,14 @@ module Boom
       #
       # Returns nothing.
       def copy(item)
-        if RUBY_PLATFORM =~ /darwin/
-          `echo '#{item.value}' | tr -d "\n" | pbcopy`
-        end
+        copy_command = 
+          if RUBY_PLATFORM =~ /darwin/
+            "pbcopy"
+          else
+            "xclip -selection clipboard"
+          end
+
+        `echo '#{item.value}' | tr -d "\n" | #{copy_command}`
 
         "Boom! We just copied #{item.value} to your clipboard."
       end
