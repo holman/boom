@@ -96,4 +96,8 @@ class TestCommand < Test::Unit::TestCase
     assert_match 'boom help', command('--anything')
     assert_match 'boom help', command('-d')
   end
+
+  def test_nonexistent_item_access_scoped_by_list
+    assert_match /"twitter" not found in "urls"/, command('urls twitter')
+  end
 end
