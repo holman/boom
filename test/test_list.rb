@@ -40,4 +40,16 @@ class TestList < Test::Unit::TestCase
     assert_equal 1, Boom.storage.lists.size
   end
 
+  def test_deletes_scoped_to_list
+    @list.add_item(@item)
+
+    @list_2 = Boom::List.new('sexy-companies')
+    @item_2 = Boom::Item.new(@item.name, @item.value)
+    @list_2.add_item(@item_2)
+
+    @list.delete_item(@item.name)
+    assert_equal 0, @list.items.size
+    assert_equal 1, @list_2.items.size
+  end
+
 end
