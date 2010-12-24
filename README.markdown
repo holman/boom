@@ -110,11 +110,6 @@ important business information (say, a carefully cultivated list of animated
 .gifs), you'd be sitting pretty if you made a backup of `~/.boom` every now and
 then, just in case. We're living on the edge, baby.
 
-Also, don't mistype anything. Everything should be 100% perfect if you type all
-the commands correctly. If you don't, it'll probably ungracefully error out and
-a puppy in Kansas will probably be murdered. You should be fine, though. As
-long as you don't have butter fingers.
-
 Soon enough, though, this'll be stable to the point where I can truthfully tell
 myself that this time baby, `boom` will be, bulletttttttttttttproof ♫.
 
