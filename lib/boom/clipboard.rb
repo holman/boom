@@ -17,7 +17,7 @@ module Boom
             "xclip -selection clipboard"
           end
 
-        `echo '#{item.value}' | tr -d "\n" | #{copy_command}`
+        `echo '#{item.value.gsub("\'","\\'")}' | tr -d "\n" | #{copy_command}`
 
         "Boom! We just copied #{item.value} to your clipboard."
       end
