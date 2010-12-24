@@ -72,6 +72,15 @@ module Boom
       previous != items.size
     end
 
+    # Public: finds an Item by name.
+    #
+    # name - String name of the Item to find
+    #
+    # Returns the found item
+    def find_item(name)
+      items.find { |item| item.name == name }
+    end
+
     # Public: a Hash representation of this List.
     #
     # Returns a Hash of its own data and its child Items.

@@ -197,12 +197,12 @@ module Boom
       # Returns the matching Item if found.
       def search_list_for_item(list_name, item_name)
         list = List.find(list_name)
-        item = list.items.find { |item| item.name == item_name }
+        item = list.find_item(item_name)
 
-        if item.nil?
-          output "\"#{item_name}\" not found in \"#{list_name}\""
-        else
+        if item
           output Clipboard.copy(item)
+        else
+          output "\"#{item_name}\" not found in \"#{list_name}\""
         end
       end
 
