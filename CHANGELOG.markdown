@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+- Searching for an item that doesn't exist doesn't murder puppies anymore
+  (thanks [jimmycuadra](https://github.com/jimmycuadra)).
 
 ## 0.0.5
 - Item deletes are now scoped by list rather than GLOBAL DESTRUCTION! (thanks
