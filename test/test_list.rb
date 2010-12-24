@@ -33,6 +33,13 @@ class TestList < Test::Unit::TestCase
     assert_equal 'https://github.com', @list.find_item('github').value
   end
 
+  def test_find_item_long_name
+    @item = Boom::Item.new('long-long-long-name','longname')
+    @list.add_item(@item)
+    assert_equal 'longname', @list.find_item('long-long-long-').value
+    assert_equal 'longname', @list.find_item('long-long-long-…').value
+  end
+
   def test_delete_success
     assert_equal 1, Boom.storage.lists.size
     assert Boom::List.delete('urls')
