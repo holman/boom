@@ -41,7 +41,7 @@ module Boom
     #
     # Returns the shortened name.
     def short_name
-      name.length > 15 ? "#{name[0..14]}…" : name[0..14]
+      name.length > 15 ? "#{name[0..14]}..." : name[0..14]
     end
 
     # Public: the amount of consistent spaces to pad based on Item#short_name.
