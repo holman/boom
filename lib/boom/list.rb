@@ -81,7 +81,7 @@ module Boom
     def find_item(name)
       items.find do |item|
         item.name == name ||
-        item.short_name.gsub('…','') == name.gsub('…','')
+        item.short_name.gsub('...','') == name.gsub('...','')
       end
     end
 

@@ -37,7 +37,7 @@ class TestList < Test::Unit::TestCase
     @item = Boom::Item.new('long-long-long-name','longname')
     @list.add_item(@item)
     assert_equal 'longname', @list.find_item('long-long-long-').value
-    assert_equal 'longname', @list.find_item('long-long-long-…').value
+    assert_equal 'longname', @list.find_item('long-long-long-...').value
   end
 
   def test_delete_success

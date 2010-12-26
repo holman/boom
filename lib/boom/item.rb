@@ -33,7 +33,7 @@ module Boom
     #
     #   item = Item.new("github's home page","https://github.com")
     #   item.short_name
-    #   # => 'github's home p…'
+    #   # => 'github's home p...'
     #
     #   item = Item.new("github","https://github.com")
     #   item.short_name

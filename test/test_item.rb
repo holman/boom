@@ -20,7 +20,7 @@ class TestItem < Test::Unit::TestCase
 
   def test_short_name
     @item.name = 'github github github lol lol lol'
-    assert_equal 'github github g…', @item.short_name
+    assert_equal 'github github g...', @item.short_name
   end
 
   def test_spacer_none
