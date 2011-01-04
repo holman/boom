@@ -77,7 +77,8 @@ module Boom
           return delete_list(command) if major == 'delete'
           return detail_list(command) unless major
           unless minor == 'delete'
-            return add_item(command,major,minor) if minor
+            minor ||= $stdin.read
+            return add_item(command,major,minor) if minor.to_s.length > 0
             return search_list_for_item(command, major)
           end
         end
