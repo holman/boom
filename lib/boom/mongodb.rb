@@ -50,11 +50,10 @@ module Boom
       # Returns nothing.
       def collect
 
-        #storage = BSON.deserialize(@mongo_coll.find.unpack("C*"))
-        #storage = Yajl::Parser.new.parse(s.to_json)
-
         s = @mongo_coll.find_one['boom']
         storage = Yajl::Parser.new.parse(s)
+
+        return if storage['lists'].nil?
 
         storage['lists'].each do |lists|
           lists.each do |list_name, items|
@@ -86,7 +85,7 @@ module Boom
         # Get collection collection;
         @mongo_coll = db.collection(config['collection'])
 
-        @mongo_coll.insert("boom" => to_json) if @mongo_coll.find_one.nil?
+        @mongo_coll.insert("boom" => '{"lists": [{}]}') if @mongo_coll.find_one.nil?
 
         return @mongo_coll
       end
