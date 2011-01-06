@@ -46,7 +46,7 @@ can have multiple lists.
     Boom! "github" in "urls" is "https://github.com". Got it.
 
     # boom <list> <name> with stdin
-    $ boom copypasta long < /tmp/multiline_file.txt
+    $ boom journal january < ~/Desktop/01-secret-journal.markdown
 
 ** Copy an item's value to your clipboard **
 
