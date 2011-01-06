@@ -45,9 +45,6 @@ can have multiple lists.
     $ boom urls github https://github.com
     Boom! "github" in "urls" is "https://github.com". Got it.
 
-    # boom <list> <name> with stdin
-    $ boom journal january < ~/Desktop/01-secret-journal.markdown
-
 ** Copy an item's value to your clipboard **
 
     $ boom github
