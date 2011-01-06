@@ -2,6 +2,9 @@
 
 ## head
 
+## 0.0.7
+- Reverts item creation from stdin, since it broke regular item creation.
+
 ## 0.0.6
 - Searching for an item that doesn't exist doesn't murder puppies anymore
   (thanks [jimmycuadra](https://github.com/jimmycuadra)).
