@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Clipboard is a centralized point to shell out to each individual platform's
 # clipboard, pasteboard, or whatever they decide to call it.
 #

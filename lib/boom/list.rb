@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # The List contains many Items. They exist as buckets in which to categorize
 # individual Items. The relationship is maintained in a simple array on the
 # List-level.
