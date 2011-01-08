@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'helper'
 
 # Intercept STDOUT and collect it
