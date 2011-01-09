@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Storage is the middleman between changes the client makes in-memory and how
 # it's actually persisted to disk (and vice-versa). There are also a few
 # convenience methods to run searches and operations on the in-memory hash.

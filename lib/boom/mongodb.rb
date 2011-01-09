@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Storage adapter that saves data from boom to MongoDB instead of JSON file
 #
 module Boom
