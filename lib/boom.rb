@@ -14,12 +14,20 @@ require 'boom/clipboard'
 require 'boom/command'
 require 'boom/item'
 require 'boom/list'
-require 'boom/storage'
+require 'boom/base'
+require 'boom/json'
+require 'boom/mongodb'
 
 module Boom
   VERSION = '0.0.8'
 
-  def self.storage
-    @storage ||= Boom::Storage.new
+  def self.adapter
+    #@adapter ||= Boom::Storage::MongoDB.new
+    @adapter ||= Boom::Storage::JSON.new
   end
+
+  def self.storage
+    @storage ||= Boom::Storage::Base.new
+  end
+  
 end
