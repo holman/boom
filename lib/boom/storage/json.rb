@@ -6,7 +6,7 @@
 #
 module Boom
   module Storage
-    class JSON
+    class JSON < Base
     
       JSON_FILE = "#{ENV['HOME']}/.boom"
 
