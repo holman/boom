@@ -2,6 +2,11 @@
 
 ## head
 
+## 0.0.9
+- Backport `Symbol#to_proc` for 1.8.6 support (thanks 
+  [kastner](https://github.com/kastner) and 
+  [DeMarko](https://github.com/DeMarko)).
+
 ## 0.0.8
 - Support for Ruby 1.9 (thanks [jimmycuadra](https://github.com/jimmycuadra)).
 
