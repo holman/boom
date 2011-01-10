@@ -12,6 +12,7 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'boom/clipboard'
 require 'boom/command'
+require 'boom/config'
 require 'boom/item'
 require 'boom/list'
 
@@ -23,8 +24,14 @@ require 'boom/storage/mongodb'
 module Boom
   VERSION = '0.0.8'
 
-  def self.storage
+  extend self
+
+  def storage
     @storage ||= Boom::Storage.backend
   end
-  
+
+  def config
+    @config ||= Boom::Config.new
+  end
+
 end

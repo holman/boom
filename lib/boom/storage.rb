@@ -12,7 +12,7 @@ module Boom
     end
 
     def self.backend
-      Boom::Storage::JSON.new
+      Boom::Storage.const_get(Boom.config.attributes['backend']).new
     end
 
   end
