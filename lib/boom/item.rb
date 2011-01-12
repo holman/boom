@@ -65,5 +65,11 @@ module Boom
       { @name => [@value,@desc].compact }
     end
 
+    # Public: append value and desc for this Item.
+    #
+    # Returns a String
+    def to_line
+      "#{value} #{desc}".strip
+    end
   end
 end
