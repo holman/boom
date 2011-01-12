@@ -106,5 +106,6 @@ class TestCommand < Test::Unit::TestCase
   def test_item_creation_with_desc
     assert_match /"twitter" in "urls"/, command('urls twitter http://twitter.com/holman he taps code for GitHub:FI')
     assert_match %r{twitter:\s+http://twitter.com/holman he taps code for GitHub:FI}, command('urls')
+    assert_match %r{desc:\s+http://en.wiktionary.org/wiki/description the description}, command('urls')    
   end
 end
