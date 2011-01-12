@@ -24,12 +24,13 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
-        command = args[0]
-        major   = args[1]
-        minor   = args[2]
+        command = args.shift
+        major   = args.shift
+        minor   = args.shift
+        rem     = args.empty? ? nil : args.join(' ')
 
         return overview unless command
-        delegate(command, major, minor)
+        delegate(command, major, minor, rem)
       end
 
       # Public: prints any given string.
@@ -60,7 +61,7 @@ module Boom
         storage.lists.each do |list|
           output "  #{list.name}"
           list.items.each do |item|
-            output "    #{item.short_name}:#{item.spacer} #{item.value}"
+            output "    #{item.short_name}:#{item.spacer} #{item.to_line}"
           end
         end
       end
@@ -68,7 +69,7 @@ module Boom
       # Public: allows main access to most commands.
       #
       # Returns output based on method calls.
-      def delegate(command, major, minor)
+      def delegate(command, major, minor, rem)
         return all  if command == 'all'
         return edit if command == 'edit'
         return help if command == 'help'
@@ -79,7 +80,7 @@ module Boom
           return delete_list(command) if major == 'delete'
           return detail_list(command) unless major
           unless minor == 'delete'
-            return add_item(command,major,minor) if minor
+            return add_item(command,major,minor, rem) if minor
             return search_list_for_item(command, major)
           end
         end
@@ -101,7 +102,7 @@ module Boom
       def detail_list(name)
         list = List.find(name)
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
-          output "    #{item.short_name}:#{item.spacer} #{item.value}"
+          output "    #{item.short_name}:#{item.spacer} #{item.to_line}"
         end
       end
 
@@ -152,9 +153,9 @@ module Boom
       #   Commands.add_item("snippets","sig","- @holman")
       #
       # Returns the newly created Item.
-      def add_item(list,name,value)
+      def add_item(list,name,value,rem=nil)
         list = List.find(list)
-        list.add_item(Item.new(name,value))
+        list.add_item(Item.new(name,value,rem))
         output "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
         save!
       end

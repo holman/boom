@@ -37,7 +37,7 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_overview
-    assert_equal '  urls (2)', command(nil)
+    assert_equal '  urls (3)', command(nil)
   end
 
   def test_list_detail
@@ -101,5 +101,10 @@ class TestCommand < Test::Unit::TestCase
 
   def test_nonexistent_item_access_scoped_by_list
     assert_match /"twitter" not found in "urls"/, command('urls twitter')
+  end
+  
+  def test_item_creation_with_desc
+    assert_match /"twitter" in "urls"/, command('urls twitter http://twitter.com/holman he taps code for GitHub:FI')
+    assert_match %r{twitter:\s+http://twitter.com/holman he taps code for GitHub:FI}, command('urls')
   end
 end
