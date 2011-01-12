@@ -12,6 +12,9 @@ module Boom
 
     # Public: the String value of the Item
     attr_accessor :value
+    
+    # Public: the String additional description of the Item
+    attr_accessor :desc
 
     # Public: creates a new Item object.
     #
@@ -21,11 +24,13 @@ module Boom
     # Examples
     #
     #   Item.new("github", "https://github.com")
+    #   Item.new("github", ["https://github.com", "social coding"])
+    #   Item.new("github", "https://github.com", "social coding")
     #
     # Returns the newly initialized Item.
-    def initialize(name,value)
+    def initialize(name,*values)
       @name = name
-      @value = value
+      @value, @desc = values.flatten
     end
 
     # Public: the shortened String name of the Item. Truncates with ellipses if
@@ -57,7 +62,7 @@ module Boom
     #
     # Returns a Hash of its data.
     def to_hash
-      { @name => @value }
+      { @name => [@value,@desc].compact }
     end
 
   end

@@ -35,7 +35,20 @@ class TestItem < Test::Unit::TestCase
   end
 
   def test_to_hash
-    assert_equal 1, @item.to_hash.size
+    assert_equal({ 'github' => ['https://github.com'] }, @item.to_hash)
   end
-
+  
+  def test_desc
+    @item = Boom::Item.new('github','https://github.com','social coding')
+    assert_equal 'https://github.com', @item.value
+    assert_equal 'social coding', @item.desc
+    assert_equal({ 'github' => ['https://github.com','social coding'] }, @item.to_hash)
+  end
+  
+  def test_alternate_contructor
+    @item = Boom::Item.new('github',['https://github.com','social coding'])
+    assert_equal 'https://github.com', @item.value
+    assert_equal 'social coding', @item.desc
+    assert_equal({ 'github' => ['https://github.com','social coding'] }, @item.to_hash)
+  end
 end
