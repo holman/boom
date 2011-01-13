@@ -18,13 +18,21 @@ module Boom
         !!(RUBY_PLATFORM =~ /darwin/)
       end
 
+      # Public: returns the command used to open a file or URL
+      # for the current platform.
+      #
+      # Currently only supports MacOS X and Linux with `xdg-open`.
+      #
+      # Returns a String with the bin
+      def open_command
+        darwin? ? 'open' : 'xdg-open'
+      end
+
       # Public: opens a given Item's value in the browser. This
       # method is designed to handle multiple platforms.
       #
       # Returns a String explaining what was done
       def open(item)
-        open_command = darwin? ? 'open' : 'xdg-open'
-
         `#{open_command} '#{item.url.gsub("\'","\\'")}'`
 
         "Boom! We just opened #{item.value} in your browser."
