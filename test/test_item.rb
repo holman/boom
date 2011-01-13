@@ -38,4 +38,17 @@ class TestItem < Test::Unit::TestCase
     assert_equal 1, @item.to_hash.size
   end
 
+  def test_url
+    assert_equal 'https://github.com', @item.url
+  end
+  
+  def test_url_with_additional_description
+    @item = Boom::Item.new('github', 'social coding https://github.com')
+    assert_equal 'https://github.com', @item.url
+  end
+  
+  def test_url_without_url
+    @item = Boom::Item.new('didum', 'dadam lol omg')
+    assert_equal 'dadam lol omg', @item.url
+  end
 end

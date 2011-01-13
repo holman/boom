@@ -53,6 +53,14 @@ module Boom
       name.length > 15 ? '' : ' '*(15-name.length+1)
     end
 
+    # Public: only return url part of value - if no url has been
+    # detected returns value.
+    #
+    # Returns a String which preferably is a URL.
+    def url
+      @url ||= value.split(/\s+/).detect { |v| v =~ %r{\A[a-z0-9]+:\S+}i } || value
+    end
+
     # Public: creates a Hash for this Item.
     #
     # Returns a Hash of its data.
