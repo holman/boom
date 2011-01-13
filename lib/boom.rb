@@ -10,7 +10,7 @@ require 'yajl'
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-require 'boom/clipboard'
+require 'boom/platform'
 require 'boom/command'
 require 'boom/item'
 require 'boom/list'

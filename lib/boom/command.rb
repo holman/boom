@@ -72,19 +72,23 @@ module Boom
         return all  if command == 'all'
         return edit if command == 'edit'
         return help if command == 'help'
-        return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
+        return help if command != "-o" && (command[0] == 45 || command[0] == '-') # any - dash options are pleas for help, except -o
 
-        # if we're operating on a List
+        # prepare for -o switch
+        method = :copy
+        method, command, major = :open, major, minor if command == "-o"
+          
+        # if we're operating on a List        
         if storage.list_exists?(command)
           return delete_list(command) if major == 'delete'
           return detail_list(command) unless major
           unless minor == 'delete'
             return add_item(command,major,minor) if minor
-            return search_list_for_item(command, major)
+            return search_list_for_item(command, major, method)
           end
         end
 
-        return search_items(command) if storage.item_exists?(command)
+        return search_items(command, method) if storage.item_exists?(command)
 
         if minor == 'delete' and storage.item_exists?(major)
           return delete_item(command, major)
@@ -180,14 +184,15 @@ module Boom
       # corresponding entry into your clipboard.
       #
       # name - the String term to search for in all Item names
+      # method - the Symbol method later called on Platform with item
       #
       # Returns the matching Item.
-      def search_items(name)
+      def search_items(name, method = :copy)
         item = storage.items.detect do |item|
           item.name == name
         end
 
-        output Clipboard.copy(item)
+        output Platform.send(method, item)
       end
 
       # Public: search for an Item in a particular list by name. Drops the 
@@ -197,12 +202,12 @@ module Boom
       # item_name - the String term to search for in all Item names
       #
       # Returns the matching Item if found.
-      def search_list_for_item(list_name, item_name)
+      def search_list_for_item(list_name, item_name, method = :copy)
         list = List.find(list_name)
         item = list.find_item(item_name)
 
         if item
-          output Clipboard.copy(item)
+          output Platform.send(method, item)
         else
           output "\"#{item_name}\" not found in \"#{list_name}\""
         end
