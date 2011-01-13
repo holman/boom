@@ -24,9 +24,9 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
-        command = args[0]
-        major   = args[1]
-        minor   = args[2]
+        command = args.shift
+        major   = args.shift
+        minor   = args.empty? ? nil : args.join(' ')
 
         return overview unless command
         delegate(command, major, minor)
