@@ -248,6 +248,8 @@ module Boom
           boom <list> <name> <value>    create a new list item
           boom <name>                   copy item's value to clipboard
           boom <list> <name>            copy item's value to clipboard
+          boom -o <name>                open item's url in browser
+          boom -o <list> <name>         open item's url in browser
           boom <list> <name> delete     deletes an item
 
           all other documentation is located at:
