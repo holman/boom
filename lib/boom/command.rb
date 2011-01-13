@@ -24,12 +24,13 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
+        method  = args.first == "-o" ? (args.shift and :open) : :copy
         command = args.shift
         major   = args.shift
         minor   = args.empty? ? nil : args.join(' ')
-
+        
         return overview unless command
-        delegate(command, major, minor)
+        delegate(command, major, minor, method)
       end
 
       # Public: prints any given string.
@@ -68,15 +69,11 @@ module Boom
       # Public: allows main access to most commands.
       #
       # Returns output based on method calls.
-      def delegate(command, major, minor)
+      def delegate(command, major, minor, method)
         return all  if command == 'all'
         return edit if command == 'edit'
         return help if command == 'help'
-        return help if command != "-o" && (command[0] == 45 || command[0] == '-') # any - dash options are pleas for help, except -o
-
-        # prepare for -o switch
-        method = :copy
-        method, command, major = :open, major, minor if command == "-o"
+        return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
           
         # if we're operating on a List        
         if storage.list_exists?(command)
