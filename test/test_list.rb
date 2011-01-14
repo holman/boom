@@ -20,6 +20,16 @@ class TestList < Test::Unit::TestCase
     assert_equal 1, @list.items.size
   end
 
+  def test_add_item_with_duplicate_name
+    @list.add_item(@item)
+    assert_equal 1, @list.items.size
+    assert_equal 'https://github.com', @list.find_item('github').value
+    @diff_item = Boom::Item.new('github', 'https://github.com/home')
+    @list.add_item(@diff_item)
+    assert_equal 1, @list.items.size
+    assert_equal 'https://github.com/home', @list.find_item('github').value
+  end
+
   def test_to_hash
     assert_equal 0, @list.to_hash[@list.name].size
     @list.add_item(@item)
