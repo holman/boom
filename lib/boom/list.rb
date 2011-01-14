@@ -41,7 +41,7 @@ module Boom
     #
     # Returns the current set of items.
     def add_item(item)
-      @items.delete_if { |i| i.name == item.name } if find_item(item.name)
+      delete_item(item.name) if find_item(item.name)
       @items << item
     end
 
