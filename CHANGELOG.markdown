@@ -5,6 +5,8 @@
   in a List for you. Thanks [lwe](https://github.com/lwe).
 - Values for item creation can have spaces, and then they get concat'ed as one
   value. Thanks [lwe](https://github.com/lwe).
+- Replacing an item no longer dupes the item; it'll just replace the value.
+  Thank god, finally. Thanks [thbishop](https://github.com/thbishop).
 
 ## 0.0.9
 - Backport `Symbol#to_proc` for 1.8.6 support (thanks 
