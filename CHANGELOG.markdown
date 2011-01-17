@@ -7,6 +7,9 @@
   value. Thanks [lwe](https://github.com/lwe).
 - Replacing an item no longer dupes the item; it'll just replace the value.
   Thank god, finally. Thanks [thbishop](https://github.com/thbishop).
+- Also started `completion/`, a place to drop in scripts to set up completion
+  support for boom. Starting out with [thbishop](https://github.com/thbishop)'s
+  bash script, but if anyone has something for zsh I'd kiss them a bit.
 
 ## 0.0.9
 - Backport `Symbol#to_proc` for 1.8.6 support (thanks 
