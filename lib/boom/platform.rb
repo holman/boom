@@ -35,7 +35,7 @@ module Boom
       def open(item)
         `#{open_command} '#{item.url.gsub("\'","\\'")}'`
 
-        "Boom! We just opened #{item.value} in your browser."
+        "Boom! We just opened #{item.value} for you."
       end
 
       # Public: copies a given Item's value to the clipboard. This method is
