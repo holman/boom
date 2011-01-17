@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+- `boom open` will open the Item's URL in a browser, or it'll open all the URLs
+  in a List for you. Thanks [lwe](https://github.com/lwe).
 - Values for item creation can have spaces, and then they get concat'ed as one
   value. Thanks [lwe](https://github.com/lwe).
 
