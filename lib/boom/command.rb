@@ -73,6 +73,7 @@ module Boom
         return edit if command == 'edit'
         return help if command == 'help'
         return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
+        return echo(major,minor) if command == 'echo'
         return open(major,minor) if command == 'open'
 
         # if we're operating on a List
@@ -118,6 +119,25 @@ module Boom
           item = storage.items.detect { |item| item.name == major }
           output Platform.open(item)
         end
+      end
+      
+      # Public: echoes only the Item's value without copying
+      #
+      # item_name - the String term to search for in all Item names
+      #
+      # Returns nothing
+      def echo(major, minor)
+        unless minor
+          item = storage.items.detect do |item|
+            item.name == major
+          end
+          return output "\"#{major}\" not found" unless item
+        else
+          list = List.find(major)
+          item = list.find_item(minor)
+          return output "\"#{minor}\" not found in \"#{major}\"" unless item
+        end
+        output item.value
       end
 
       # Public: add a new List.
@@ -260,6 +280,8 @@ module Boom
           boom <list> <name>            copy item's value to clipboard
           boom open <name>              open item's url in browser
           boom open <list> <name>       open all item's url in browser for a list
+          boom echo <name>              echo the item's value without copying
+          boom echo <list> <name>       echo the item's value without copying
           boom <list> <name> delete     deletes an item
 
           all other documentation is located at:

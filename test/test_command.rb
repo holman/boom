@@ -119,4 +119,20 @@ class TestCommand < Test::Unit::TestCase
   def test_nonexistent_item_access_scoped_by_list
     assert_match /"twitter" not found in "urls"/, command('urls twitter')
   end
+  
+  def test_echo_item
+    assert_match /https:\/\/github\.com/, command('echo github')
+  end
+  
+  def test_echo_item_does_not_exist
+    assert_match /"wrong" not found/, command('echo wrong')
+  end
+  
+  def test_echo_list_item
+    assert_match /https:\/\/github\.com/, command('echo urls github')
+  end
+  
+  def test_echo_list_item_does_not_exist
+    assert_match /"wrong" not found in "urls"/, command('echo urls wrong')
+  end
 end
