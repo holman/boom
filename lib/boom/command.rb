@@ -74,7 +74,7 @@ module Boom
         return help if command == 'help'
         return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
-        return open(major,minor) if command == 'open'
+        return open(major,minor) if command == 'open' || command == 'o'
 
         # if we're operating on a List
         if storage.list_exists?(command)
