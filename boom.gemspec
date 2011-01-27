@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'boom'
-  s.version           = '0.0.9'
-  s.date              = '2011-01-10'
+  s.version           = '0.0.10'
+  s.date              = '2011-01-26'
   s.rubyforge_project = 'boom'
 
   ## Make sure your summary is short. The description may be as long
@@ -71,12 +71,14 @@ Gem::Specification.new do |s|
     Rakefile
     bin/boom
     boom.gemspec
+    completion/boom.bash
+    completion/boom.zsh
     lib/boom.rb
-    lib/boom/clipboard.rb
     lib/boom/command.rb
     lib/boom/core_ext/symbol.rb
     lib/boom/item.rb
     lib/boom/list.rb
+    lib/boom/platform.rb
     lib/boom/storage.rb
     test/examples/urls.json
     test/helper.rb
