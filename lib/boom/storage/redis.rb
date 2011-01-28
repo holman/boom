@@ -9,7 +9,7 @@ module Boom
       def bootstrap
       end
 
-      def setup
+      def populate
       end
 
       def save

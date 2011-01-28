@@ -6,7 +6,7 @@
 #
 # Command also keeps track of one connection to Storage, which is how new data
 # changes are persisted to disk. It takes care of any data changes by calling
-# Boom::Command#save!.
+# Boom::Command#save.
 #
 module Boom
   class Command
@@ -153,7 +153,7 @@ module Boom
         lists = (storage.lists << List.new(name))
         storage.lists = lists
         output "Boom! Created a new list called \"#{name}\"."
-        save!
+        save
       end
 
       # Public: remove a named List.
@@ -170,7 +170,7 @@ module Boom
         if $stdin.gets.chomp == 'y'
           List.delete(name)
           output "Boom! Deleted all your #{name}."
-          save!
+          save
         else
           output "Just kidding then."
         end
@@ -191,7 +191,7 @@ module Boom
         list = List.find(list)
         list.add_item(Item.new(name,value))
         output "Boom! \"#{name}\" in \"#{list.name}\" is \"#{value}\". Got it."
-        save!
+        save
       end
 
       # Public: remove a named Item.
@@ -208,7 +208,7 @@ module Boom
         list = List.find(list_name)
         list.delete_item(name)
         output "Boom! \"#{name}\" is gone forever."
-        save!
+        save
       end
 
       # Public: search for an Item in all lists by name. Drops the 
@@ -246,8 +246,8 @@ module Boom
       # Public: save in-memory data to disk.
       #
       # Returns whether or not data was saved.
-      def save!
-        storage.save!
+      def save
+        storage.save
       end
 
       # Public: launches JSON file in an editor for you to edit manually. Uses
