@@ -81,6 +81,24 @@ can have multiple lists.
         blog:   http://zachholman.com
         github: https://github.com
 
+** Open in browser **
+
+    $ boom open facebook-stalking
+    Boom! We just opened all of "shoes" for you.
+
+In other words, this will open all the links in `facebook-stalking` in your
+browser. You creep. You can also just open up one:
+
+    $ boom open twitter
+    Boom! We just opened http://twitter.com for you.
+
+** Just print an item **
+
+	# boom echo <list> <name>
+	# boom echo <name>
+	$ git clone $(boom echo github)holman/boom
+	Cloning into boom...
+
 ** Help **
 
     $ boom help

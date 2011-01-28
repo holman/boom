@@ -24,9 +24,9 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
-        command = args[0]
-        major   = args[1]
-        minor   = args[2]
+        command = args.shift
+        major   = args.shift
+        minor   = args.empty? ? nil : args.join(' ')
 
         return overview unless command
         delegate(command, major, minor)
@@ -73,6 +73,8 @@ module Boom
         return edit if command == 'edit'
         return help if command == 'help'
         return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
+        return echo(major,minor) if command == 'echo' || command == 'e'
+        return open(major,minor) if command == 'open' || command == 'o'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -103,6 +105,39 @@ module Boom
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
           output "    #{item.short_name}:#{item.spacer} #{item.value}"
         end
+      end
+
+      # Public: opens the Item.
+      #
+      # Returns nothing.
+      def open(major, minor)
+        if storage.list_exists?(major)
+          list = List.find(major)
+          list.items.each { |item| Platform.open(item) }
+          output "Boom! We just opened all of \"#{major}\" for you."
+        else
+          item = storage.items.detect { |item| item.name == major }
+          output Platform.open(item)
+        end
+      end
+      
+      # Public: echoes only the Item's value without copying
+      #
+      # item_name - the String term to search for in all Item names
+      #
+      # Returns nothing
+      def echo(major, minor)
+        unless minor
+          item = storage.items.detect do |item|
+            item.name == major
+          end
+          return output "\"#{major}\" not found" unless item
+        else
+          list = List.find(major)
+          item = list.find_item(minor)
+          return output "\"#{minor}\" not found in \"#{major}\"" unless item
+        end
+        output item.value
       end
 
       # Public: add a new List.
@@ -187,7 +222,7 @@ module Boom
           item.name == name
         end
 
-        output Clipboard.copy(item)
+        output Platform.copy(item)
       end
 
       # Public: search for an Item in a particular list by name. Drops the 
@@ -202,7 +237,7 @@ module Boom
         item = list.find_item(item_name)
 
         if item
-          output Clipboard.copy(item)
+          output Platform.copy(item)
         else
           output "\"#{item_name}\" not found in \"#{list_name}\""
         end
@@ -243,6 +278,10 @@ module Boom
           boom <list> <name> <value>    create a new list item
           boom <name>                   copy item's value to clipboard
           boom <list> <name>            copy item's value to clipboard
+          boom open <name>              open item's url in browser
+          boom open <list> <name>       open all item's url in browser for a list
+          boom echo <name>              echo the item's value without copying
+          boom echo <list> <name>       echo the item's value without copying
           boom <list> <name> delete     deletes an item
 
           all other documentation is located at:

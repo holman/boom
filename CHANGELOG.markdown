@@ -1,6 +1,22 @@
 # boom changes
 
-## head
+## 0.0.10
+- `boom open` will open the Item's URL in a browser, or it'll open all the URLs
+  in a List for you. Thanks [lwe](https://github.com/lwe).
+- Values for item creation can have spaces, and then they get concat'ed as one
+  value. Thanks [lwe](https://github.com/lwe).
+- Replacing an item no longer dupes the item; it'll just replace the value.
+  Thank god, finally. Thanks [thbishop](https://github.com/thbishop).
+- Also started `completion/`, a place to drop in scripts to set up completion
+  support for boom. Starting out with [thbishop](https://github.com/thbishop)'s
+  bash script, but if anyone has something for zsh I'd kiss them a bit.
+- `boom echo` (and `boom e`) just echos the value; great for command-line
+  scripts and junk! Thanks [bschaeffer](https://github.com/bschaeffer).
+
+## 0.0.9
+- Backport `Symbol#to_proc` for 1.8.6 support (thanks 
+  [kastner](https://github.com/kastner) and 
+  [DeMarko](https://github.com/DeMarko)).
 
 ## 0.0.8
 - Support for Ruby 1.9 (thanks [jimmycuadra](https://github.com/jimmycuadra)).

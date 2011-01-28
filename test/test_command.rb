@@ -63,10 +63,27 @@ class TestCommand < Test::Unit::TestCase
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('urls github')
   end
+  
+  def test_item_open_url
+    Boom::Platform.stubs(:open_command).returns("echo")
+    assert_match /opened https:\/\/github\.com for you/,
+      command('open github')
+  end
+
+  def test_item_open_lists
+    Boom::Platform.stubs(:open_command).returns("echo")
+    assert_match /opened all of \"urls\" for you/,
+      command('open urls')
+  end
 
   def test_item_creation
     assert_match /"twitter" in "urls"/,
       command('urls twitter http://twitter.com/holman')
+  end
+
+  def test_item_creation_long_value
+    assert_match /is "tanqueray hendricks bombay"/,
+      command('urls gins tanqueray hendricks bombay')
   end
 
   def test_list_deletion_no
@@ -101,5 +118,25 @@ class TestCommand < Test::Unit::TestCase
 
   def test_nonexistent_item_access_scoped_by_list
     assert_match /"twitter" not found in "urls"/, command('urls twitter')
+  end
+  
+  def test_echo_item
+    assert_match /https:\/\/github\.com/, command('echo github')
+  end
+
+  def test_echo_item_shorthand
+    assert_match /https:\/\/github\.com/, command('e github')
+  end
+  
+  def test_echo_item_does_not_exist
+    assert_match /"wrong" not found/, command('echo wrong')
+  end
+  
+  def test_echo_list_item
+    assert_match /https:\/\/github\.com/, command('echo urls github')
+  end
+  
+  def test_echo_list_item_does_not_exist
+    assert_match /"wrong" not found in "urls"/, command('echo urls wrong')
   end
 end

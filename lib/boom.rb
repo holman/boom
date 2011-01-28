@@ -10,7 +10,7 @@ require 'yajl'
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-require 'boom/clipboard'
+require 'boom/platform'
 require 'boom/command'
 require 'boom/config'
 require 'boom/item'
@@ -21,8 +21,10 @@ require 'boom/storage/base'
 require 'boom/storage/json'
 require 'boom/storage/mongodb'
 
+require 'boom/core_ext/symbol'
+
 module Boom
-  VERSION = '0.0.8'
+  VERSION = '0.0.10'
 
   extend self
 
