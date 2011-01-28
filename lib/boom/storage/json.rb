@@ -1,8 +1,7 @@
 # coding: utf-8
-
-# Storage is the middleman between changes the client makes in-memory and how
-# it's actually persisted to disk (and vice-versa). There are also a few
-# convenience methods to run searches and operations on the in-memory hash.
+#
+# JSON is the default storage option for boom. It writes a json file to
+# ~/.boom. Pretty neat, huh?
 #
 module Boom
   module Storage
@@ -17,48 +16,23 @@ module Boom
         JSON_FILE
       end
 
-      # Public: initializes a Storage instance by loading in your persisted data.
+      # Takes care of bootstrapping the JSON file, both in terms of creating the
+      # file and in terms of creating a skeleton JSON schema.
       #
-      # Returns the Storage instance.
-      def initialize
-        @lists = []
-        explode_json(json_file)
+      # Return true if successfully saved.
+      def bootstrap
+        return if File.exist?(json_file)
+        FileUtils.touch json_file
+        File.open(json_file, 'w') {|f| f.write(to_json) }
+        save!
       end
-
-      # Public: the in-memory collection of all Lists attached to this Storage
-      # instance.
-      #
-      # lists - an Array of individual List items
-      #
-      # Returns nothing.
-      attr_writer :lists
-
-      # Public: get the data from storage
-      #
-      # Returns the list
-      def lists
-        @lists
-      end
-
-      # Public: persists your in-memory objects to disk in JSON format.
-      #
-      # lists_json - list in JSON format
-      #
-      # Returns true if successful, false if unsuccessful.
-      def save(lists_json)
-        File.open(json_file, 'w') {|f| f.write(lists_json) }
-      end
-
-    # INTERNAL METHODS ##########################################################
 
       # Take a JSON representation of data and explode it out into the consituent
       # Lists and Items for the given Storage instance.
       #
       # Returns nothing.
-      def explode_json(json)
-        bootstrap_json unless File.exist?(json)
-
-        storage = Yajl::Parser.new.parse(File.new(json, 'r'))
+      def setup
+        storage = Yajl::Parser.new.parse(File.new(json_file, 'r'))
       
         storage['lists'].each do |lists|
           lists.each do |list_name, items|
@@ -73,14 +47,21 @@ module Boom
         end
       end
 
-      # Takes care of bootstrapping the JSON file, both in terms of creating the
-      # file and in terms of creating a skeleton JSON schema.
+      # Public: persists your in-memory objects to disk in JSON format.
       #
-      # Return true if successfully saved.
-      def bootstrap_json
-        FileUtils.touch json_file
+      # lists_json - list in JSON format
+      #
+      # Returns true if successful, false if unsuccessful.
+      def save
         File.open(json_file, 'w') {|f| f.write(to_json) }
-        save!
+      end
+
+      # Public: the JSON representation of the current List and Item assortment
+      # attached to the Storage instance.
+      #
+      # Returns a String JSON representation of its Lists and their Items.
+      def to_json
+        Yajl::Encoder.encode(to_hash, :pretty => true)
       end
 
     end

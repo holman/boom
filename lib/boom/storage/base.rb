@@ -12,7 +12,9 @@ module Boom
       #
       # Returns the Storage instance.
       def initialize
-        @lists = Boom.storage.lists
+        @lists = []
+        bootstrap
+        setup
       end
 
       # Public: the in-memory collection of all Lists attached to this Storage
@@ -35,7 +37,7 @@ module Boom
       #
       # Returns true or false
       def save!
-        Boom.storage.save(to_json)
+        save
       end
 
       # Public: tests whether a named List exists.
@@ -61,14 +63,6 @@ module Boom
       # Returns true if found, false if not.
       def item_exists?(name)
         items.detect { |item| item.name == name }
-      end
-
-      # Public: the JSON representation of the current List and Item assortment
-      # attached to the Storage instance.
-      #
-      # Returns a String JSON representation of its Lists and their Items.
-      def to_json
-        Yajl::Encoder.encode(to_hash, :pretty => true)
       end
 
       # Public: creates a Hash of the representation of the in-memory data
