@@ -79,6 +79,7 @@ module Boom
       # Return true if successfully saved.
       def bootstrap_json
         FileUtils.touch json_file
+        File.open(json_file, 'w') {|f| f.write(to_json) }
         save!
       end
 
