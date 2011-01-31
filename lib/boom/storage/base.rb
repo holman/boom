@@ -14,7 +14,7 @@ module Boom
       def initialize
         @lists = []
         bootstrap
-        setup
+        populate
       end
 
       # run bootstrap tasks for the storage

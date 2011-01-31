@@ -19,6 +19,7 @@ require 'boom/list'
 require 'boom/storage'
 require 'boom/storage/base'
 require 'boom/storage/json'
+require 'boom/storage/redis'
 require 'boom/storage/mongodb'
 
 require 'boom/core_ext/symbol'
