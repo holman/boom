@@ -1,5 +1,8 @@
 # boom changes
 
+## 0.1.11
+- Don't force Redis on everyone.
+
 ## 0.1.0
 - boom has been rewritten to use multiple backends. Use `boom switch <backend>`
   to switch from the default JSON backend. Currently only Redis is supported.
