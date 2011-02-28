@@ -36,6 +36,13 @@ class TestCommand < Test::Unit::TestCase
     Boom::Command.captured_output
   end
 
+  def test_overview_for_empty
+    storage = Boom::Storage
+    storage.stubs(:lists).returns([])
+    Boom::Command.stubs(:storage).returns(storage)
+    assert_match /have anything yet!/, command(nil)
+  end
+
   def test_overview
     assert_equal '  urls (2)', command(nil)
   end

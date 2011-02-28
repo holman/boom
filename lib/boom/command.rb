@@ -50,6 +50,13 @@ module Boom
         storage.lists.each do |list|
           output "  #{list.name} (#{list.items.size})"
         end
+        s =  "You don't have anything yet! To start out, create a new list:"
+        s << "\n  $ boom <list-name>"
+        s << "\nAnd then add something to your list!"
+        s << "\n  $ boom <list-name> <item-name> <item-value>"
+        s << "\nYou can then grab your new item:"
+        s << "\n  $ boom <item-name>"
+        output s if storage.lists.size == 0
       end
 
       # Public: prints the detailed view of all your Lists and all their
