@@ -1,5 +1,10 @@
 # boom changes
 
+## 0.1.0
+- boom has been rewritten to use multiple backends. Use `boom switch <backend>`
+  to switch from the default JSON backend. Currently only Redis is supported.
+  Pull Requests are welcome.
+
 ## 0.0.10
 - `boom open` will open the Item's URL in a browser, or it'll open all the URLs
   in a List for you. Thanks [lwe](https://github.com/lwe).

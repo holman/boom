@@ -25,7 +25,7 @@ require 'boom/storage/mongodb'
 require 'boom/core_ext/symbol'
 
 module Boom
-  VERSION = '0.0.10'
+  VERSION = '0.1.0'
 
   extend self
 
