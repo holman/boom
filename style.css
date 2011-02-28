@@ -1,0 +1,141 @@
+html{
+  font-family: Helvetica, sans-serif;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #777;
+}
+a{
+  color: #FF006F;
+}
+a:hover{
+  color: #111;
+}
+
+#header{
+  background-color: #262626;
+  background-image: url('pattern.png');
+  background-repeat: repeat-x;
+  padding: 10px 25px;
+  text-align: right;
+}
+#header h1{
+  padding: 0;
+  margin: 0;
+  font-size: 125px;
+}
+#header h1 a{
+  color: #FF006F;
+  text-decoration: none;
+}
+#header h1 a:hover{
+  text-shadow: #10CDFF 0 0 200px;
+}
+@-webkit-keyframes pulse {
+  from { opacity: 0.05; }
+  50%  { opacity: 1.0; }
+  to   { opacity: 0.05; }
+}
+#pulse:hover h1 { 
+  -webkit-animation-name: pulse; 
+  -webkit-animation-duration: 0.5s; 
+  -webkit-animation-iteration-count: infinite;
+}
+
+#teaser{
+  background-color: #000;
+  font-size: 40px;
+  color: #CCFF00;
+  padding: 50px 25px;
+}
+#teaser strong{
+  color: #10CDFF;
+}
+
+#navigation{
+  text-align: center;
+  background-color: #262626;
+  background-image: url('pattern.png');
+  background-repeat: repeat-x;
+  padding: 25px 0;
+  margin: 0;
+  text-shadow; 1px 1px 0 #000;
+  font-size: 35px;
+}
+#navigation li{
+  display: inline;
+  margin: 0 30px;
+}
+#navigation a{
+  color: #eee;
+  text-decoration: none;
+}
+#navigation a:hover{
+  color: #FF006F;
+}
+.sticky #navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#tiny{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#tiny a{
+  color: #FF006F;
+  text-decoration: none;
+}
+#tiny a:hover{
+  color: #fff;
+}
+#spacer{
+  height: 100px;
+}
+
+#content{
+  background-color: #777;
+  margin: 0;
+  margin-bottom: 150px;
+  padding: 0 20%;
+  color: #ccc;
+  font-size: 20px;
+}
+#content h2{
+  font-size: 90px;
+  font-weight: normal;
+  margin: 0 0;
+  padding: 0;
+  padding-top: 100px;
+  color: #eee;
+}
+#content pre{
+  background-color: #111;
+  display: block;
+  border-radius: 7px;
+  padding: 5px 7px;
+  color: #ccc;
+  font-size: 16px;
+}
+#content pre strong{
+  color: #FF006F;
+  font-weight: normal;
+  font-size: 13px;
+}
+#content .chunk{
+  font-family: Georgia, serif;
+  line-height: 1.4em;
+  background-color: #ccc;
+  border-radius: 7px;
+  color: #444;
+  padding: 1px 20px;
+  margin-bottom: 0px;
+}

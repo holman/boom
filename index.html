@@ -1,0 +1,146 @@
+<html>
+<head>
+  <title>boom</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="jquery.js"></script>
+  <script src="waypoints/waypoints.min.js"></script>
+  <script src="scroll.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('body').waypoint(function(event, direction) {
+      $('#tiny').fadeIn(250);
+    }, {
+        offset: '-100%'
+    }).find('#navigation').waypoint(function(event, direction) {
+        $('#tiny').fadeOut(250);
+        $(this).parent().toggleClass('sticky', direction === "down");
+        event.stopPropagation();
+    });
+  });
+  var boom = new Audio("boom.m4v"); 
+  </script>  
+</head>
+<body id="top">
+
+<div id="pulse">
+  <div id="header">
+    <h1><a href="#top" onclick="boom.play(); boom.currentTime=0">boom</a></h1>
+  </div>
+</div>
+
+<div id="teaser">
+  motherfucking <strong>text snippets</strong> <br />
+  on the <strong>command line</strong>.
+</div>
+
+<div id="spacer">
+  <div id="tiny"><a href="#top">(boom)</a></div>
+  <ul class="navigation" id="navigation">
+    <li><a href="#overview">overview</a></li>
+    <li><a href="#usage">usage</a></li>
+    <li><a href="#screencast">screencast</a></li>
+    <li><a href="https://github.com/holman/boom/wiki">docs</a></li>
+    <li><a href="https://github.com/holman/boom">code</a></li>
+  </ul>
+</div>
+
+<div id="content">
+
+  <h2 id="overview">Overview</h2>
+  <div class="chunk">
+
+    <p><strong>boom</strong> lets you access text snippets from the command
+    line.</p>
+
+    <p>You probably hate typing the same shit over and over again. You probably
+    sit in front of your command line prompt every day. Let's smash those two
+    concepts together in the face.<p>
+
+    <p>Some people use <strong>boom</strong> for shit like:</p>
+
+    <ul>
+      <li><strong>Tracking URLs</strong>. It's sort of like your own personal del.icio.us. I upload animated GIFs mocking my coworkers, and <strong>boom</strong> lets me access those quickly.</li>
+      <li><strong>Simple todos</strong>. Why use an ugly task manager app when it's all loaded into your shell?</li>
+      <li><strong>Common responses and snippets</strong>. Stock email replies, private code copy and paste, things like that.</li>
+    </ul>
+  </div>
+
+  <h2 id="install">Install</h2>
+  <div class="chunk">
+    <p>Hey, run this:</p>
+    <p><pre>$ gem install boom</pre></p>
+
+    <p>See? Now you can do this:</p>
+    <p><pre>$ boom</pre></p>
+
+    <p>Pretty easy. Like your mom.</p>
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <div class="chunk">
+    <p><strong>boom</strong> is designed to be really simple.</p>
+    
+    <p>
+      You save a bunch of <strong>items</strong> which all belong to a
+      <strong>list</strong>. First, make a new list:
+    </p>
+
+    <pre> $ boom gifs
+ <strong>Boom! Created a new list called "gifs".</strong></pre>
+
+    <p>Then, add something to your new list:</p>
+
+    <pre> $ boom gifs melissa http://cl.ly/3pAn/animated.gif
+ <strong>Boom! "melissa" in "gifs" is "http://cl.ly/3pAn/animated.gif". Got it.</strong></pre>
+
+    <p>Then you're ready to grab this animated GIF of Melissa at a moment's
+    notice:</p>
+
+    <pre> $ boom melissa
+ <strong>Boom! Just copied http://cl.ly/3pAn/animated.gif to your clipboard.</strong></pre>
+
+    <p>There's a slew of other commands for deletion, displaying, opening in
+    browsers, and so on; check <a
+    href="https://github.com/holman/boom/wiki">the wiki</a> or run:</p>
+
+    <pre> $ boom help</pre>
+   
+
+  </div>
+
+  <h2 id="screencast">Screencast</h2>
+  <div class="chunk">
+      
+    <p>I made a screencast that shows off how I use <strong>boom</strong> in
+    GitHub's internal Campfire. Some people thought it was hilarious and
+    nominated me for an award, which I accepted and then used as a murder
+    weapon. Allegedly.<p>
+
+    <p style="text-align: center">
+      <iframe src="http://player.vimeo.com/video/18378673" width="500" height="281" frameborder="0"></iframe>
+    </p>
+
+    <p>&nbsp;</p>
+
+  </div>
+
+  <h2 id="about">About</h2>
+  <div class="chunk">
+      
+    <p><strong>boom</strong> was made during a tequila bender in a tiny rented
+    (possibly stolen) RV camper by <a href="http://zachholman.com">Zach Holman</a>.
+    Feel free to <a href="http://twitter.com/holman">follow him on Twitter</a>-
+    I'm pretty sure he exclusively tweets about migration patterns of
+    velociraptors.</p>
+
+    <p>Are you a developer? Do you at least tolerate <strong>boom</strong>? You
+    should watch or fork <strong>boom</strong>
+    <a href="https://github.com/holman/boom">on GitHub</a>. Pull Requests of
+    awesome functionality is awesome.</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>
