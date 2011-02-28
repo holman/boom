@@ -2,8 +2,11 @@
 #
 # Sup, Redis.
 #
-require 'digest'
-require 'redis'
+begin
+  require 'digest'
+  require 'redis'
+rescue LoadError
+end
 
 module Boom
   module Storage
@@ -12,6 +15,9 @@ module Boom
       def redis
         @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
                                :port => Boom.config.attributes["redis"]["port"]
+      rescue NameError => e
+        puts "You don't have Redis installed yet:\n  gem install redis"
+        exit
       end
 
       def bootstrap
