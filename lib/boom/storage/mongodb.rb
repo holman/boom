@@ -1,7 +1,12 @@
 # coding: utf-8
 
-# Storage adapter that saves data from boom to MongoDB instead of JSON file
+# Storage adapter that saves data from boom to MongoDB instead of JSON file.
 #
+# This was grabbed from antonlindstrom's fork, but he wrote it before the 0.1.0
+# changes to boom. It would need to be updated to use Boom::Config and to
+# inherit methods from Boom::Storage::Base. Until then, this is chillin' here
+# until it gets fixed.
+
 module Boom
   module Storage
     class MongoDB
