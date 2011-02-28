@@ -298,6 +298,8 @@ module Boom
           boom all                      show all items in all lists
           boom edit                     edit the boom JSON file in $EDITOR
           boom help                     this help text
+          boom storage                  shows which storage backend you're using
+          boom switch <storage>         switches to a different storage backend
           
           boom <list>                   create a new list
           boom <list>                   show items for a list
