@@ -13,11 +13,13 @@ module Boom
     class Redis < Base
 
       def redis
-        @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
-                               :port => Boom.config.attributes["redis"]["port"]
-      rescue NameError => e
-        puts "You don't have Redis installed yet:\n  gem install redis"
-        exit
+        begin
+          @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
+                                 :port => Boom.config.attributes["redis"]["port"]
+        rescue NameError => e
+          puts "You don't have Redis installed yet:\n  gem install redis"
+          exit
+        end
       end
 
       def bootstrap
