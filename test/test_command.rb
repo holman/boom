@@ -148,7 +148,7 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_show_storage
-    assert_match /You're currently using JSON/, command('storage')
+    assert_match /You're currently using json/, command('storage')
   end
   
   def test_nonexistant_storage_switch
