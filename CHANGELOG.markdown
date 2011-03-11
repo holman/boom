@@ -1,5 +1,9 @@
 # boom changes
 
+## head
+- Copy to clipboard doesn't hang anymore. Sweet. Thanks,
+  [mcollina](https://github.com/mcollina).
+
 ## 0.1.11
 - Don't force Redis on everyone.
 
