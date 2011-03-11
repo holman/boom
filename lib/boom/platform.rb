@@ -45,7 +45,7 @@ module Boom
       def copy(item)
         copy_command = darwin? ? "pbcopy" : "xclip -selection clipboard"
 
-        `echo '#{item.value.gsub("\'","\\'")}' | tr -d "\n" | #{copy_command}`
+        Kernel.system("echo '#{item.value.gsub("\'","\\'")}' | tr -d \"\n\" | #{copy_command}")
 
         "Boom! We just copied #{item.value} to your clipboard."
       end
