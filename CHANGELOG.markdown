@@ -5,6 +5,8 @@
   [mcollina](https://github.com/mcollina).
 - Holy hell, [brettbuddin](https://github.com/brettbuddin) added completion for
   zsh. Pretty awesome too.
+- [antonlindstrom](https://github.com/antonlindstrom) fixed up the MongoDB
+  backend.
 
 ## 0.1.11
 - Don't force Redis on everyone.
