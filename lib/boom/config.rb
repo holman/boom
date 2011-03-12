@@ -48,7 +48,7 @@ module Boom
     # Returns whether the attributes were saved.
     def bootstrap
       @attributes = {
-        :backend => 'JSON'
+        :backend => 'json'
       }
       save
     end
