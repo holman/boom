@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+
+## 0.1.2
 - Copy to clipboard doesn't hang anymore. Sweet. Thanks,
   [mcollina](https://github.com/mcollina).
 - Holy hell, [brettbuddin](https://github.com/brettbuddin) added completion for
@@ -8,7 +10,7 @@
 - [antonlindstrom](https://github.com/antonlindstrom) fixed up the MongoDB
   backend.
 
-## 0.1.11
+## 0.1.1
 - Don't force Redis on everyone.
 
 ## 0.1.0
