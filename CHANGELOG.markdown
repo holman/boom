@@ -3,6 +3,8 @@
 ## head
 - Copy to clipboard doesn't hang anymore. Sweet. Thanks,
   [mcollina](https://github.com/mcollina).
+- Holy hell, [brettbuddin](https://github.com/brettbuddin) added completion for
+  zsh. Pretty awesome too.
 
 ## 0.1.11
 - Don't force Redis on everyone.
