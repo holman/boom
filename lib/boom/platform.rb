@@ -35,7 +35,7 @@ module Boom
       def open(item)
         `#{open_command} '#{item.url.gsub("\'","\\'")}'`
 
-        "Boom! We just opened '#{item.value}' for you."
+        "Boom! We just opened \"#{item.value}\" for you."
       end
 
       # Public: copies a given Item's value to the clipboard. This method is
@@ -47,7 +47,7 @@ module Boom
 
         Kernel.system("echo '#{item.value.gsub("\'","\\'")}' | tr -d \"\n\" | #{copy_command}")
 
-        "Boom! We just copied '#{item.value}' to your clipboard."
+        "Boom! We just copied \"#{item.value}\" to your clipboard."
       end
     end
   end
