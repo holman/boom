@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'boom'
-  s.version           = '0.1.2'
-  s.date              = '2011-03-11'
+  s.version           = '0.2.0'
+  s.date              = '2011-04-11'
   s.rubyforge_project = 'boom'
 
   ## Make sure your summary is short. The description may be as long
@@ -66,6 +66,8 @@ Gem::Specification.new do |s|
   # = MANIFEST =
   s.files = %w[
     CHANGELOG.markdown
+    Gemfile
+    Gemfile.lock
     LICENSE.markdown
     README.markdown
     Rakefile
@@ -84,6 +86,7 @@ Gem::Specification.new do |s|
     lib/boom/storage.rb
     lib/boom/storage/base.rb
     lib/boom/storage/json.rb
+    lib/boom/storage/keychain.rb
     lib/boom/storage/mongodb.rb
     lib/boom/storage/redis.rb
     test/examples/config_json.json

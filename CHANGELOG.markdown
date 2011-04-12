@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+
+## 0.2.0
 - Add Keychain storage to store Boom data securely in OS X's Keychain.app.
   Thanks, [@davidtrogers](https://github.com/davidtrogers)!
 - Switch from yajl-ruby because [OS X isn't for
@@ -8,6 +10,7 @@
   for finishing it up, [@antonlindstrom](https://github.com/antonlindstrom).
 - Move dependencies to Bundler, because it's the One True Way™ at this point.
 - Some README updates.
+- `boom -v`.
 
 ## 0.1.2
 - Copy to clipboard doesn't hang anymore. Sweet. Thanks,

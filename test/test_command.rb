@@ -161,4 +161,11 @@ class TestCommand < Test::Unit::TestCase
     assert_match /We've switched you over to redis/, command('switch redis')
   end
 
+  def test_version_switch
+    assert_match /#{Boom::VERSION}/, command('-v')
+  end
+
+  def test_version_long
+    assert_match /#{Boom::VERSION}/, command('--version')
+  end
 end
