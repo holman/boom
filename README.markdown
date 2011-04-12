@@ -15,10 +15,13 @@ For more details about what boom is and how it works, check out
 
 ## Contribute
 
-I'd love to include your contributions, friend. Make sure your methods are
-[TomDoc](http://tomdoc.org)'d properly, that existing tests pass (`rake`), and
-that any new functionality includes appropriate tests. Bonus points if you're
-not updating the gemspec or bumping boom's version.
+I'd love to include your contributions, friend.
+
+Clone this repository, then run `bundle install`. That'll install all the gem
+dependencies. Make sure your methods are [TomDoc](http://tomdoc.org)'d
+properly, that existing tests pass (`rake`), and that any new functionality
+includes appropriate tests. Bonus points if you're not updating the gemspec or
+bumping boom's version.
 
 All good? Cool! Then [send me a pull request](https://github.com/holman/boom/pull/new/master)!
 

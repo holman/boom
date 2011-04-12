@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    boom (0.1.2)
+      json_pure (~> 1.5.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    json_pure (1.5.1)
+    mocha (0.9.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  boom!
+  mocha (~> 0.9.9)
