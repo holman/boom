@@ -21,6 +21,7 @@ require 'boom/storage/base'
 require 'boom/storage/json'
 require 'boom/storage/redis'
 require 'boom/storage/mongodb'
+require 'boom/storage/keychain'
 
 require 'boom/core_ext/symbol'
 
