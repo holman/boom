@@ -1,6 +1,11 @@
 # boom changes
 
 ## head
+- Switch from yajl-ruby because [OS X isn't for
+  developers](http://zachholman.com/2011/03/osx-isnt-for-developers/). Thanks
+  for finishing it up, [@antonlindstrom](https://github.com/antonlindstrom).
+- Move dependencies to Bundler, because it's the One True Way™ at this point.
+- Some README updates.
 
 ## 0.1.2
 - Copy to clipboard doesn't hang anymore. Sweet. Thanks,
