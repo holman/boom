@@ -42,6 +42,14 @@ module Boom
         puts(s)
       end
 
+      # Public: gets $stdin.
+      #
+      # Returns the $stdin object. This method exists to help with easy mocking
+      # or overriding.
+      def stdin
+        $stdin
+      end
+
       # Public: prints a tidy overview of your Lists in descending order of
       # number of Items.
       #
@@ -93,7 +101,7 @@ module Boom
           return detail_list(command) unless major
           unless minor == 'delete'
             return add_item(command,major,minor) if minor
-            return add_item(command,major,$stdin.read) if $stdin.stat.size > 0
+            return add_item(command,major,stdin.read) if stdin.stat.size > 0
             return search_list_for_item(command, major)
           end
         end

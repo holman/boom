@@ -168,4 +168,12 @@ class TestCommand < Test::Unit::TestCase
   def test_version_long
     assert_match /#{Boom::VERSION}/, command('--version')
   end
+
+  def test_stdin_pipes
+    stub = Object.new
+    stub.stubs(:stat).returns([1,2])
+    stub.stubs(:read).returns("http://twitter.com")
+    Boom::Command.stubs(:stdin).returns(stub)
+    assert_match /"twitter" in "urls"/, command('urls twitter')
+  end
 end
