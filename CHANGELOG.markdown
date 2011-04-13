@@ -1,8 +1,11 @@
 # boom changes
 
 ## head
+- boom accepts piped-in data (like `cat admins.txt | boom groups admins`).
+  Thanks [@brettbuddin](https://github.com/brettbuddin) and
+  [@antonlindstrom](https://github.com/antonlindstrom). Tag-team action.
 
-## 0.2.0
+## 0.2.0 (April 12, 2011)
 - Add Keychain storage to store Boom data securely in OS X's Keychain.app.
   Thanks, [@davidtrogers](https://github.com/davidtrogers)!
 - Switch from yajl-ruby because [OS X isn't for
