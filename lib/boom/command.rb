@@ -112,7 +112,7 @@ module Boom
           return delete_item(command, major)
         end
 
-        return create_list(command)
+        return create_list(command, major, minor)
       end
 
       # Public: shows the current user's storage.
@@ -188,11 +188,12 @@ module Boom
       #   Commands.list_create("snippets")
       #
       # Returns the newly created List.
-      def create_list(name)
+      def create_list(name, major, minor)
         lists = (storage.lists << List.new(name))
         storage.lists = lists
         output "Boom! Created a new list called \"#{name}\"."
         save
+        add_item(name, major, minor) unless major.nil? || minor.nil?
       end
 
       # Public: remove a named List.
