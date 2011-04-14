@@ -181,19 +181,22 @@ module Boom
 
       # Public: add a new List.
       #
-      # name - the String name of the List.
+      # name  - the String name of the List.
+      # item  - the String name of the Item
+      # value - the String value of Item
       #
       # Example
       #
       #   Commands.list_create("snippets")
+      #   Commands.list_create("hotness", "item", "value")
       #
-      # Returns the newly created List.
-      def create_list(name, major, minor)
+      # Returns the newly created List and creates an item when asked.
+      def create_list(name, item = nil, value = nil)
         lists = (storage.lists << List.new(name))
         storage.lists = lists
         output "Boom! Created a new list called \"#{name}\"."
+        add_item(name, item, value) unless value.nil?
         save
-        add_item(name, major, minor) unless minor.nil?
       end
 
       # Public: remove a named List.
