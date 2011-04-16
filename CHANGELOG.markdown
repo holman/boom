@@ -4,6 +4,8 @@
 - boom accepts piped-in data (like `cat admins.txt | boom groups admins`).
   Thanks [@brettbuddin](https://github.com/brettbuddin) and
   [@antonlindstrom](https://github.com/antonlindstrom). Tag-team action.
+- `boom <newlist> <item> <value>` will actually create the list and item now.
+  [@jmazzi](https://github.com/jmazzi).
 
 ## 0.2.0 (April 12, 2011)
 - Add Keychain storage to store Boom data securely in OS X's Keychain.app.
