@@ -30,7 +30,9 @@ commands](https://github.com/holman/boom/wiki/Commands).
 
 ## Contribute
 
-I'd love to include your contributions, friend.
+Want to join the [Pantheon of
+Boom'ers](https://github.com/holman/boom/contributors)? I'd love to include
+your contributions, friend.
 
 Clone this repository, then run `bundle install`. That'll install all the gem
 dependencies. Make sure your methods are [TomDoc](http://tomdoc.org)'d
