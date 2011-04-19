@@ -66,18 +66,18 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_item_access
-    assert_match /copied https:\/\/github\.com to your clipboard/,
+    assert_match /copied "https:\/\/github\.com" to your clipboard/,
       command('github')
   end
 
   def test_item_access_scoped_by_list
-    assert_match /copied https:\/\/github\.com to your clipboard/,
+    assert_match /copied "https:\/\/github\.com" to your clipboard/,
       command('urls github')
   end
   
   def test_item_open_url
     Boom::Platform.stubs(:open_command).returns("echo")
-    assert_match /opened https:\/\/github\.com for you/,
+    assert_match /opened "https:\/\/github\.com" for you/,
       command('open github')
   end
 
