@@ -152,6 +152,7 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_show_storage
+    Boom::Config.any_instance.stubs(:attributes).returns('backend' => 'json')
     assert_match /You're currently using json/, command('storage')
   end
   
