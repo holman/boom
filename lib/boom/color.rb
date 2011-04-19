@@ -5,6 +5,8 @@ module Boom
   # Color collects some methods for colorizing terminal output.
   module Color
 
+    extend self
+
     CODES = {
       :reset   => "\e[0m",
 
