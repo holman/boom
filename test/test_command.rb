@@ -33,7 +33,8 @@ class TestCommand < Test::Unit::TestCase
     cmd = cmd.split(' ') if cmd
     Boom::Command.capture_output
     Boom::Command.execute(*cmd)
-    Boom::Command.captured_output
+    output = Boom::Command.captured_output
+    output.gsub(/\e\[\d\d?m/, '')
   end
 
   def test_overview_for_empty
