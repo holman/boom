@@ -61,6 +61,10 @@ class TestCommand < Test::Unit::TestCase
     assert_match /a new list called "newlist"/, command('newlist')
   end
 
+  def test_list_creation_with_item
+    assert_match /a new list called "newlist".* "item" in "newlist"/, command('newlist item blah')
+  end
+
   def test_item_access
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('github')
@@ -161,4 +165,19 @@ class TestCommand < Test::Unit::TestCase
     assert_match /We've switched you over to redis/, command('switch redis')
   end
 
+  def test_version_switch
+    assert_match /#{Boom::VERSION}/, command('-v')
+  end
+
+  def test_version_long
+    assert_match /#{Boom::VERSION}/, command('--version')
+  end
+
+  def test_stdin_pipes
+    stub = Object.new
+    stub.stubs(:stat).returns([1,2])
+    stub.stubs(:read).returns("http://twitter.com")
+    Boom::Command.stubs(:stdin).returns(stub)
+    assert_match /"twitter" in "urls"/, command('urls twitter')
+  end
 end

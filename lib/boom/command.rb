@@ -42,6 +42,14 @@ module Boom
         puts(s)
       end
 
+      # Public: gets $stdin.
+      #
+      # Returns the $stdin object. This method exists to help with easy mocking
+      # or overriding.
+      def stdin
+        $stdin
+      end
+
       # Public: prints a tidy overview of your Lists in descending order of
       # number of Items.
       #
@@ -76,12 +84,14 @@ module Boom
       #
       # Returns output based on method calls.
       def delegate(command, major, minor)
-        return all  if command == 'all'
-        return edit if command == 'edit'
-        return switch(major) if command == 'switch'
-        return show_storage  if command == 'storage'
-        return help if command == 'help'
-        return help if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
+        return all               if command == 'all'
+        return edit              if command == 'edit'
+        return switch(major)     if command == 'switch'
+        return show_storage      if command == 'storage'
+        return version           if command == "-v"
+        return version           if command == "--version"
+        return help              if command == 'help'
+        return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
         return open(major,minor) if command == 'open' || command == 'o'
 
@@ -91,6 +101,7 @@ module Boom
           return detail_list(command) unless major
           unless minor == 'delete'
             return add_item(command,major,minor) if minor
+            return add_item(command,major,stdin.read) if stdin.stat.size > 0
             return search_list_for_item(command, major)
           end
         end
@@ -101,7 +112,7 @@ module Boom
           return delete_item(command, major)
         end
 
-        return create_list(command)
+        return create_list(command, major, minor)
       end
 
       # Public: shows the current user's storage.
@@ -170,18 +181,22 @@ module Boom
 
       # Public: add a new List.
       #
-      # name - the String name of the List.
+      # name  - the String name of the List.
+      # item  - the String name of the Item
+      # value - the String value of Item
       #
       # Example
       #
       #   Commands.list_create("snippets")
+      #   Commands.list_create("hotness", "item", "value")
       #
-      # Returns the newly created List.
-      def create_list(name)
+      # Returns the newly created List and creates an item when asked.
+      def create_list(name, item = nil, value = nil)
         lists = (storage.lists << List.new(name))
         storage.lists = lists
         output "Boom! Created a new list called \"#{name}\"."
         save
+        add_item(name, item, value) unless value.nil?
       end
 
       # Public: remove a named List.
@@ -276,6 +291,13 @@ module Boom
       # Returns whether or not data was saved.
       def save
         storage.save
+      end
+
+      # Public: the version of boom that you're currently running.
+      #
+      # Returns a String identifying the version number.
+      def version
+        output "You're running boom #{Boom::VERSION}. Congratulations!"
       end
 
       # Public: launches JSON file in an editor for you to edit manually. Uses

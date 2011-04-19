@@ -6,7 +6,7 @@ rescue LoadError
 end
 
 require 'fileutils'
-require 'yajl'
+require 'json/pure'
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
@@ -21,11 +21,12 @@ require 'boom/storage/base'
 require 'boom/storage/json'
 require 'boom/storage/redis'
 require 'boom/storage/mongodb'
+require 'boom/storage/keychain'
 
 require 'boom/core_ext/symbol'
 
 module Boom
-  VERSION = '0.1.2'
+  VERSION = '0.2.0'
 
   extend self
 
