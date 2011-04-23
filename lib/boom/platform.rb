@@ -10,6 +10,7 @@
 module Boom
   class Platform
     class << self
+      include Boom::Color
 
       # Public: tests if currently running on darwin.
       #
@@ -35,7 +36,7 @@ module Boom
       def open(item)
         `#{open_command} '#{item.url.gsub("\'","\\'")}'`
 
-        "Boom! We just opened #{item.value} for you."
+        "#{magenta("Boom!")} We just opened \"#{yellow(item.value)}\" for you."
       end
 
       # Public: copies a given Item's value to the clipboard. This method is
@@ -47,7 +48,7 @@ module Boom
 
         Kernel.system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
 
-        "Boom! We just copied #{item.value} to your clipboard."
+        "#{magenta("Boom!")} We just copied \"#{yellow(item.value)}\" to your clipboard."
       end
     end
   end
