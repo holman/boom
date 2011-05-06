@@ -77,6 +77,7 @@ Gem::Specification.new do |s|
     completion/boom.bash
     completion/boom.zsh
     lib/boom.rb
+    lib/boom/color.rb
     lib/boom/command.rb
     lib/boom/config.rb
     lib/boom/core_ext/symbol.rb

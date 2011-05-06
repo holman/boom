@@ -33,7 +33,8 @@ class TestCommand < Test::Unit::TestCase
     cmd = cmd.split(' ') if cmd
     Boom::Command.capture_output
     Boom::Command.execute(*cmd)
-    Boom::Command.captured_output
+    output = Boom::Command.captured_output
+    output.gsub(/\e\[\d\d?m/, '')
   end
 
   def test_overview_for_empty
@@ -66,18 +67,18 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_item_access
-    assert_match /copied https:\/\/github\.com to your clipboard/,
+    assert_match /copied "https:\/\/github\.com" to your clipboard/,
       command('github')
   end
 
   def test_item_access_scoped_by_list
-    assert_match /copied https:\/\/github\.com to your clipboard/,
+    assert_match /copied "https:\/\/github\.com" to your clipboard/,
       command('urls github')
   end
   
   def test_item_open_url
     Boom::Platform.stubs(:open_command).returns("echo")
-    assert_match /opened https:\/\/github\.com for you/,
+    assert_match /opened "https:\/\/github\.com" for you/,
       command('open github')
   end
 
@@ -152,6 +153,7 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_show_storage
+    Boom::Config.any_instance.stubs(:attributes).returns('backend' => 'json')
     assert_match /You're currently using json/, command('storage')
   end
   
