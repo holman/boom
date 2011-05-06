@@ -18,6 +18,15 @@ module Boom
         !!(RUBY_PLATFORM =~ /darwin/)
       end
 
+      # Public: tests if currently running on windows.
+      #
+      # Apparently Windows RUBY_PLATFORM can be 'win32' or 'mingw32'
+      #
+      # Returns true if running on windows (win32/mingw32), else false
+      def windows?
+        !!(RUBY_PLATFORM =~ /win32/) || !!(RUBY_PLATFORM =~ /mingw32/)
+      end
+
       # Public: returns the command used to open a file or URL
       # for the current platform.
       #
