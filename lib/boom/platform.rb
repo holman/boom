@@ -34,7 +34,12 @@ module Boom
       #
       # Returns a String with the bin
       def open_command
-        darwin? ? 'open' : 'xdg-open'
+        # There must be a nicer way of doing this?
+        if darwin?
+          'open'
+        else
+          windows? ? 'start' : 'xdg-open'
+        end
       end
 
       # Public: opens a given Item's value in the browser. This
@@ -42,7 +47,12 @@ module Boom
       #
       # Returns a String explaining what was done
       def open(item)
-        `#{open_command} '#{item.url.gsub("\'","\\'")}'`
+
+        unless windows?
+          `#{open_command} '#{item.url.gsub("\'","\\'")}'`
+        else
+          `#{open_command} #{item.url.gsub("\'","\\'")}`
+        end
 
         "Boom! We just opened #{item.value} for you."
       end
