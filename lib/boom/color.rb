@@ -10,6 +10,7 @@ module Boom
     CODES = {
       :reset   => "\e[0m",
 
+      :cyan    => "\e[36m",
       :magenta => "\e[35m",
       :red     => "\e[31m",
       :yellow  => "\e[33m"

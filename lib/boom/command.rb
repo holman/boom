@@ -154,7 +154,7 @@ module Boom
         if storage.list_exists?(major)
           list = List.find(major)
           list.items.each { |item| Platform.open(item) }
-          output "#{magenta("Boom!")} We just opened all of \"#{yellow(major)}\" for you."
+          output "#{cyan("Boom!")} We just opened all of \"#{yellow(major)}\" for you."
         else
           item = storage.items.detect { |item| item.name == major }
           output Platform.open(item)
@@ -195,7 +195,7 @@ module Boom
       def create_list(name, item = nil, value = nil)
         lists = (storage.lists << List.new(name))
         storage.lists = lists
-        output "#{magenta("Boom!")} Created a new list called \"#{yellow(name)}\"."
+        output "#{cyan("Boom!")} Created a new list called \"#{yellow(name)}\"."
         save
         add_item(name, item, value) unless value.nil?
       end
@@ -213,7 +213,7 @@ module Boom
         output "You sure you want to delete everything in \"#{yellow(name)}\"? (y/n):"
         if $stdin.gets.chomp == 'y'
           List.delete(name)
-          output "#{magenta("Boom!")} Deleted all your #{yellow(name)}."
+          output "#{cyan("Boom!")} Deleted all your #{yellow(name)}."
           save
         else
           output "Just kidding then."
@@ -234,7 +234,7 @@ module Boom
       def add_item(list,name,value)
         list = List.find(list)
         list.add_item(Item.new(name,value))
-        output "#{magenta("Boom!")} \"#{yellow(name)}\" in \"#{yellow(list.name)}\" is \"#{yellow(value)}\". Got it."
+        output "#{cyan("Boom!")} \"#{yellow(name)}\" in \"#{yellow(list.name)}\" is \"#{yellow(value)}\". Got it."
         save
       end
 
@@ -251,7 +251,7 @@ module Boom
       def delete_item(list_name,name)
         list = List.find(list_name)
         list.delete_item(name)
-        output "#{magenta("Boom!")} \"#{yellow(name)}\" is gone forever."
+        output "#{cyan("Boom!")} \"#{yellow(name)}\" is gone forever."
         save
       end
 
@@ -307,7 +307,7 @@ module Boom
       # Returns nothing.
       def edit
         system "`echo $EDITOR` #{storage.json_file} &"
-        output "#{magenta("Boom!")} Make your edits, and do be sure to save."
+        output "#{cyan("Boom!")} Make your edits, and do be sure to save."
       end
 
       # Public: prints all the commands of boom.
