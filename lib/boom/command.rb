@@ -306,9 +306,7 @@ module Boom
       #
       # Returns nothing.
       def edit
-        # system "`echo $EDITOR` #{storage.json_file} &"
         Platform.edit(storage.json_file)
-        output "#{cyan("Boom!")} Make your edits, and do be sure to save."
       end
 
       # Public: prints all the commands of boom.

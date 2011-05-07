@@ -86,12 +86,14 @@ module Boom
         "#{cyan("Boom!")} We just copied #{yellow(item.value)} to your clipboard."
       end
 
-      def edit(file)
+      def edit(json_file)
         unless windows?
-          system "`echo $EDITOR` #{file} &"
+          system "`echo $EDITOR` #{json_file} &"
         else
-          system "start %EDITOR% #{file}"
+          system "start %EDITOR% #{json_file}"
         end
+
+        "#{cyan("Boom!")} Make your edits, and do be sure to save."
       end
     end
   end
