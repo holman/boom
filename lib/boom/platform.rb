@@ -50,9 +50,9 @@ module Boom
       # Returns a String explaining what was done
       def open(item)
         unless windows?
-          `#{open_command} '#{item.url.gsub("\'","\\'")}'`
+          system("#{open_command} '#{item.url.gsub("\'","\\'")}'")
         else
-          `#{open_command} #{item.url.gsub("\'","\\'")}`
+          system("#{open_command} #{item.url.gsub("\'","\\'")}")
         end
 
         "#{cyan("Boom!")} We just opened #{yellow(item.value)} for you."
@@ -88,6 +88,7 @@ module Boom
 
       # Public: opens the JSON file in an editor for you to edit. Uses the
       # $EDITOR environment variable, or %EDITOR% on Windows for editing.
+      # This method is designed to handle multiple platforms.
       #
       # Returns a String explaining what was done
       def edit(json_file)
