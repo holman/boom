@@ -85,6 +85,14 @@ module Boom
 
         "#{cyan("Boom!")} We just copied #{yellow(item.value)} to your clipboard."
       end
+
+      def edit(file)
+        unless windows?
+          system "`echo $EDITOR` #{file} &"
+        else
+          system "start %EDITOR% #{file}"
+        end
+      end
     end
   end
 end
