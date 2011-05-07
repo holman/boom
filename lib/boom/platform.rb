@@ -86,6 +86,10 @@ module Boom
         "#{cyan("Boom!")} We just copied #{yellow(item.value)} to your clipboard."
       end
 
+      # Public: opens the JSON file in an editor for you to edit. Uses the
+      # $EDITOR environment variable, or %EDITOR% on Windows for editing.
+      #
+      # Returns a String explaining what was done
       def edit(json_file)
         unless windows?
           system "`echo $EDITOR` #{json_file} &"

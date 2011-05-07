@@ -301,8 +301,7 @@ module Boom
         output "You're running boom #{Boom::VERSION}. Congratulations!"
       end
 
-      # Public: launches JSON file in an editor for you to edit manually. Uses
-      # the $EDITOR environment variable for editing.
+      # Public: launches JSON file in an editor for you to edit manually.
       #
       # Returns nothing.
       def edit
