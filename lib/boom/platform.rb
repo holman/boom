@@ -18,6 +18,15 @@ module Boom
         !!(RUBY_PLATFORM =~ /darwin/)
       end
 
+      # Public: tests if currently running on windows.
+      #
+      # Apparently Windows RUBY_PLATFORM can be 'win32' or 'mingw32'
+      #
+      # Returns true if running on windows (win32/mingw32), else false
+      def windows?
+        !!(RUBY_PLATFORM =~ /win32/) || !!(RUBY_PLATFORM =~ /mingw32/)
+      end
+
       # Public: returns the command used to open a file or URL
       # for the current platform.
       #
@@ -25,7 +34,11 @@ module Boom
       #
       # Returns a String with the bin
       def open_command
-        darwin? ? 'open' : 'xdg-open'
+        if darwin?
+          'open'
+        else
+          windows? ? 'start' : 'xdg-open'
+        end
       end
 
       # Public: opens a given Item's value in the browser. This
@@ -33,19 +46,37 @@ module Boom
       #
       # Returns a String explaining what was done
       def open(item)
-        `#{open_command} '#{item.url.gsub("\'","\\'")}'`
+        unless windows?
+          `#{open_command} '#{item.url.gsub("\'","\\'")}'`
+        else
+          `#{open_command} #{item.url.gsub("\'","\\'")}`
+        end
 
         "Boom! We just opened #{item.value} for you."
       end
 
+      # Public: returns the command used to copy a given Item's value to the
+      # clipboard for the current platform.
+      #
+      # Returns a String with the bin
+      def copy_command
+        if darwin?
+          'pbcopy'
+        else
+          windows? ? 'clip' : 'xclip -selection clipboard'
+        end
+      end
+      
       # Public: copies a given Item's value to the clipboard. This method is
       # designed to handle multiple platforms.
       #
       # Returns a String explaining what was done
       def copy(item)
-        copy_command = darwin? ? "pbcopy" : "xclip -selection clipboard"
-
-        Kernel.system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
+        unless windows?
+          Kernel.system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
+        else
+          Kernel.system("echo #{item.value.gsub("\'","\\'")} | #{copy_command}")
+        end
 
         "Boom! We just copied #{item.value} to your clipboard."
       end

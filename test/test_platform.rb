@@ -8,4 +8,9 @@ class TestPlatform < Test::Unit::TestCase
   def test_darwin
     assert_equal Boom::Platform.darwin?, RUBY_PLATFORM.include?('darwin')
   end
+
+  def test_windows
+    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM.include?('win32') 
+    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM.include?('mingw32')
+  end
 end
