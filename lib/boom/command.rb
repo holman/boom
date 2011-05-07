@@ -306,7 +306,7 @@ module Boom
       #
       # Returns nothing.
       def edit
-        Platform.edit(storage.json_file)
+        output Platform.edit(storage.json_file)
       end
 
       # Public: prints all the commands of boom.
