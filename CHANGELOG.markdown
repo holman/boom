@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+- boom displays colors thanks to [@dandorman](https://github.com/dandorman).
+- Windows support, brah. [@tombell](https://github.com/tombell).
 - boom accepts piped-in data (like `cat admins.txt | boom groups admins`).
   Thanks [@brettbuddin](https://github.com/brettbuddin) and
   [@antonlindstrom](https://github.com/antonlindstrom). Tag-team action.
