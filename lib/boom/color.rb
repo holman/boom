@@ -20,7 +20,9 @@ module Boom
     #
     # Returns nothing.
     def self.included(other)
-      require 'Win32/Console/ANSI' if RUBY_PLATFORM =~ /win32/
+      if RUBY_PLATFORM =~ /win32/ || RUBY_PLATFORM =~ /mingw32/
+        require 'Win32/Console/ANSI'
+      end
     rescue LoadError
       # Oh well, we tried.
     end
