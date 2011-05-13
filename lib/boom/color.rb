@@ -1,10 +1,8 @@
 # coding: utf-8
 
 module Boom
-
   # Color collects some methods for colorizing terminal output.
   module Color
-
     extend self
 
     CODES = {
@@ -20,9 +18,7 @@ module Boom
     #
     # Returns nothing.
     def self.included(other)
-      if RUBY_PLATFORM =~ /win32/ || RUBY_PLATFORM =~ /mingw32/
-        require 'Win32/Console/ANSI'
-      end
+      require 'Win32/Console/ANSI' if OS.windows?
     rescue LoadError
       # Oh well, we tried.
     end
@@ -42,7 +38,7 @@ module Boom
       "#{CODES[color_code] || color_code}#{string}#{CODES[:reset]}"
     end
 
-    # Set up shortcut methods to all the codes define in CODES.
+    # Set up shortcut methods to all the codes defined in CODES.
     self.class_eval(CODES.keys.reject {|color| color == :reset }.map do |color|
       "def #{color}(string); colorize(string, :#{color}); end"
     end.join("\n"))
