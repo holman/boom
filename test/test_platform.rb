@@ -10,7 +10,6 @@ class TestPlatform < Test::Unit::TestCase
   end
 
   def test_windows
-    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM.include?('win32') 
-    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM.include?('mingw32')
+    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM =~ /win|mingw/ 
   end
 end
