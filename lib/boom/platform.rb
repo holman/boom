@@ -21,15 +21,13 @@ module Boom
 
       # Public: tests if currently running on windows.
       #
-      # Returns true if running on windows (win32/mingw32), else false
+      # Returns true if running on windows, else false
       def windows?
         !!(RUBY_PLATFORM =~ /win|mingw/)
       end
 
       # Public: returns the command used to open a file or URL
       # for the current platform.
-      #
-      # Currently only supports MacOS X and Linux with `xdg-open`.
       #
       # Returns a String with the bin
       def open_command
