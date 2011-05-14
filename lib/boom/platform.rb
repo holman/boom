@@ -12,32 +12,14 @@ module Boom
     class << self
       include Boom::Color
 
-      # Public: tests if currently running on darwin.
-      #
-      # Returns true if running on darwin (MacOS X), else false
-      def darwin?
-        !!(RUBY_PLATFORM =~ /darwin/)
-      end
-
-      # Public: tests if currently running on windows.
-      #
-      # Apparently Windows RUBY_PLATFORM can be 'win32' or 'mingw32'
-      #
-      # Returns true if running on windows (win32/mingw32), else false
-      def windows?
-        !!(RUBY_PLATFORM =~ /win|mingw/)
-      end
-
       # Public: returns the command used to open a file or URL
       # for the current platform.
       #
-      # Currently only supports MacOS X and Linux with `xdg-open`.
-      #
       # Returns a String with the bin
       def open_command
-        if darwin?
+        if OS.darwin?
           'open'
-        elsif windows? 
+        elsif OS.windows?
           'start'
         else
           'xdg-open'
@@ -49,7 +31,7 @@ module Boom
       #
       # Returns a String explaining what was done
       def open(item)
-        unless windows?
+        unless OS.windows?
           system("#{open_command} '#{item.url.gsub("\'","\\'")}'")
         else
           system("#{open_command} #{item.url.gsub("\'","\\'")}")
@@ -63,9 +45,9 @@ module Boom
       #
       # Returns a String with the bin
       def copy_command
-        if darwin?
+        if OS.darwin?
           'pbcopy'
-        elsif windows?
+        elsif OS.windows?
           'clip'
         else
           'xclip -selection clipboard'
@@ -77,7 +59,7 @@ module Boom
       #
       # Returns a String explaining what was done
       def copy(item)
-        unless windows?
+        unless OS.windows?
           system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
         else
           system("echo #{item.value.gsub("\'","\\'")} | #{copy_command}")
@@ -92,7 +74,7 @@ module Boom
       #
       # Returns a String explaining what was done
       def edit(json_file)
-        unless windows?
+        unless OS.windows?
           system("`echo $EDITOR` #{json_file} &")
         else
           system("start %EDITOR% #{json_file}")
