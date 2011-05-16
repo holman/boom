@@ -1,10 +1,8 @@
 # coding: utf-8
 
 module Boom
-
   # Color collects some methods for colorizing terminal output.
   module Color
-
     extend self
 
     CODES = {
