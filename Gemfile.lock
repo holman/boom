@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    boom (0.2.0)
+    boom (0.2.1)
       json_pure (~> 1.5.1)
 
 GEM
@@ -9,6 +9,7 @@ GEM
   specs:
     json_pure (1.5.1)
     mocha (0.9.12)
+    rake (0.9.2)
 
 PLATFORMS
   ruby
@@ -16,3 +17,4 @@ PLATFORMS
 DEPENDENCIES
   boom!
   mocha (~> 0.9.9)
+  rake (~> 0.9.2)
