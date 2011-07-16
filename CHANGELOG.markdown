@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+
+## 0.2.1 (July 16, 2011)
 - boom displays colors thanks to [@dandorman](https://github.com/dandorman).
 - Windows support, brah. [@tombell](https://github.com/tombell).
 - boom accepts piped-in data (like `cat admins.txt | boom groups admins`).

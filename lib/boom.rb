@@ -27,7 +27,7 @@ require 'boom/storage/keychain'
 require 'boom/core_ext/symbol'
 
 module Boom
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 
   extend self
 
