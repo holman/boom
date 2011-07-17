@@ -5,7 +5,7 @@
 begin
   require "httparty"
 rescue LoadError
-  $stderr.puts "The Gist backend requires HTTParty: gem install httparty"
+  puts "The Gist backend requires HTTParty: gem install httparty"
   exit
 end
 
@@ -24,7 +24,7 @@ module Boom
 
       def bootstrap
         unless Boom.config.attributes["gist"]
-          $stderr.puts "A gist key must be defined in ~/.boom.conf"
+          puts "A gist key must be defined in ~/.boom.conf"
           exit
         end
 
@@ -33,7 +33,7 @@ module Boom
         @gist_id = Boom.config.attributes["gist"]["gist_id"]
 
         unless @username and @password
-          $stderr.puts "GitHub username and password must be defined in ~/.boom.conf"
+          puts "GitHub username and password must be defined in ~/.boom.conf"
           exit
         end
 
@@ -65,7 +65,7 @@ module Boom
         @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
 
         unless @storage
-          $stderr.puts "No Boom data could be found in this Gist"
+          puts "No Boom data could be found in this Gist"
           exit
         end
       end
