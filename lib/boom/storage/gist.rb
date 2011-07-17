@@ -21,55 +21,16 @@ module Boom
     class Gist < Base
       include HTTParty
       parser JsonParser
+      base_uri "https://api.github.com"
 
       def bootstrap
         unless Boom.config.attributes["gist"]
-          puts "A gist key must be defined in ~/.boom.conf"
+          puts 'A "gist" data structure must be defined in ~/.boom.conf'
           exit
         end
 
-        @username = Boom.config.attributes["gist"]["username"]
-        @password = Boom.config.attributes["gist"]["password"]
-        @gist_id = Boom.config.attributes["gist"]["gist_id"]
-
-        unless @username and @password
-          puts "GitHub username and password must be defined in ~/.boom.conf"
-          exit
-        end
-
-        params = {
-          :basic_auth => {
-            :username => @username,
-            :password => @password
-          }
-        }
-
-        if @gist_id
-          response = self.class.get("https://api.github.com/gists/#{@gist_id}", params)
-        else
-          params.merge!({
-            :body => JSON.generate({
-              :description => "Data for Boom",
-              :public => false,
-              :files => {
-                "boom.json" => {
-                  "content" => '{"lists":[]}'
-                }
-              }
-            })
-          })
-
-          response = self.class.post("https://api.github.com/gists", params)
-        end
-
-        @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
-        Boom.config.attributes["gist"]["gist_id"] = @gist_id = response["id"]
-        Boom.config.save
-
-        unless @storage
-          puts "No Boom data could be found in this Gist"
-          exit
-        end
+        set_up_auth
+        find_or_create_gist
       end
 
       def populate
@@ -87,23 +48,53 @@ module Boom
       end
 
       def save
-        params = {
-          :basic_auth => {
-            :username => @username,
-            :password => @password
-          },
+        self.class.post("/gists/#{@gist_id}", request_params)
+      end
+
+      private
+
+      def set_up_auth
+        username, password = Boom.config.attributes["gist"]["username"], Boom.config.attributes["gist"]["password"]
+
+        if username and password
+          self.class.basic_auth(username, password)
+        else
+          puts "GitHub username and password must be defined in ~/.boom.conf"
+          exit
+        end
+      end
+
+      def find_or_create_gist
+        @gist_id = Boom.config.attributes["gist"]["gist_id"]
+        @public = Boom.config.attributes["gist"]["public"] == true
+
+        if @gist_id.nil? or @gist_id.empty?
+          response = self.class.post("/gists", request_params)
+        else
+          response = self.class.get("/gists/#{@gist_id}", request_params)
+        end
+
+        @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
+
+        unless @storage
+          puts "Boom data could not be obtained"
+          exit
+        end
+
+        unless @gist_id
+          Boom.config.attributes["gist"]["gist_id"] = @gist_id = response["id"]
+          Boom.config.save
+        end
+      end
+
+      def request_params
+        {
           :body => JSON.generate({
             :description => "Data for Boom",
-            :public => false,
-            :files => {
-              "boom.json" => {
-                "content" => JSON.generate(to_hash)
-              }
-            }
+            :public => @public,
+            :files => { "boom.json" => { :content => JSON.generate(to_hash) } }
           })
         }
-
-        response = self.class.post("https://api.github.com/gists/#{@gist_id}", params)
       end
     end
   end
