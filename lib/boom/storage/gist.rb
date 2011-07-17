@@ -63,7 +63,7 @@ module Boom
         end
 
         @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
-        Boom.config.attributes["gist"]["gist_id"] = response["id"]
+        Boom.config.attributes["gist"]["gist_id"] = @gist_id = response["id"]
         Boom.config.save
 
         unless @storage
@@ -87,7 +87,23 @@ module Boom
       end
 
       def save
+        params = {
+          :basic_auth => {
+            :username => @username,
+            :password => @password
+          },
+          :body => JSON.generate({
+            :description => "Data for Boom",
+            :public => false,
+            :files => {
+              "boom.json" => {
+                "content" => JSON.generate(to_hash)
+              }
+            }
+          })
+        }
 
+        response = self.class.post("https://api.github.com/gists/#{@gist_id}", params)
       end
     end
   end
