@@ -2,6 +2,25 @@
 #
 # Gist backend for Boom.
 #
+# Your .boom.conf file should look like this:
+#
+#   {
+#     "backend": "gist",
+#     "gist": {
+#       "username": "your_github_username",
+#       "password": "your_github_password"
+#     }
+#   }
+#
+# There are two optional keys which can be under "gist":
+#
+#   gist_id - The ID of an existing Gist to use. If not
+#     present, a Gist will be created the first time
+#     Boom is run and will be persisted to the config.
+#   public - Makes the Gist public. An absent value or
+#     any value other than boolean true will make
+#     the Gist private.
+#
 begin
   require "httparty"
 rescue LoadError
