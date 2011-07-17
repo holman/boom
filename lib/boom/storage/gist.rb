@@ -63,6 +63,8 @@ module Boom
         end
 
         @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
+        Boom.config.attributes["gist"]["gist_id"] = response["id"]
+        Boom.config.save
 
         unless @storage
           puts "No Boom data could be found in this Gist"
