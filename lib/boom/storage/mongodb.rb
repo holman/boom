@@ -49,7 +49,7 @@ module Boom
       #
       # Returns nothing
       def populate
-        storage = JSON.parse(collection.find_one['boom']) || []
+        storage = MultiJson.decode(collection.find_one['boom']) || []
               
         storage['lists'].each do |lists|
           lists.each do |list_name, items|
@@ -76,7 +76,7 @@ module Boom
       #
       # Returns
       def to_json
-       JSON.generate(to_hash)
+       MultiJson.encode(to_hash)
       end
       
     end
