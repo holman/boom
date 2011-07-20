@@ -32,7 +32,7 @@ module Boom
       #
       # Returns nothing.
       def populate
-        storage = JSON.parse(File.new(json_file, 'r').read)
+        storage = MultiJson.decode(File.new(json_file, 'r').read)
       
         storage['lists'].each do |lists|
           lists.each do |list_name, items|
@@ -61,7 +61,7 @@ module Boom
       #
       # Returns a String Json representation of its Lists and their Items.
       def to_json
-        JSON.generate(to_hash)
+        MultiJson.encode(to_hash)
       end
 
     end
