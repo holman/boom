@@ -74,14 +74,14 @@ module Boom
     #
     # Returns nothing.
     def load_attributes
-      @attributes = JSON.parse(File.new(file, 'r').read)
+      @attributes = MultiJson.decode(File.new(file, 'r').read)
     end
 
     # Public: writes the in-memory JSON Hash to disk.
     #
     # Returns nothing.
     def save
-      json = JSON.generate(attributes)
+      json = MultiJson.encode(attributes)
       File.open(file, 'w') {|f| f.write(json) }
     end
 
