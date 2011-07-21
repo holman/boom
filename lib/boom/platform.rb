@@ -23,7 +23,7 @@ module Boom
       #
       # Returns true if running on windows (win32/mingw32), else false
       def windows?
-        !!(RUBY_PLATFORM =~ /win|mingw/)
+        !!(RUBY_PLATFORM =~ /mswin|mingw/)
       end
 
       # Public: returns the command used to open a file or URL
