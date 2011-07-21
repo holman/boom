@@ -78,7 +78,7 @@ module Boom
         unless windows?
           system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
         else
-          system("echo #{item.value.gsub("\'","\\'")} | #{copy_command}")
+          system("echo \"#{item.value.gsub("\'","\\'")}\" | #{copy_command}")
         end
 
         item.value
