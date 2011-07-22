@@ -28,10 +28,10 @@ rescue LoadError
   exit
 end
 
-# Crack's parsing is no bueno. Use the stdlib instead.
+# Crack's parsing is no bueno. Use the MultiJson instead.
 class JsonParser < HTTParty::Parser
   def json
-    ::JSON.parse(body)
+    MultiJson.decode(body)
   end
 end
 
@@ -93,7 +93,7 @@ module Boom
           response = self.class.get("/gists/#{@gist_id}", request_params)
         end
 
-        @storage = JSON.parse(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
+        @storage = MultiJson.decode(response["files"]["boom.json"]["content"]) if response["files"] and response["files"]["boom.json"]
 
         unless @storage
           puts "Boom data could not be obtained"
@@ -108,10 +108,10 @@ module Boom
 
       def request_params
         {
-          :body => JSON.generate({
+          :body => MultiJson.encode({
             :description => "Data for Boom",
             :public => @public,
-            :files => { "boom.json" => { :content => JSON.generate(to_hash) } }
+            :files => { "boom.json" => { :content => MultiJson.encode(to_hash) } }
           })
         }
       end
