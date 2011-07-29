@@ -10,6 +10,6 @@ class TestPlatform < Test::Unit::TestCase
   end
 
   def test_windows
-    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM =~ /win|mingw/ 
+    assert_equal Boom::Platform.windows?, true if RUBY_PLATFORM =~ /mswin|mingw/
   end
 end
