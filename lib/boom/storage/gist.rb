@@ -109,7 +109,7 @@ module Boom
       def request_params
         {
           :body => MultiJson.encode({
-            :description => "Data for Boom",
+            :description => "boom!",
             :public => @public,
             :files => { "boom.json" => { :content => MultiJson.encode(to_hash) } }
           })
