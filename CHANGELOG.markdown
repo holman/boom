@@ -2,6 +2,11 @@
 
 ## head
 
+## 0.2.2 (July 29, 2011)
+- [@jimmycuadra](https://github.com/jimmycuadra) went to town on this beast and
+  hooked up a Gist backend to boom. Killer.
+- Small Windows fix.
+
 ## 0.2.1 (July 16, 2011)
 - boom displays colors thanks to [@dandorman](https://github.com/dandorman).
 - Windows support, brah. [@tombell](https://github.com/tombell).
