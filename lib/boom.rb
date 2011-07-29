@@ -23,6 +23,7 @@ require 'boom/storage/json'
 require 'boom/storage/redis'
 require 'boom/storage/mongodb'
 require 'boom/storage/keychain'
+require 'boom/storage/gist'
 
 require 'boom/core_ext/symbol'
 
