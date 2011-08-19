@@ -1,6 +1,8 @@
 # boom changes
 
 ## head
+- [@culvr](https://github.com/culvr) added `boom random <list>` that lets you
+  quickly pull a random item.
 
 ## 0.2.2 (July 29, 2011)
 - [@jimmycuadra](https://github.com/jimmycuadra) went to town on this beast and
