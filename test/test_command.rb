@@ -180,4 +180,22 @@ class TestCommand < Test::Unit::TestCase
     Boom::Command.stubs(:stdin).returns(stub)
     assert_match /twitter in urls/, command('urls twitter')
   end
+  
+  def test_roulette
+    Boom::Platform.stubs(:system).returns('')
+    assert_match /opened .+ for you/, command('roulette')
+  end
+  
+  def test_roulette_from_list
+    boom_json :roulette
+    Boom::Platform.stubs(:system).returns('')
+    assert_match /opened http:\/\/en.wikipedia.org\/wiki\/Roulette/, command('roulette gamble')
+  end
+  
+  def test_roulette_list_not_exist
+    Boom::Platform.stubs(:system).returns('')
+    assert_match /couldn't find that list\./, command('roulette 39jc02jlskjbbac9')
+  end
+  
+
 end
