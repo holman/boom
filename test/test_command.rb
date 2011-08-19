@@ -181,21 +181,19 @@ class TestCommand < Test::Unit::TestCase
     assert_match /twitter in urls/, command('urls twitter')
   end
   
-  def test_roulette
+  def test_random
     Boom::Platform.stubs(:system).returns('')
-    assert_match /opened .+ for you/, command('roulette')
+    assert_match /opened .+ for you/, command('random')
   end
   
-  def test_roulette_from_list
-    boom_json :roulette
+  def test_random_from_list
     Boom::Platform.stubs(:system).returns('')
-    assert_match /opened http:\/\/en.wikipedia.org\/wiki\/Roulette/, command('roulette gamble')
+    assert_match /(github|zachholman)/, command('random urls')
   end
   
-  def test_roulette_list_not_exist
+  def test_random_list_not_exist
     Boom::Platform.stubs(:system).returns('')
-    assert_match /couldn't find that list\./, command('roulette 39jc02jlskjbbac9')
+    assert_match /couldn't find that list\./, command('random 39jc02jlskjbbac9')
   end
-  
 
 end

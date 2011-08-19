@@ -95,7 +95,7 @@ module Boom
         return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
         return open(major,minor) if command == 'open' || command == 'o'
-        return roulette(major)   if command == 'roulette' || command == 'r'
+        return random(major)     if command == 'random' || command == 'rand' || command == 'r'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -165,7 +165,7 @@ module Boom
       # Public: Opens a random item
       #
       # Returns nothing.
-      def roulette(major)
+      def random(major)
         if major.nil?
           index = rand(storage.items.size)
           item = storage.items[index]
@@ -349,8 +349,8 @@ module Boom
           boom <list> <name>            copy item's value to clipboard
           boom open <name>              open item's url in browser
           boom open <list> <name>       open all item's url in browser for a list
-          boom roulette                 open a random item's url in browser
-          boom roulette <list>          open a random item's url for a list in browser
+          boom random                   open a random item's url in browser
+          boom random <list>            open a random item's url for a list in browser
           boom echo <name>              echo the item's value without copying
           boom echo <list> <name>       echo the item's value without copying
           boom <list> <name> delete     deletes an item
