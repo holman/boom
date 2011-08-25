@@ -154,8 +154,13 @@ module Boom
       def open(major, minor)
         if storage.list_exists?(major)
           list = List.find(major)
-          list.items.each { |item| Platform.open(item) }
-          output "#{cyan("Boom!")} We just opened all of #{yellow(major)} for you."
+          if minor
+            item = storage.items.detect { |item| item.name == minor }
+            output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+          else
+            list.items.each { |item| Platform.open(item) }
+            output "#{cyan("Boom!")} We just opened all of #{yellow(major)} for you."
+          end
         else
           item = storage.items.detect { |item| item.name == major }
           output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."

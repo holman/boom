@@ -3,6 +3,8 @@
 ## head
 - [@culvr](https://github.com/culvr) added `boom random <list>` that lets you
   quickly pull a random item.
+- Fixed so that opening a specific item (`boom open urls github`) will only
+  open that item.
 
 ## 0.2.2 (July 29, 2011)
 - [@jimmycuadra](https://github.com/jimmycuadra) went to town on this beast and
