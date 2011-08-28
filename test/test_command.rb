@@ -65,7 +65,15 @@ class TestCommand < Test::Unit::TestCase
   def test_list_creation_with_item
     assert_match /a new list called newlist.* item in newlist/, command('newlist item blah')
   end
-
+  
+  def test_list_creation_with_item_stdin
+    STDIN.stubs(:read).returns('blah')
+    STDIN.stubs(:stat)
+    STDIN.stat.stubs(:size).returns(4)
+    
+    assert_match /a new list called newlist.* item in newlist is blah/, command('newlist item')
+  end
+  
   def test_item_access
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('github')
