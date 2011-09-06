@@ -28,7 +28,7 @@ require 'boom/storage/gist'
 require 'boom/core_ext/symbol'
 
 module Boom
-  VERSION = '0.2.2'
+  VERSION = '0.2.3'
 
   extend self
 
