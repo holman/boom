@@ -5,6 +5,7 @@
   quickly pull a random item.
 - Fixed so that opening a specific item (`boom open urls github`) will only
   open that item.
+- [@culvr](https://github.com/culvr) fixed STDIN list+item creation.
 
 ## 0.2.2 (July 29, 2011)
 - [@jimmycuadra](https://github.com/jimmycuadra) went to town on this beast and
