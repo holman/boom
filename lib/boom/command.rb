@@ -113,7 +113,8 @@ module Boom
         if minor == 'delete' and storage.item_exists?(major)
           return delete_item(command, major)
         end
-
+        
+        return create_list(command, major, stdin.read) unless minor if stdin.stat.size > 0
         return create_list(command, major, minor)
       end
 
