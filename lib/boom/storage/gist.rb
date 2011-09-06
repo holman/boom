@@ -21,28 +21,24 @@
 #     any value other than boolean true will make
 #     the Gist private.
 #
-begin
-  require "httparty"
-rescue LoadError
-  puts "The Gist backend requires HTTParty: gem install httparty"
-  exit
-end
-
-# Crack's parsing is no bueno. Use the MultiJson instead.
-class JsonParser < HTTParty::Parser
-  def json
-    MultiJson.decode(body)
-  end
-end
 
 module Boom
   module Storage
     class Gist < Base
-      include HTTParty
-      parser JsonParser
-      base_uri "https://api.github.com"
 
       def bootstrap
+        begin
+          require "httparty"
+          require "boom/storage/gist/json_parser"
+
+          self.class.send(:include, HTTParty)
+          self.class.parser JsonParser
+          self.class.base_uri "https://api.github.com"
+        rescue LoadError
+          puts "The Gist backend requires HTTParty: gem install httparty"
+          exit
+        end
+
         unless Boom.config.attributes["gist"]
           puts 'A "gist" data structure must be defined in ~/.boom.conf'
           exit
