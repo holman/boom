@@ -87,13 +87,18 @@ module Boom
       # Public: opens the JSON file in an editor for you to edit. Uses the
       # $EDITOR environment variable, or %EDITOR% on Windows for editing.
       # This method is designed to handle multiple platforms.
+      # If $EDITOR is nil, try to open using the open_command.
       #
       # Returns a String with a helpful message.
       def edit(json_file)
-        unless windows?
-          system("`echo $EDITOR` #{json_file} &")
+        unless $EDITOR.nil?
+          unless windows?
+            system("`echo $EDITOR` #{json_file} &")
+          else
+            system("start %EDITOR% #{json_file}")
+          end
         else
-          system("start %EDITOR% #{json_file}")
+          system("#{open_command} #{json_file}")
         end
 
         "Make your edits, and do be sure to save."
