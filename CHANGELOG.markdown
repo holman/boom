@@ -1,5 +1,6 @@
 # boom changes
 ## head
+- [@Dlom](https://github.com/Dlom) fixed some troubles in #49.
 
 ## 0.2.3
 - [@culvr](https://github.com/culvr) added `boom random <list>` that lets you
