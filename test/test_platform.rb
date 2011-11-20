@@ -5,6 +5,11 @@ class TestPlatform < Test::Unit::TestCase
   def setup
   end
 
+  def test_can_handle_percent_strings
+    Boom::Platform.expects("system").with('printf "val%%ue" | pbcopy')
+    Boom::Platform.copy(Boom::Item.new('name','val%ue'))
+  end if !Boom::Platform.windows?
+
   def test_darwin
     assert_equal Boom::Platform.darwin?, RUBY_PLATFORM.include?('darwin')
   end

@@ -75,10 +75,12 @@ module Boom
       #
       # Returns the String value of the Item.
       def copy(item)
+        value = item.value.gsub("\'","\\'")
         unless windows?
-          system("printf '#{item.value.gsub("\'","\\'")}' | #{copy_command}")
+          value = value.gsub('%','%%')
+          system("printf \"#{value}\" | #{copy_command}")
         else
-          system("echo #{item.value.gsub("\'","\\'")} | #{copy_command}")
+          system("echo #{value} | #{copy_command}")
         end
 
         item.value
