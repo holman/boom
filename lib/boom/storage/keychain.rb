@@ -19,15 +19,21 @@ module Boom
 
       alias_method :json_file, :open_keychain_app
 
-      # Boostraps Keychain by asking if you're using Mac OS X which is a prereq
+      # Boostraps Keychain by checking if you're using a Mac which is a prereq
+      #
+      # Returns
+      def bootstrap
+        raise RuntimeError unless is_mac?
+      rescue
+        puts('No Keychain utility to access, maybe try another storage option?')
+        exit
+      end
+      
+      # Asks if you're using Mac OS X
       #
       # Returns true on a Mac
-      def bootstrap
-        raise RuntimeError unless Boom::Platform.darwin?
-        true
-      rescue
-        puts(e 'No Keychain utility to access, maybe try another storage option?')
-        false
+      def is_mac?
+        return Boom::Platform.darwin?
       end
 
       # Populate the in-memory store with all the lists and items from Keychain

@@ -329,7 +329,11 @@ module Boom
       #
       # Returns nothing.
       def edit
-        output "#{cyan("Boom!")} #{Platform.edit(storage.json_file)}"
+        if storage.respond_to?("json_file")
+          output "#{cyan("Boom!")} #{Platform.edit(storage.json_file)}"
+        else
+          output "This storage backend does not store #{cyan("Boom!")} data on your computer"
+        end
       end
 
       # Public: prints all the commands of boom.
