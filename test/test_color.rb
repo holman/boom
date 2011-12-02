@@ -23,4 +23,8 @@ class TestColor < Test::Unit::TestCase
     assert_equal "\e[33mYellow!\e[0m",
       Boom::Color.yellow("Yellow!")
   end
+  def test_cyan
+    assert_equal "\e[36mCyan!\e[0m",
+      Boom::Color.cyan("Cyan!")
+  end
 end
