@@ -35,22 +35,6 @@ class TestPlatform < Test::Unit::TestCase
     Boom::Platform.stubs(:windows?).returns(false)
     assert_equal Boom::Platform.open_command, 'xdg-open'
   end
-  
-  def test_open_for_not_windows
-    Boom::Platform.stubs(:windows?).returns(true)
-    Boom::Platform.expects(:system).with("open http://example.com")
-    
-    item = mock(:url => "http://example.com", :value => "http://example.com")
-    Boom::Platform.open(item)
-  end
-
-  def test_open_for_windows
-    Boom::Platform.stubs(:windows?).returns(false)
-    Boom::Platform.expects(:system).with("open 'http://example.com'")
-    
-    item = mock(:url => "http://example.com", :value => "http://example.com")
-    Boom::Platform.open(item)
-  end
 
   def test_copy_command_darwin
     Boom::Platform.stubs(:darwin?).returns(true)
