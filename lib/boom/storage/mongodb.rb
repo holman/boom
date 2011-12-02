@@ -42,34 +42,33 @@ module Boom
       #
       # Returns
       def bootstrap
-        collection.insert("boom" => '{"lists": [{}]}') if collection.find_one.nil?
       end   
 
       # Public: Populates the memory list from MongoDB
       #
       # Returns nothing
       def populate
-        storage = MultiJson.decode(collection.find_one['boom']) || []
-              
-        storage['lists'].each do |lists|
-          lists.each do |list_name, items|
+        storage = collection.find() || Hash.new
+        storage.each do |doc|
+          list = MultiJson.decode(doc['boom'])
+          list.each do |list_name, items|
             @lists << list = List.new(list_name)
-
             items.each do |item|
               item.each do |name,value|
                 list.add_item(Item.new(name,value))
               end
             end
           end
-        end   
+        end
       end
       
       # Public: Save to MongoDB
       #
       # Returns Mongo ID
       def save
-        doc = collection.find_one()
-        collection.update({"_id" => doc["_id"]}, {'boom' => to_json})
+        lists.each do |list|
+            collection.update({"_id" => list.name}, {"boom" => MultiJson.encode(list.to_hash), "_id" => list.name}, {:upsert => true})
+        end
       end
       
       # Public: Convert to JSON
