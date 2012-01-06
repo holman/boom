@@ -75,7 +75,7 @@ module Boom
       #
       # Returns the String value of the Item.
       def copy(item)
-        IO.popen(copy_command,"w") {|cc|  cc.puts(item.value)}
+        IO.popen(copy_command,"w") {|cc|  cc.write(item.value)}
         item.value
       end
 
