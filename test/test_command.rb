@@ -75,11 +75,13 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_item_access
+    IO.stubs(:popen)
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('github')
   end
 
   def test_item_access_scoped_by_list
+    IO.stubs(:popen)
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('urls github')
   end
