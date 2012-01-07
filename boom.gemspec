@@ -89,7 +89,6 @@ Gem::Specification.new do |s|
     lib/boom/storage.rb
     lib/boom/storage/base.rb
     lib/boom/storage/gist.rb
-    lib/boom/storage/gist/json_parser.rb
     lib/boom/storage/json.rb
     lib/boom/storage/keychain.rb
     lib/boom/storage/mongodb.rb
