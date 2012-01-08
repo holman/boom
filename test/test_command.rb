@@ -220,4 +220,14 @@ class TestCommand < Test::Unit::TestCase
     assert_match /github not found in urlz/, command('urlz github delete')
   end
 
+  def test_delete_item_different_name
+    command('foo bar baz')
+    assert_match /bar is gone forever/, command('foo bar delete')
+  end
+
+  def test_delete_item_same_name
+    command('duck duck goose')
+    assert_match /duck is gone forever/, command('duck duck delete')
+  end
+
 end
