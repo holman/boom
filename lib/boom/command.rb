@@ -108,11 +108,11 @@ module Boom
           end
         end
 
-        return search_items(command) if storage.item_exists?(command)
-
         if minor == 'delete' and storage.item_exists?(major)
           return delete_item(command, major)
         end
+
+        return search_items(command) if storage.item_exists?(command)
 
         return create_list(command, major, stdin.read) if !minor && stdin.stat.size > 0
         return create_list(command, major, minor)
@@ -273,10 +273,17 @@ module Boom
       #
       # Returns nothing.
       def delete_item(list_name,name)
-        list = List.find(list_name)
-        list.delete_item(name)
-        output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
-        save
+        if storage.list_exists?(list_name)
+          list = List.find(list_name)
+          if list.delete_item(name)
+            output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
+            save
+          else
+            output "#{yellow(name)} #{red("not found in")} #{yellow(list_name)}"
+          end
+        else
+          output "We couldn't find that list."
+        end
       end
 
       # Public: search for an Item in all lists by name. Drops the 
