@@ -211,4 +211,8 @@ class TestCommand < Test::Unit::TestCase
     assert_match /couldn't find that list\./, command('random 39jc02jlskjbbac9')
   end
 
+  def test_delete_item_list_not_exist
+    assert_match /couldn't find that list\./, command('urlz github delete')
+  end
+
 end

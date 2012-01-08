@@ -273,10 +273,14 @@ module Boom
       #
       # Returns nothing.
       def delete_item(list_name,name)
-        list = List.find(list_name)
-        list.delete_item(name)
-        output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
-        save
+        if storage.list_exists?(list_name)
+          list = List.find(list_name)
+          list.delete_item(name)
+          output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
+          save
+        else
+          output "We couldn't find that list."
+        end
       end
 
       # Public: search for an Item in all lists by name. Drops the 
