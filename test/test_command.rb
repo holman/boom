@@ -215,4 +215,9 @@ class TestCommand < Test::Unit::TestCase
     assert_match /couldn't find that list\./, command('urlz github delete')
   end
 
+  def test_delete_item_wrong_list
+    command('urlz twitter https://twitter.com/')
+    assert_match /github not found in urlz/, command('urlz github delete')
+  end
+
 end

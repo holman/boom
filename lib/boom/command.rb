@@ -275,9 +275,12 @@ module Boom
       def delete_item(list_name,name)
         if storage.list_exists?(list_name)
           list = List.find(list_name)
-          list.delete_item(name)
-          output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
-          save
+          if list.delete_item(name)
+            output "#{cyan("Boom!")} #{yellow(name)} is gone forever."
+            save
+          else
+            output "#{yellow(name)} #{red("not found in")} #{yellow(list_name)}"
+          end
         else
           output "We couldn't find that list."
         end
