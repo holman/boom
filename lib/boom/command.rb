@@ -274,7 +274,7 @@ module Boom
       #
       # Example
       #
-      #   Commands.move_item("urls","http://github.com","f av_urls")
+      #   Commands.move_item("urls","http://github.com","fav_urls")
       #
       # Returns the newly created Item.
       def move_item(list,name,target)
