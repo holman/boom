@@ -265,7 +265,7 @@ module Boom
         save
       end
 
-      # Public: move an existing Item to an existing or new list.
+      # Public: move an existing Item to a new or existing List.
       #
       # list   - the String name of the List to associate with this Item
       # name   - the String name of the Item
@@ -289,7 +289,7 @@ module Boom
         end
         list2.add_item(item)
         list.delete_item(name)
-        output "#{cyan("Boom!")} #{yellow(name)} moved to #{yellow(target)}. Got it."
+        output "#{cyan("Boom!")} #{yellow(name)} moved to #{yellow(target)}."
         save
       end
 
@@ -402,7 +402,7 @@ module Boom
           boom echo <name>               echo the item's value without copying
           boom echo <list> <name>        echo the item's value without copying
           boom <list> <name> delete      deletes an item
-          boom <list> <name> move <list> moves item to another list  
+          boom <list> <name> move <list> moves a list's item to an existing or new list
 
           all other documentation is located at:
             https://github.com/holman/boom
