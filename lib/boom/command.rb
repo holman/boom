@@ -282,10 +282,10 @@ module Boom
         item = list.find_item(name)
         list2 = List.find(target)
         if list2 == nil
-            lists = (storage.lists << List.new(target))
-            storage.lists = lists
-            list2 = List.find(target)
-            target = "a new list called " + target
+          lists = (storage.lists << List.new(target))
+          storage.lists = lists
+          list2 = List.find(target)
+          target = "a new list called " + target
         end
         list2.add_item(item)
         list.delete_item(name)
