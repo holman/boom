@@ -79,7 +79,7 @@ class TestList < Test::Unit::TestCase
   def test_move_item_to_new_list
     new_list_name = "urls"
 
-    @list_2.move(@item.name, new_list_name)
+    @list_2.move_item(@item.name, new_list_name)
 
     @list_3 = Boom::List.find(new_list_name)
     assert_equal 1, @list_3.items.size
@@ -87,7 +87,7 @@ class TestList < Test::Unit::TestCase
   end
 
   def test_move_item_to_existing_list
-    @list_3.move(@item.name, @list_2.name)
+    @list_3.move_item(@item.name, @list_2.name)
 
     assert_equal 1, @list_2.items.size
     assert_equal 0, @list_3.items.size

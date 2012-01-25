@@ -75,6 +75,16 @@ module Boom
       items.reject! { |item| item.name == name}
       previous != items.size
     end
+    
+    # Public: moves an existing item to another list, creates a new list if 
+    # the list doesn't exist.
+    #
+    # name - String name of the item to move
+    # destination - String name of the destination list
+    #
+    # Returns if item existed
+    def move_item(name, destination)
+    end
 
     # Public: finds an Item by name. If the name is typically truncated, also
     # allow a search based on that truncated name.

@@ -52,5 +52,4 @@ class TestItem < Test::Unit::TestCase
     assert_equal 'dadam lol omg', @item.url
   end
 
-
 end
