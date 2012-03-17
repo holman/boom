@@ -12,6 +12,7 @@ module Boom
   class Command
     class << self
       include Boom::Color
+      include Boom::Output
 
       # Public: accesses the in-memory JSON representation.
       #
@@ -33,15 +34,7 @@ module Boom
         delegate(command, major, minor)
       end
 
-      # Public: prints any given string.
-      #
-      # s = String output
-      #
-      # Prints to STDOUT and returns. This method exists to standardize output
-      # and for easy mocking or overriding.
-      def output(s)
-        puts(s)
-      end
+
 
       # Public: gets $stdin.
       #
