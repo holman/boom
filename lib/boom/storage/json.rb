@@ -6,7 +6,7 @@
 module Boom
   module Storage
     class Json < Base
-    
+
       JSON_FILE = "#{ENV['HOME']}/.boom"
 
       # Public: the path to the Json file used by boom.
@@ -33,7 +33,7 @@ module Boom
       # Returns nothing.
       def populate
         storage = MultiJson.decode(File.new(json_file, 'r').read)
-      
+
         storage['lists'].each do |lists|
           lists.each do |list_name, items|
             @lists << list = List.new(list_name)
