@@ -36,6 +36,10 @@ module Boom
 
         Now head yourself on over to #{yellow Boom.config.file}
         and edit some goodness into it
+
+        Meanwhile, please enjoy your ordinary boom service:
+        ___________________________________________________
+
       ).gsub(/^ {8}/, '')
     end
     extend self
