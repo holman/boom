@@ -2,8 +2,6 @@
 
 require 'helper'
 require 'output_interceptor'
-require 'ruby-debug'
-require 'ostruct'
 
 class TestRemote < Test::Unit::TestCase
   def dummy type
