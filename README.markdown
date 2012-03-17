@@ -24,6 +24,10 @@ For more details about what boom is and how it works, check out
     $ boom melissa
     Boom! Just copied http://cl.ly/3pAn/animated.gif to your clipboard.
 
+And that's just a taste! I know, you're salivating, I can hear you from here.
+(Why your saliva is noisy is beyond me.) Check out the [full list of
+commands](https://github.com/holman/boom/wiki/Commands).
+
 ## Remote boom
 You can even have a remote boom using config in ~/.boom.remote.conf
 
@@ -40,9 +44,6 @@ each others command lines
     $ boomr config ackrc > ~/.ackrc
 
 
-And that's just a taste! I know, you're salivating, I can hear you from here.
-(Why your saliva is noisy is beyond me.) Check out the [full list of
-commands](https://github.com/holman/boom/wiki/Commands).
 
 ## Contribute
 
