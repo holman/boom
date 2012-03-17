@@ -6,7 +6,7 @@
 #
 module Boom
   class Item
-    
+
     # Public: the String name of the Item
     attr_accessor :name
 
