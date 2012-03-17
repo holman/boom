@@ -6,7 +6,7 @@
 #
 module Boom
   class List
-    
+
     # Public: creates a new List instance in-memory.
     #
     # name - The name of the List. Fails if already used.
@@ -51,7 +51,7 @@ module Boom
     #
     # Returns the first instance of List that it finds.
     def self.find(name)
-      storage.lists.find { |list| list.name == name } 
+      storage.lists.find { |list| list.name == name }
     end
 
     # Public: deletes a List by name.

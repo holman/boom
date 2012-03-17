@@ -160,7 +160,7 @@ module Boom
           output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
         end
       end
-      
+
       # Public: Opens a random item
       #
       # Returns nothing.
@@ -175,9 +175,9 @@ module Boom
         else
           output "We couldn't find that list."
         end
-        open(item.name, nil) unless item.nil? 
+        open(item.name, nil) unless item.nil?
       end
-      
+
       # Public: echoes only the Item's value without copying
       #
       # item_name - the String term to search for in all Item names
@@ -279,7 +279,7 @@ module Boom
         end
       end
 
-      # Public: search for an Item in all lists by name. Drops the 
+      # Public: search for an Item in all lists by name. Drops the
       # corresponding entry into your clipboard.
       #
       # name - the String term to search for in all Item names
@@ -293,7 +293,7 @@ module Boom
         output "#{cyan("Boom!")} We just copied #{yellow(Platform.copy(item))} to your clipboard."
       end
 
-      # Public: search for an Item in a particular list by name. Drops the 
+      # Public: search for an Item in a particular list by name. Drops the
       # corresponding entry into your clipboard if found.
       #
       # list_name - the String name of the List in which to scope the search
@@ -349,7 +349,7 @@ module Boom
           boom help                     this help text
           boom storage                  shows which storage backend you're using
           boom switch <storage>         switches to a different storage backend
-          
+
           boom <list>                   create a new list
           boom <list>                   show items for a list
           boom <list> delete            deletes a list
