@@ -37,6 +37,13 @@ class TestCommand < Test::Unit::TestCase
     output.gsub(/\e\[\d\d?m/, '')
   end
 
+  def test_use_remote
+    response = command('remote the_office fun awesome')
+
+    assert_match /a new list called the_office/, response
+    assert_match /fun in the_office is awesome/, response
+  end
+
   def test_overview_for_empty
     storage = Boom::Storage
     storage.stubs(:lists).returns([])
