@@ -16,7 +16,7 @@ module Boom
 
       def redis
         @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
-          :port => Boom.config.attributes["redis"]["port"]
+                               :port => Boom.config.attributes["redis"]["port"]
       rescue  Exception => exception
         handle exception
       end
@@ -71,7 +71,7 @@ module Boom
         when NoMethodError
           output cyan config_text
         when NameError
-          output red("You don't have Redis installed yet:\n  gem install redis")
+          output "You don't have Redis installed yet:\n  gem install redis"
         end
 
         exit
