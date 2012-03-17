@@ -11,13 +11,25 @@ end
 module Boom
   module Storage
     class Redis < Base
+      include Boom::Color
+      include Boom::Output
+
+      def self.sample_config
+        %(
+          {"backend": "redis",
+            "redis": {
+              "port": "6379",
+              "host": "<host>"
+            }
+          }
+        )
+      end
 
       def redis
         @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
                                :port => Boom.config.attributes["redis"]["port"]
-      rescue NameError => e
-        puts "You don't have Redis installed yet:\n  gem install redis"
-        exit
+      rescue  Exception => exception
+        handle exception, "You don't have Redis installed yet:\n  gem install redis"
       end
 
       def bootstrap
@@ -60,8 +72,8 @@ module Boom
             redis.set   "boom:items:#{item_sha}:value", item.value
           end
         end
-      end
 
     end
+      end
   end
 end

@@ -20,5 +20,6 @@ def boom_json(name)
   Boom::Storage::Json.any_instance.stubs(:save).returns(true)
   Boom::Storage::Json.any_instance.stubs(:json_file).
     returns("#{root}/examples/#{name}.json")
+  Boom.use_remote false
   Boom.stubs(:storage).returns(Boom::Storage::Json.new)
 end

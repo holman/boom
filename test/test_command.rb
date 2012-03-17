@@ -1,27 +1,7 @@
 # coding: utf-8
 
 require 'helper'
-
-# Intercept STDOUT and collect it
-class Boom::Command
-
-  def self.capture_output
-    @output = ''
-  end
-
-  def self.captured_output
-    @output
-  end
-
-  def self.output(s)
-    @output << s
-  end
-
-  def self.save!
-    # no-op
-  end
-
-end
+require 'output_interceptor'
 
 class TestCommand < Test::Unit::TestCase
 
@@ -35,6 +15,20 @@ class TestCommand < Test::Unit::TestCase
     Boom::Command.execute(*cmd)
     output = Boom::Command.captured_output
     output.gsub(/\e\[\d\d?m/, '')
+  end
+
+  def test_use_remote
+    response = command('remote the_office fun awesome')
+
+    assert_match /a new list called the_office/, response
+    assert_match /fun in the_office is awesome/, response
+  end
+
+  def test_remote_checks_for_acceptable_config
+    response = command('remote the_office fun awesome')
+
+    assert_match /a new list called the_office/, response
+    assert_match /fun in the_office is awesome/, response
   end
 
   def test_overview_for_empty
@@ -70,7 +64,7 @@ class TestCommand < Test::Unit::TestCase
     STDIN.stubs(:read).returns('blah')
     STDIN.stubs(:stat)
     STDIN.stat.stubs(:size).returns(4)
-    
+
     assert_match /a new list called newlist.* item in newlist is blah/, command('newlist item')
   end
 
@@ -85,7 +79,7 @@ class TestCommand < Test::Unit::TestCase
     assert_match /copied https:\/\/github\.com to your clipboard/,
       command('urls github')
   end
-  
+
   def test_item_open_item
     Boom::Platform.stubs(:system).returns('')
     assert_match /opened https:\/\/github\.com for you/, command('open github')
@@ -144,7 +138,7 @@ class TestCommand < Test::Unit::TestCase
   def test_nonexistent_item_access_scoped_by_list
     assert_match /twitter not found in urls/, command('urls twitter')
   end
-  
+
   def test_echo_item
     assert_match /https:\/\/github\.com/, command('echo github')
   end
@@ -152,15 +146,15 @@ class TestCommand < Test::Unit::TestCase
   def test_echo_item_shorthand
     assert_match /https:\/\/github\.com/, command('e github')
   end
-  
+
   def test_echo_item_does_not_exist
     assert_match /wrong not found/, command('echo wrong')
   end
-  
+
   def test_echo_list_item
     assert_match /https:\/\/github\.com/, command('echo urls github')
   end
-  
+
   def test_echo_list_item_does_not_exist
     assert_match /wrong not found in urls/, command('echo urls wrong')
   end
@@ -169,7 +163,7 @@ class TestCommand < Test::Unit::TestCase
     Boom::Config.any_instance.stubs(:attributes).returns('backend' => 'json')
     assert_match /You're currently using json/, command('storage')
   end
-  
+
   def test_nonexistant_storage_switch
     Boom::Config.any_instance.stubs(:save).returns(true)
     assert_match /couldn't find that storage engine/, command('switch dkdkdk')
@@ -195,17 +189,17 @@ class TestCommand < Test::Unit::TestCase
     Boom::Command.stubs(:stdin).returns(stub)
     assert_match /twitter in urls/, command('urls twitter')
   end
-  
+
   def test_random
     Boom::Platform.stubs(:system).returns('')
     assert_match /opened .+ for you/, command('random')
   end
-  
+
   def test_random_from_list
     Boom::Platform.stubs(:system).returns('')
     assert_match /(github|zachholman)/, command('random urls')
   end
-  
+
   def test_random_list_not_exist
     Boom::Platform.stubs(:system).returns('')
     assert_match /couldn't find that list\./, command('random 39jc02jlskjbbac9')

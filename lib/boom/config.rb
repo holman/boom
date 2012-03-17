@@ -17,12 +17,26 @@ module Boom
   class Config
 
     # The main config file for boom
-    FILE = "#{ENV['HOME']}/.boom.conf"
+    FILE        = "#{ENV['HOME']}/.boom.conf"
+    REMOTE_FILE = FILE.gsub(/\.conf$/, ".remote.conf")
+
+    #if set to true then we will use a different config file for storage
+    #engine
+    attr_accessor :remote
 
     # Public: The attributes Hash for configuration options. The attributes
     # needed are dictated by each backend, but the `backend` option must be
     # present.
     attr_reader :attributes
+
+
+    # Public: an alias for accessing Boom.config.attributes[key]
+    # like Boom.config[key] instead
+    #
+    # Returns the value in the attributes hash
+    def [] key
+      attributes[key]
+    end
 
     # Public: creates a new instance of Config.
     #
@@ -30,7 +44,8 @@ module Boom
     # if this is a new install. Bootstrapping defaults to the JSON backend.
     #
     # Returns nothing.
-    def initialize
+    def initialize remote=false
+      @remote = remote
       bootstrap unless File.exist?(file)
       load_attributes
     end
@@ -39,7 +54,7 @@ module Boom
     #
     # Returns the String file path.
     def file
-      FILE
+      remote ? REMOTE_FILE : FILE
     end
 
     # Public: saves an empty, barebones hash to @attributes for the purpose of
@@ -84,6 +99,20 @@ module Boom
       json = MultiJson.encode(attributes)
       File.open(file, 'w') {|f| f.write(json) }
     end
+
+    def invalid_message
+      %(#{red "Is your config correct? You said:"}
+
+      #{File.read Boom.config.file}
+
+      #{cyan "Our survey says:"}
+
+      #{self.class.sample_config}
+
+      #{yellow "Go edit "} #{Boom.config.file +  yellow(" and make it all better") }
+      ).gsub(/^ {8}/, '') # strip the first eight spaces of every line
+    end
+
 
   end
 end

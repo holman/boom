@@ -28,6 +28,23 @@ And that's just a taste! I know, you're salivating, I can hear you from here.
 (Why your saliva is noisy is beyond me.) Check out the [full list of
 commands](https://github.com/holman/boom/wiki/Commands).
 
+## boom remote (or kaboom)
+You can even have a remote boom using config in ~/.boom.remote.conf
+
+    $ boom remote "a sandwich" cheese "mighty fine"
+    Boom! cheese in a sandwich is mighty fine. Got it.
+
+e.g. have a shared redis instance in the office for pinging around snippets to
+each others command lines
+
+    # me:
+    $ kaboom config ackrc < ~/.ackrc
+
+    # you:
+    $ kaboom config ackrc > ~/.ackrc
+
+
+
 ## Contribute
 
 Want to join the [Pantheon of

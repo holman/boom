@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'helper'
+require 'output_interceptor'
 
 class TestConfig < Test::Unit::TestCase
 
@@ -21,5 +22,6 @@ class TestConfig < Test::Unit::TestCase
     @config.attributes[:wu_tang] = 'clan'
     assert_equal 'clan', @config.attributes[:wu_tang]
   end
+
 
 end

@@ -28,7 +28,7 @@ module Boom
         puts('No Keychain utility to access, maybe try another storage option?')
         exit
       end
-      
+
       # Asks if you're using Mac OS X
       #
       # Returns true on a Mac

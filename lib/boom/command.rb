@@ -12,6 +12,7 @@ module Boom
   class Command
     class << self
       include Boom::Color
+      include Boom::Output
 
       # Public: accesses the in-memory JSON representation.
       #
@@ -25,7 +26,8 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
-        command = args.shift
+        command = check_if_remote args
+
         major   = args.shift
         minor   = args.empty? ? nil : args.join(' ')
 
@@ -33,15 +35,18 @@ module Boom
         delegate(command, major, minor)
       end
 
-      # Public: prints any given string.
-      #
-      # s = String output
-      #
-      # Prints to STDOUT and returns. This method exists to standardize output
-      # and for easy mocking or overriding.
-      def output(s)
-        puts(s)
+
+      def check_if_remote args
+        command = args.shift
+
+        if command == "remote"
+          Boom.use_remote
+          command = args.shift
+        end
+        command
       end
+
+      private :check_if_remote
 
       # Public: gets $stdin.
       #
@@ -167,7 +172,7 @@ module Boom
           output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
         end
       end
-      
+
       # Public: Opens a random item
       #
       # Returns nothing.
@@ -182,9 +187,9 @@ module Boom
         else
           output "We couldn't find that list."
         end
-        open(item.name, nil) unless item.nil? 
+        open(item.name, nil) unless item.nil?
       end
-      
+
       # Public: echoes only the Item's value without copying
       #
       # item_name - the String term to search for in all Item names
@@ -286,7 +291,7 @@ module Boom
         end
       end
 
-      # Public: search for an Item in all lists by name. Drops the 
+      # Public: search for an Item in all lists by name. Drops the
       # corresponding entry into your clipboard.
       #
       # name - the String term to search for in all Item names
@@ -300,7 +305,7 @@ module Boom
         output "#{cyan("Boom!")} We just copied #{yellow(Platform.copy(item))} to your clipboard."
       end
 
-      # Public: search for an Item in a particular list by name. Drops the 
+      # Public: search for an Item in a particular list by name. Drops the
       # corresponding entry into your clipboard if found.
       #
       # list_name - the String name of the List in which to scope the search
@@ -356,7 +361,7 @@ module Boom
           boom help                     this help text
           boom storage                  shows which storage backend you're using
           boom switch <storage>         switches to a different storage backend
-          
+
           boom <list>                   create a new list
           boom <list>                   show items for a list
           boom <list> delete            deletes a list
