@@ -26,12 +26,7 @@ module Boom
       # args    - The actual commands to operate on. Can be as few as zero
       #           arguments or as many as three.
       def execute(*args)
-        command = args.shift
-
-        if command == "remote"
-          Boom.use_remote
-          command = args.shift
-        end
+        command = check_if_remote args
 
         major   = args.shift
         minor   = args.empty? ? nil : args.join(' ')
@@ -41,6 +36,17 @@ module Boom
       end
 
 
+      def check_if_remote args
+        command = args.shift
+
+        if command == "remote"
+          Boom.use_remote
+          command = args.shift
+        end
+        command
+      end
+
+      private :check_if_remote
 
       # Public: gets $stdin.
       #
