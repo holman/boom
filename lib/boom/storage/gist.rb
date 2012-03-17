@@ -46,6 +46,17 @@ module Boom
         find_or_create_gist
       end
 
+      def self.sample_config
+        %({
+             "backend": "gist",
+             "gist": {
+               "username": "your_github_username",
+               "password": "your_github_password"
+             }
+           }
+         )
+      end
+
       def populate
         @storage['lists'].each do |lists|
           lists.each do |list_name, items|
@@ -79,7 +90,7 @@ module Boom
 
       def find_or_create_gist
         @gist_id = Boom.config.attributes["gist"]["gist_id"]
-        @public = Boom.config.attributes["gist"]["public"] == true
+        @public  = Boom.config.attributes["gist"]["public"] == true
 
         if @gist_id.nil? or @gist_id.empty?
           response = self.class.post("/gists", request_params)

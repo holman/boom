@@ -1,27 +1,7 @@
 # coding: utf-8
 
 require 'helper'
-
-# Intercept STDOUT and collect it
-class Boom::Command
-
-  def self.capture_output
-    @output = ''
-  end
-
-  def self.captured_output
-    @output
-  end
-
-  def self.output(s)
-    @output << s
-  end
-
-  def self.save!
-    # no-op
-  end
-
-end
+require 'output_interceptor'
 
 class TestCommand < Test::Unit::TestCase
 
@@ -38,6 +18,13 @@ class TestCommand < Test::Unit::TestCase
   end
 
   def test_use_remote
+    response = command('remote the_office fun awesome')
+
+    assert_match /a new list called the_office/, response
+    assert_match /fun in the_office is awesome/, response
+  end
+
+  def test_remote_checks_for_acceptable_config
     response = command('remote the_office fun awesome')
 
     assert_match /a new list called the_office/, response

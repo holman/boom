@@ -25,8 +25,8 @@ class TestRemote < Test::Unit::TestCase
 
     Boom.use_remote true
 
-    debugger
-    remote.all? { |t| assert Boom::Remote.allowed? dummy(t) }
-    local.all?  { |t| refute Boom::Remote.allowed? dummy(t) }
+    Boom::Remote.stubs(:output)
+    remote.all? { |t| assert Boom::Remote.allowed?(dummy(t)), "#{t} should be allowed" }
+    local.all?  { |t| refute Boom::Remote.allowed?(dummy(t)), "#{t} should not be allowed"}
   end
 end

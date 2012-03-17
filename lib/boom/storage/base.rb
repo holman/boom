@@ -14,6 +14,7 @@ module Boom
       def initialize
         @lists = []
         bootstrap
+        Boom::Remote.allowed? self
         populate
       end
 
@@ -25,6 +26,7 @@ module Boom
 
       # save the data
       def save ; end
+
 
       # Public: the in-memory collection of all Lists attached to this Storage
       # instance.
@@ -75,6 +77,18 @@ module Boom
       def to_hash
         { :lists => lists.collect(&:to_hash) }
       end
+
+
+
+      def handle error, message
+        case error
+        when NoMethodError
+          output cyan config_text
+        when NameError
+          output message
+        end
+      end
+
 
     end
   end

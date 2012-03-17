@@ -6,6 +6,8 @@
 module Boom
   module Storage
     class Json < Base
+      include Output
+      include Color
 
       JSON_FILE = "#{ENV['HOME']}/.boom"
 
@@ -13,7 +15,12 @@ module Boom
       #
       # Returns the String path of boom's Json representation.
       def json_file
+
         JSON_FILE
+      end
+
+      def self.sample_config
+        %({"backend":"json"})
       end
 
       # Takes care of bootstrapping the Json file, both in terms of creating the

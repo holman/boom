@@ -14,11 +14,22 @@ module Boom
       include Boom::Color
       include Boom::Output
 
+      def self.sample_config
+        %(
+          {"backend": "redis",
+            "redis": {
+              "port": "6379",
+              "host": "<host>"
+            }
+          }
+        )
+      end
+
       def redis
         @redis ||= ::Redis.new :host => Boom.config.attributes["redis"]["host"],
                                :port => Boom.config.attributes["redis"]["port"]
       rescue  Exception => exception
-        handle exception
+        handle exception, "You don't have Redis installed yet:\n  gem install redis"
       end
 
       def bootstrap
@@ -61,42 +72,8 @@ module Boom
             redis.set   "boom:items:#{item_sha}:value", item.value
           end
         end
-      end
-
-
-      private
-
-      def handle error
-        case error
-        when NoMethodError
-          output cyan config_text
-        when NameError
-          output "You don't have Redis installed yet:\n  gem install redis"
-        end
-
-        exit
-      end
-
-      def config_text
-        %(#{red "Is your redis config correct? You said:"}
-
-        #{File.read Boom.config.file}
-
-        #{cyan "Our survey says:"}
-
-        {
-          "backend": "redis",
-          "redis": {
-            "port": "6379",
-            "host": "localhost"
-          }
-        }
-
-        #{yellow "Go edit "} #{Boom.config.file +  yellow(" and make it all better") }
-        ).gsub(/^ {8}/, '') # strip the first eight spaces of every line
-      end
 
     end
+      end
   end
-
 end

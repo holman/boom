@@ -10,6 +10,19 @@ module Boom
   module Storage
     class Mongodb < Base
 
+      def self.sample_config
+        %(
+          {"backend": "mongodb",
+            "mongodb": {
+              "port": "",
+              "host": ""
+              "database": ""
+              "username": ""
+              "password": ""
+            }
+          })
+      end
+
       # Public: Initialize MongoDB connection and check dep.
       #
       # Returns Mongo connection
@@ -26,9 +39,8 @@ module Boom
 
         # Return connection
         @mongo
-      rescue NameError => e
-        puts "You don't have the Mongo gem installed yet:\n  gem install mongo"
-       exit
+      rescue  Exception => exception
+        handle exception, "You don't have the Mongo gem installed yet:\n  gem install mongo"
       end
 
       # Public: The MongoDB collection

@@ -29,6 +29,15 @@ module Boom
     # present.
     attr_reader :attributes
 
+
+    # Public: an alias for accessing Boom.config.attributes[key]
+    # like Boom.config[key] instead
+    #
+    # Returns the value in the attributes hash
+    def [] key
+      attributes[key]
+    end
+
     # Public: creates a new instance of Config.
     #
     # This will load the attributes from boom's config file, or bootstrap it
@@ -90,6 +99,20 @@ module Boom
       json = MultiJson.encode(attributes)
       File.open(file, 'w') {|f| f.write(json) }
     end
+
+    def invalid_message
+      %(#{red "Is your config correct? You said:"}
+
+      #{File.read Boom.config.file}
+
+      #{cyan "Our survey says:"}
+
+      #{self.class.sample_config}
+
+      #{yellow "Go edit "} #{Boom.config.file +  yellow(" and make it all better") }
+      ).gsub(/^ {8}/, '') # strip the first eight spaces of every line
+    end
+
 
   end
 end

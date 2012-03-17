@@ -27,6 +27,7 @@ require 'boom/storage/keychain'
 require 'boom/storage/gist'
 
 require 'boom/core_ext/symbol'
+require 'boom/remote'
 
 module Boom
   VERSION = '0.2.3'
@@ -37,7 +38,7 @@ module Boom
     @storage ||= Boom::Storage.backend
   end
 
-  # Public: tell Boom you're feeling like using the storage specified in
+  # Public: tell Boom to use the storage specified in
   # ~/.boom.remote.conf
   # Returns a Config instance.
   def use_remote remote=true
@@ -46,5 +47,13 @@ module Boom
 
   def config
     @config ||= Boom::Config.new
+  end
+
+  def remote?
+    config.remote
+  end
+
+  def local?
+    !remote?
   end
 end
