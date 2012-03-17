@@ -24,6 +24,20 @@ For more details about what boom is and how it works, check out
     $ boom melissa
     Boom! Just copied http://cl.ly/3pAn/animated.gif to your clipboard.
 
+## Remote boom
+You can even have a remote boom using config in ~/.boom.remote.conf
+    $ boomr "a sandwich" cheese "mighty fine"
+    Boom! cheese in a sandwich is mighty fine. Got it.
+
+e.g. have a shared redis instance in the office for pinging around snippets to
+each others command lines
+    # me:
+    $ boomr config ackrc < ~/.ackrc
+
+    # you:
+    $ boomr config ackrc > ~/.ackrc
+
+
 And that's just a taste! I know, you're salivating, I can hear you from here.
 (Why your saliva is noisy is beyond me.) Check out the [full list of
 commands](https://github.com/holman/boom/wiki/Commands).
