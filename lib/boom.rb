@@ -37,8 +37,13 @@ module Boom
     @storage ||= Boom::Storage.backend
   end
 
+  # Setting this to true uses a config specified
+  # in ~/.boom.remote.conf
+  def use_remote remote=true
+    @config = Boom::Config.new remote
+  end
+
   def config
     @config ||= Boom::Config.new
   end
-
 end

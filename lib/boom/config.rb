@@ -17,7 +17,12 @@ module Boom
   class Config
 
     # The main config file for boom
-    FILE = "#{ENV['HOME']}/.boom.conf"
+    FILE        = "#{ENV['HOME']}/.boom.conf"
+    REMOTE_FILE = FILE.gsub(/\.conf$/, ".remote.conf")
+
+    #if set to true then we will use a different config file for storage
+    #engine
+    attr_accessor :remote
 
     # Public: The attributes Hash for configuration options. The attributes
     # needed are dictated by each backend, but the `backend` option must be
@@ -30,7 +35,8 @@ module Boom
     # if this is a new install. Bootstrapping defaults to the JSON backend.
     #
     # Returns nothing.
-    def initialize
+    def initialize remote=false
+      @remote = remote
       bootstrap unless File.exist?(file)
       load_attributes
     end
@@ -39,7 +45,7 @@ module Boom
     #
     # Returns the String file path.
     def file
-      FILE
+      remote ? REMOTE_FILE : FILE
     end
 
     # Public: saves an empty, barebones hash to @attributes for the purpose of

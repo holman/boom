@@ -27,6 +27,12 @@ module Boom
       #           arguments or as many as three.
       def execute(*args)
         command = args.shift
+
+        if command == "remote"
+          Boom.use_remote
+          command = args.shift
+        end
+
         major   = args.shift
         minor   = args.empty? ? nil : args.join(' ')
 
