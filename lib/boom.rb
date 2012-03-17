@@ -37,8 +37,9 @@ module Boom
     @storage ||= Boom::Storage.backend
   end
 
-  # Setting this to true uses a config specified
-  # in ~/.boom.remote.conf
+  # Public: tell Boom you're feeling like using the storage specified in
+  # ~/.boom.remote.conf
+  # Returns a Config instance.
   def use_remote remote=true
     @config = Boom::Config.new remote
   end
