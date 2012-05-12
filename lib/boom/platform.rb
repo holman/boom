@@ -26,6 +26,14 @@ module Boom
         !!(RUBY_PLATFORM =~ /mswin|mingw/)
       end
 
+      # Public: tests if currently running on any of linux distribution.
+      #
+      # Returns true if running on Linux, else false
+      # def darwin?
+      #  !!(RUBY_PLATFORM =~ /linux/)
+      # end
+
+
       # Public: returns the command used to open a file or URL
       # for the current platform.
       #
