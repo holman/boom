@@ -101,7 +101,7 @@ module Boom
         if storage.list_exists?(command)
           return delete_list(command) if major == 'delete'
           return detail_list(command) unless major
-          unless minor == 'delete'
+          unless minor == 'delete' || minor =~ /move\ /
             return add_item(command,major,minor) if minor
             return add_item(command,major,stdin.read) if stdin.stat.size > 0
             return search_list_for_item(command, major)
@@ -110,6 +110,9 @@ module Boom
 
         if minor == 'delete' and storage.item_exists?(major)
           return delete_item(command, major)
+        elsif minor =~ /move\ / and storage.item_exists?(major)
+          target = minor.split(" ")[1]
+            return move_item(command, major, target)
         end
 
         return search_items(command) if storage.item_exists?(command)
@@ -262,6 +265,34 @@ module Boom
         save
       end
 
+      # Public: move an existing Item to a new or existing List.
+      #
+      # list   - the String name of the List to associate with this Item
+      # name   - the String name of the Item
+      # target - the String value of the list to move the item to. 
+      #          (Created if doesn't exist)
+      #
+      # Example
+      #
+      #   Commands.move_item("urls","http://github.com","fav_urls")
+      #
+      # Returns the newly created Item.
+      def move_item(list,name,target)
+        list = List.find(list)
+        item = list.find_item(name)
+        list2 = List.find(target)
+        if list2 == nil
+          lists = (storage.lists << List.new(target))
+          storage.lists = lists
+          list2 = List.find(target)
+          target = "a new list called " + target
+        end
+        list2.add_item(item)
+        list.delete_item(name)
+        output "#{cyan("Boom!")} #{yellow(name)} moved to #{yellow(target)}."
+        save
+      end
+
       # Public: remove a named Item.
       #
       # list_name - the String name of the List.
@@ -350,27 +381,28 @@ module Boom
         text = %{
           - boom: help ---------------------------------------------------
 
-          boom                          display high-level overview
-          boom all                      show all items in all lists
-          boom edit                     edit the boom JSON file in $EDITOR
-          boom help                     this help text
-          boom storage                  shows which storage backend you're using
-          boom switch <storage>         switches to a different storage backend
+          boom                           display high-level overview
+          boom all                       show all items in all lists
+          boom edit                      edit the boom JSON file in $EDITOR
+          boom help                      this help text
+          boom storage                   shows which storage backend you're using
+          boom switch <storage>          switches to a different storage backend
           
-          boom <list>                   create a new list
-          boom <list>                   show items for a list
-          boom <list> delete            deletes a list
+          boom <list>                    create a new list
+          boom <list>                    show items for a list
+          boom <list> delete             deletes a list
 
-          boom <list> <name> <value>    create a new list item
-          boom <name>                   copy item's value to clipboard
-          boom <list> <name>            copy item's value to clipboard
-          boom open <name>              open item's url in browser
-          boom open <list> <name>       open all item's url in browser for a list
-          boom random                   open a random item's url in browser
-          boom random <list>            open a random item's url for a list in browser
-          boom echo <name>              echo the item's value without copying
-          boom echo <list> <name>       echo the item's value without copying
-          boom <list> <name> delete     deletes an item
+          boom <list> <name> <value>     create a new list item
+          boom <name>                    copy item's value to clipboard
+          boom <list> <name>             copy item's value to clipboard
+          boom open <name>               open item's url in browser
+          boom open <list> <name>        open all item's url in browser for a list
+          boom random                    open a random item's url in browser
+          boom random <list>             open a random item's url for a list in browser
+          boom echo <name>               echo the item's value without copying
+          boom echo <list> <name>        echo the item's value without copying
+          boom <list> <name> delete      deletes an item
+          boom <list> <name> move <list> moves a list's item to an existing or new list
 
           all other documentation is located at:
             https://github.com/holman/boom

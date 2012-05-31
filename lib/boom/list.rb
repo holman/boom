@@ -75,7 +75,7 @@ module Boom
       items.reject! { |item| item.name == name}
       previous != items.size
     end
-
+    
     # Public: finds an Item by name. If the name is typically truncated, also
     # allow a search based on that truncated name.
     #
