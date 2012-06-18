@@ -76,6 +76,21 @@ module Boom
         { :lists => lists.collect(&:to_hash) }
       end
 
+      # Public: backend supports change of location
+      #
+      # Returns true if the backend can change the location of the storage object, 
+      # otherwise false.
+      def supports_location
+        return false
+      end
+
+      # Public: a string representing the location of the backend storage element
+      #
+      # Returns a string that represents the location of the backend storage element
+      def storage_location
+        return 'Storage location not supported.'
+      end
+
     end
   end
 end
