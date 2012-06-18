@@ -90,7 +90,7 @@ module Boom
         return switchLocation(major, minor) if command == 'switch' && minor != nil
         return switch(major)     if command == 'switch'
         return show_storage      if command == 'storage'
-	return show_location     if command == 'location'
+        return show_location     if command == 'location'
         return version           if command == "-v"
         return version           if command == "--version"
         return help              if command == 'help'
@@ -132,10 +132,10 @@ module Boom
       # Returns nothing.
       def show_location
         if Storage.backend.supports_location
-	  output "You're currently using #{Boom.config.attributes['backend']} storage engine with a location of #{Storage.backend.storage_location}."
-	else
-	  output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
-	end
+          output "You're currently using #{Boom.config.attributes['backend']} storage engine with a location of #{Storage.backend.storage_location}."
+        else
+          output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
+        end
       end
 
       # Public: switch to a new backend location.
@@ -148,27 +148,27 @@ module Boom
       def switchLocation(backend, location)
         switch(backend)
         if !Storage.backend.supports_location
-	  output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
-	  return
-	end
+          output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
+          return
+        end
         if File.directory?(location)
           if location[-1,1] != '/'
-	    location += '/'
-	  end
+            location += '/'
+          end
           location += '.boom'
         end 
         if !File.exists?(Storage.backend.json_file) 
           output "There seems to be a problem and boom has lost the json file. Resetting to #{ENV['HOME']}/.boom"
-	  location = "#{ENV['HOME']}/.boom"
-	end
-	if Storage.backend.json_file == location
-	  output 'The json file is already set to ' + location + '.'
-	  return
-	end
-	FileUtils.mv Storage.backend.json_file, location, :force => true
-	Boom.config.attributes['json_file'] = location
-	Boom.config.save
-	output 'The json file has been switched to ' + location + '.'
+          location = "#{ENV['HOME']}/.boom"
+        end
+        if Storage.backend.json_file == location
+          output 'The json file is already set to ' + location + '.'
+          return
+        end
+        FileUtils.mv Storage.backend.json_file, location, :force => true
+        Boom.config.attributes['json_file'] = location
+        Boom.config.save
+        output 'The json file has been switched to ' + location + '.'
       end
 
       # Public: switch to a new backend.
