@@ -396,27 +396,29 @@ module Boom
         text = %{
           - boom: help ---------------------------------------------------
 
-          boom                          display high-level overview
-          boom all                      show all items in all lists
-          boom edit                     edit the boom JSON file in $EDITOR
-          boom help                     this help text
-          boom storage                  shows which storage backend you're using
-          boom switch <storage>         switches to a different storage backend
+          boom                             display high-level overview
+          boom all                         show all items in all lists
+          boom edit                        edit the boom JSON file in $EDITOR
+          boom help                        this help text
+          boom storage                     shows which storage backend you're using
+          boom location                    shows the location used for the current storage engine
+          boom switch <storage>            switches to a different storage backend
+          boom switch <storage> <location> optionally change the location of the storage backend
           
-          boom <list>                   create a new list
-          boom <list>                   show items for a list
-          boom <list> delete            deletes a list
+          boom <list>                      create a new list
+          boom <list>                      show items for a list
+          boom <list> delete               deletes a list
 
-          boom <list> <name> <value>    create a new list item
-          boom <name>                   copy item's value to clipboard
-          boom <list> <name>            copy item's value to clipboard
-          boom open <name>              open item's url in browser
-          boom open <list> <name>       open all item's url in browser for a list
-          boom random                   open a random item's url in browser
-          boom random <list>            open a random item's url for a list in browser
-          boom echo <name>              echo the item's value without copying
-          boom echo <list> <name>       echo the item's value without copying
-          boom <list> <name> delete     deletes an item
+          boom <list> <name> <value>       create a new list item
+          boom <name>                      copy item's value to clipboard
+          boom <list> <name>               copy item's value to clipboard
+          boom open <name>                 open item's url in browser
+          boom open <list> <name>          open all item's url in browser for a list
+          boom random                      open a random item's url in browser
+          boom random <list>               open a random item's url for a list in browser
+          boom echo <name>                 echo the item's value without copying
+          boom echo <list> <name>          echo the item's value without copying
+          boom <list> <name> delete        deletes an item
 
           all other documentation is located at:
             https://github.com/holman/boom
