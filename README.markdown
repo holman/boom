@@ -5,7 +5,7 @@
 boom manages your text snippets. On the command line. I just blew your mind.
 
 For more details about what boom is and how it works, check out
-[boom's website](http://holman.github.com/boom). For full usage details
+[boom's website](http://zachholman.com/2010/11/text-snippets-boom/). For full usage details
 (including a complete list of commands), check out
 [boom's wiki](https://github.com/holman/boom/wiki).
 
