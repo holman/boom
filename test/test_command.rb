@@ -165,6 +165,18 @@ class TestCommand < Test::Unit::TestCase
     assert_match /wrong not found in urls/, command('echo urls wrong')
   end
 
+  def test_exec_item
+    assert_match /Running https:\/\/github\.com/, command('exec github')
+  end
+
+  def test_exec_item_does_not_exist
+    assert_match /wrong not found in urls/, command('echo urls wrong')
+  end
+
+  def test_exec_list_item
+    assert_match /Running https:\/\/github\.com/, command('exec urls github')
+  end
+
   def test_show_storage
     Boom::Config.any_instance.stubs(:attributes).returns('backend' => 'json')
     assert_match /You're currently using json/, command('storage')

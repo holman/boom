@@ -85,17 +85,18 @@ module Boom
       #
       # Returns output based on method calls.
       def delegate(command, major, minor)
-        return all               if command == 'all'
-        return edit              if command == 'edit'
-        return switch(major)     if command == 'switch'
-        return show_storage      if command == 'storage'
-        return version           if command == "-v"
-        return version           if command == "--version"
-        return help              if command == 'help'
-        return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
-        return echo(major,minor) if command == 'echo' || command == 'e'
-        return open(major,minor) if command == 'open' || command == 'o'
-        return random(major)     if command == 'random' || command == 'rand' || command == 'r'
+        return all                   if command == 'all'
+        return edit                  if command == 'edit'
+        return switch(major)         if command == 'switch'
+        return show_storage          if command == 'storage'
+        return version               if command == "-v"
+        return version               if command == "--version"
+        return help                  if command == 'help'
+        return help                  if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
+        return echo(major,minor)     if command == 'echo' || command == 'e'
+        return exec_cmd(major,minor) if command == 'exec'
+        return open(major,minor)     if command == 'open' || command == 'o'
+        return random(major)         if command == 'random' || command == 'rand' || command == 'r'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -202,6 +203,26 @@ module Boom
           return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
         end
         output item.value
+      end
+
+      # Public: Executes the Item's value without copying
+      #
+      # item_name - the String term to search for in all Item names 
+      #
+      # Returns nothing
+      def exec_cmd(major, minor)
+        unless minor
+          item = storage.items.detect do |item|
+            item.name == major
+          end
+          return output "#{yellow(major)} #{red("not found")}" unless item
+        else
+          list = List.find(major)
+          item = list.find_item(minor)
+          return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
+        end
+        output "Running #{yellow(item.value)}"
+        system item.value
       end
 
       # Public: add a new List.
@@ -370,6 +391,8 @@ module Boom
           boom random <list>            open a random item's url for a list in browser
           boom echo <name>              echo the item's value without copying
           boom echo <list> <name>       echo the item's value without copying
+          boom execute <name>           execute the item's value without copying
+          boom execute <list> <name>    execute the item's value without copying
           boom <list> <name> delete     deletes an item
 
           all other documentation is located at:
