@@ -1,7 +1,7 @@
 # coding: utf-8
 
 # Command is the main point of entry for boom commands; shell arguments are
-# passd through to Command, which then filters and parses through indivdual
+# passd through to Command, which then filters and parses through individual
 # commands and reroutes them to constituent object classes.
 #
 # Command also keeps track of one connection to Storage, which is how new data
