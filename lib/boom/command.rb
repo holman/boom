@@ -87,8 +87,10 @@ module Boom
       def delegate(command, major, minor)
         return all               if command == 'all'
         return edit              if command == 'edit'
+        return switchLocation(major, minor) if command == 'switch' && minor != nil
         return switch(major)     if command == 'switch'
         return show_storage      if command == 'storage'
+        return show_location     if command == 'location'
         return version           if command == "-v"
         return version           if command == "--version"
         return help              if command == 'help'
@@ -123,6 +125,50 @@ module Boom
       # Returns nothing.
       def show_storage
         output "You're currently using #{Boom.config.attributes['backend']}."
+      end
+
+      # Public: shows the current user's storage location.
+      #
+      # Returns nothing.
+      def show_location
+        if Storage.backend.supports_location
+          output "You're currently using #{Boom.config.attributes['backend']} storage engine with a location of #{Storage.backend.storage_location}."
+        else
+          output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
+        end
+      end
+
+      # Public: switch to a new backend location.
+      #
+      # backend - the String of the backend desired
+      #
+      # location - the String of the backend location desired
+      #
+      # Returns nothing.
+      def switchLocation(backend, location)
+        switch(backend)
+        if !Storage.backend.supports_location
+          output "The storage engine #{Boom.config.attributes['backend']} does not support location configuration."
+          return
+        end
+        if File.directory?(location)
+          if location[-1,1] != '/'
+            location += '/'
+          end
+          location += '.boom'
+        end 
+        if !File.exists?(Storage.backend.json_file) 
+          output "There seems to be a problem and boom has lost the json file. Resetting to #{ENV['HOME']}/.boom"
+          location = "#{ENV['HOME']}/.boom"
+        end
+        if Storage.backend.json_file == location
+          output 'The json file is already set to ' + location + '.'
+          return
+        end
+        FileUtils.mv Storage.backend.json_file, location, :force => true
+        Boom.config.attributes['json_file'] = location
+        Boom.config.save
+        output 'The json file has been switched to ' + location + '.'
       end
 
       # Public: switch to a new backend.
@@ -350,27 +396,29 @@ module Boom
         text = %{
           - boom: help ---------------------------------------------------
 
-          boom                          display high-level overview
-          boom all                      show all items in all lists
-          boom edit                     edit the boom JSON file in $EDITOR
-          boom help                     this help text
-          boom storage                  shows which storage backend you're using
-          boom switch <storage>         switches to a different storage backend
+          boom                             display high-level overview
+          boom all                         show all items in all lists
+          boom edit                        edit the boom JSON file in $EDITOR
+          boom help                        this help text
+          boom storage                     shows which storage backend you're using
+          boom location                    shows the location used for the current storage engine
+          boom switch <storage>            switches to a different storage backend
+          boom switch <storage> <location> optionally change the location of the storage backend
           
-          boom <list>                   create a new list
-          boom <list>                   show items for a list
-          boom <list> delete            deletes a list
+          boom <list>                      create a new list
+          boom <list>                      show items for a list
+          boom <list> delete               deletes a list
 
-          boom <list> <name> <value>    create a new list item
-          boom <name>                   copy item's value to clipboard
-          boom <list> <name>            copy item's value to clipboard
-          boom open <name>              open item's url in browser
-          boom open <list> <name>       open all item's url in browser for a list
-          boom random                   open a random item's url in browser
-          boom random <list>            open a random item's url for a list in browser
-          boom echo <name>              echo the item's value without copying
-          boom echo <list> <name>       echo the item's value without copying
-          boom <list> <name> delete     deletes an item
+          boom <list> <name> <value>       create a new list item
+          boom <name>                      copy item's value to clipboard
+          boom <list> <name>               copy item's value to clipboard
+          boom open <name>                 open item's url in browser
+          boom open <list> <name>          open all item's url in browser for a list
+          boom random                      open a random item's url in browser
+          boom random <list>               open a random item's url for a list in browser
+          boom echo <name>                 echo the item's value without copying
+          boom echo <list> <name>          echo the item's value without copying
+          boom <list> <name> delete        deletes an item
 
           all other documentation is located at:
             https://github.com/holman/boom

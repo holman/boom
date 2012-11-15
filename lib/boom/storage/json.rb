@@ -13,7 +13,23 @@ module Boom
       #
       # Returns the String path of boom's Json representation.
       def json_file
-        JSON_FILE
+        file = Boom.config.attributes['json_file']
+        return file if file != nil
+        return JSON_FILE
+      end
+
+      # Public: backend supports change of location
+      #
+      # Returns true as json backend supports changing the location of the json file
+      def supports_location
+        return true
+      end
+
+      # Public: a string representing the location of the backend storage element
+      #
+      # Returns the path to the json file.
+      def storage_location
+        return json_file
       end
 
       # Takes care of bootstrapping the Json file, both in terms of creating the
