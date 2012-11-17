@@ -54,6 +54,11 @@ module Boom
       storage.lists.find { |list| list.name == name } 
     end
 
+    def self.delete_all
+      storage.lists = []
+      storage.lists.empty?
+    end
+
     # Public: deletes a List by name.
     #
     # name - String name of the list to delete

@@ -76,4 +76,10 @@ class TestList < Test::Unit::TestCase
     assert_equal 1, @list_2.items.size
   end
 
+  def test_delete_all_lists
+    boom_json :multi_list
+    assert_equal 2, Boom.storage.lists.size
+    assert Boom::List.delete_all
+    assert_equal 0, Boom.storage.lists.size
+  end
 end

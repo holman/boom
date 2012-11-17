@@ -96,6 +96,7 @@ module Boom
         return echo(major,minor) if command == 'echo' || command == 'e'
         return open(major,minor) if command == 'open' || command == 'o'
         return random(major)     if command == 'random' || command == 'rand' || command == 'r'
+        return delete_all        if command == 'delete'
 
         # if we're operating on a List
         if storage.list_exists?(command)
@@ -116,6 +117,20 @@ module Boom
 
         return create_list(command, major, stdin.read) if !minor && stdin.stat.size > 0
         return create_list(command, major, minor)
+      end
+
+      # Public: delete all lists and items
+      #
+      # Returns nothing.
+      def delete_all
+        output "Are you sure you want to delete all lists and items? (y/n):"
+        if $stdin.gets.chomp == 'y'
+          List.delete_all
+          output "#{cyan("Boom!")} Deleted all your lists and items."
+          save
+        else
+          output "Just kidding then."
+        end
       end
 
       # Public: shows the current user's storage.
@@ -353,6 +368,7 @@ module Boom
           boom                          display high-level overview
           boom all                      show all items in all lists
           boom edit                     edit the boom JSON file in $EDITOR
+          boom delete                   delete all lists and items
           boom help                     this help text
           boom storage                  shows which storage backend you're using
           boom switch <storage>         switches to a different storage backend
