@@ -76,7 +76,7 @@ class TestCommand < Test::Unit::TestCase
 
   def test_list_creation_with_existing_items_name
     command('list item foo')
-    assert_match /a new list called item.* key in item is foo/, command('item key bar')
+    assert_match /a new list called item.* key in item is bar/, command('item key bar')
   end
 
   def test_item_access
