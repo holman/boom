@@ -74,6 +74,11 @@ class TestCommand < Test::Unit::TestCase
     assert_match /a new list called newlist.* item in newlist is blah/, command('newlist item')
   end
 
+  def test_list_creation_with_existing_items_name
+    command('list item foo')
+    assert_match /a new list called item.* key in item is foo/, command('item key bar')
+  end
+
   def test_item_access
     IO.stubs(:popen)
     assert_match /copied https:\/\/github\.com to your clipboard/,
