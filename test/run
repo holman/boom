@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# A shim to run our tests in shell. Boom is written for the shell, might as well
+# test it in shell.
+
+./test/roundup test/*.sh
