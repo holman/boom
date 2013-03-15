@@ -2,10 +2,12 @@
   "lists": [
     {
       "urls": [
-        "https:\/\/github.com\/holman",
-        "https:\/\/twitter.com\/holman",
-        "http:\/\/zachholman.com"
-      ],
+        "https://github.com/holman",
+        "https://twitter.com/holman",
+        "http://zachholman.com"
+      ]
+    },
+    {
       "jokes": [
         "What do you call a cow with no legs? Ground beef.",
         "What do you call a cow with three legs? Lean beef."

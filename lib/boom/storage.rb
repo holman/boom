@@ -116,7 +116,7 @@ module Boom
     #
     # Returns a String Json representation of its Lists and their Items.
     def to_json
-      Yajl::Encoder.encode(to_hash)
+      Yajl::Encoder.encode(to_hash, :pretty => true)
     end
   end
 end
