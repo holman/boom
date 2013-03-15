@@ -1,5 +1,7 @@
 # boom changes
 ## head
+
+## 0.2.4
 - [@Dlom](https://github.com/Dlom) fixed some troubles in #49.
 - Some additional test coverage added by
   [@nickhammond](https://github.com/nickhammond).
@@ -66,8 +68,8 @@
   scripts and junk! Thanks [bschaeffer](https://github.com/bschaeffer).
 
 ## 0.0.9
-- Backport `Symbol#to_proc` for 1.8.6 support (thanks 
-  [kastner](https://github.com/kastner) and 
+- Backport `Symbol#to_proc` for 1.8.6 support (thanks
+  [kastner](https://github.com/kastner) and
   [DeMarko](https://github.com/DeMarko)).
 
 ## 0.0.8
@@ -81,7 +83,7 @@
   (thanks [jimmycuadra](https://github.com/jimmycuadra)).
 - Output is a bit cleaner with a constrained `name` column.
 - Adds items from stdin (thanks
-  [MichaelXavier](https://github.com/MichaelXavier)). 
+  [MichaelXavier](https://github.com/MichaelXavier)).
 
 ## 0.0.5
 - Item deletes are now scoped by list rather than GLOBAL DESTRUCTION! (thanks
