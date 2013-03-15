@@ -2,7 +2,7 @@
 
 describe "cli: tests around boom the binary — help, version, and so on"
 
-boom="./bin/boom"
+boom="JSON=test/examples/urls.json ./bin/boom"
 
 it_shows_help() {
   $boom help | grep "boom: help"
