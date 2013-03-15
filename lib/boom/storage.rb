@@ -3,14 +3,73 @@
 # directly without having to worry about which Backend is in use.
 #
 module Boom
-  module Storage
+  class Storage
     JSON_FILE = "#{ENV['HOME']}/.boom"
 
     # Public: the path to the Json file used by boom.
     #
     # Returns the String path of boom's Json representation.
     def json_file
-      JSON_FILE
+      ENV['BOOMFILE'] || JSON_FILE
+    end
+
+    # Public: initializes a Storage instance by loading in your persisted data from adapter.
+    #
+    # Returns the Storage instance.
+    def initialize
+      @lists = []
+      bootstrap
+      populate
+    end
+
+    # Public: the in-memory collection of all Lists attached to this Storage
+    # instance.
+    #
+    # lists - an Array of individual List items
+    #
+    # Returns nothing.
+    attr_writer :lists
+
+    # Public: the list of Lists in your JSON data, sorted by number of items
+    # descending.
+    #
+    # Returns an Array of List objects.
+    def lists
+      @lists.sort_by { |list| -list.items.size }
+    end
+
+    # Public: tests whether a named List exists.
+    #
+    # name - the String name of a List
+    #
+    # Returns true if found, false if not.
+    def list_exists?(name)
+      @lists.detect { |list| list.name == name }
+    end
+
+    # Public: all Items in storage.
+    #
+    # Returns an Array of all Items.
+    def items
+      @lists.collect(&:items).flatten
+    end
+
+    # Public: tests whether a named Item exists.
+    #
+    # name - the String name of an Item
+    #
+    # Returns true if found, false if not.
+    def item_exists?(name)
+      items.detect { |item| item.name == name }
+    end
+
+    # Public: creates a Hash of the representation of the in-memory data
+    # structure. This percolates down to Items by calling to_hash on the List,
+    # which in tern calls to_hash on individual Items.
+    #
+    # Returns a Hash of the entire data set.
+    def to_hash
+      { :lists => lists.collect(&:to_hash) }
     end
 
     # Takes care of bootstrapping the Json file, both in terms of creating the

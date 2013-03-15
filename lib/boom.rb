@@ -16,6 +16,7 @@ require 'boom/command'
 require 'boom/config'
 require 'boom/item'
 require 'boom/list'
+require 'boom/storage'
 
 require 'boom/core_ext/symbol'
 
@@ -23,5 +24,6 @@ module Boom
   VERSION = '0.2.4'
 
   def self.storage
+    Storage.new
   end
 end
