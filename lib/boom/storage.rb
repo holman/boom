@@ -88,7 +88,8 @@ module Boom
     #
     # Returns nothing.
     def populate
-      storage = MultiJson.decode(File.new(json_file, 'r').read)
+      file = File.new(json_file, 'r')
+      storage = Yajl::Parser.parse(file)
 
       storage['lists'].each do |lists|
         lists.each do |list_name, items|
@@ -117,7 +118,7 @@ module Boom
     #
     # Returns a String Json representation of its Lists and their Items.
     def to_json
-      MultiJson.encode(to_hash)
+      Yajl::Encoder.encode(to_hash)
     end
   end
 end
