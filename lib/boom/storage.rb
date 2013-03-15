@@ -83,7 +83,7 @@ module Boom
       save
     end
 
-    # Take a Json representation of data and explode it out into the consituent
+    # Take a JSON representation of data and explode it out into the consituent
     # Lists and Items for the given Storage instance.
     #
     # Returns nothing.
