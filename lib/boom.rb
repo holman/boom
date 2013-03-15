@@ -24,6 +24,6 @@ module Boom
   VERSION = '0.2.4'
 
   def self.storage
-    Storage.new
+    @storage ||= Storage.new
   end
 end

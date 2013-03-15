@@ -4,3 +4,5 @@
 # test it in shell.
 
 ./test/roundup test/*.sh
+
+git checkout test/examples

@@ -56,11 +56,11 @@ module Boom
 
     # Public: tests whether a named Item exists.
     #
-    # name - the String name of an Item
+    # value - the String value of an Item
     #
     # Returns true if found, false if not.
-    def item_exists?(name)
-      items.detect { |item| item.name == name }
+    def item_exists?(value)
+      items.detect { |item| item.value == value }
     end
 
     # Public: creates a Hash of the representation of the in-memory data
@@ -96,9 +96,7 @@ module Boom
           @lists << list = List.new(list_name)
 
           items.each do |item|
-            item.each do |name,value|
-              list.add_item(Item.new(name,value))
-            end
+            list.add_item(Item.new(item))
           end
         end
       end
