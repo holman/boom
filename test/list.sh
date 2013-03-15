@@ -5,5 +5,6 @@ boom="./bin/boom"
 describe "lists"
 
 it_shows_all_lists_by_default() {
-  $boom | grep "urls (2)"
+  $boom | grep "urls (3)"
+  $boom | grep "jokes (2)"
 }
