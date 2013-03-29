@@ -235,4 +235,13 @@ class TestCommand < Test::Unit::TestCase
     assert_match /duck is gone forever/, command('duck duck delete')
   end
 
+  def test_delete_all_lists_no
+    STDIN.stubs(:gets).returns('n')
+    assert_match /Just kidding then/, command('delete')
+  end
+
+  def test_delete_all_lists_yes
+    STDIN.stubs(:gets).returns('y')
+    assert_match /Deleted all your lists and items/, command('delete')
+  end
 end
