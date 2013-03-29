@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'boom'
-  s.version           = '0.2.4'
-  s.date              = '2013-03-15'
+  s.version           = '0.3.0'
+  s.date              = '2013-03-29'
   s.rubyforge_project = 'boom'
 
   ## Make sure your summary is short. The description may be as long
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   ## better to set the email to an email list or something. If you don't have
   ## a custom homepage, consider using your GitHub URL or the like.
   s.authors  = ["Zach Holman"]
-  s.email    = 'github.com@zachholman.com'
+  s.email    = 'zach@zachholman.com'
   s.homepage = 'https://github.com/holman/boom'
 
   ## This gets added to the $LOAD_PATH so that 'lib/NAME.rb' can be required as
@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   ## Specify any RDoc options here. You'll want to add your README and
   ## LICENSE files to the extra_rdoc_files list.
   s.rdoc_options = ["--charset=UTF-8"]
-  s.extra_rdoc_files = %w[README.markdown LICENSE.markdown]
+  s.extra_rdoc_files = %w[README.md LICENSE.md]
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
@@ -66,11 +66,11 @@ Gem::Specification.new do |s|
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
   s.files = %w[
-    CHANGELOG.markdown
+    CHANGELOG.md
     Gemfile
     Gemfile.lock
-    LICENSE.markdown
-    README.markdown
+    LICENSE.md
+    README.md
     Rakefile
     bin/boom
     boom.gemspec
@@ -80,28 +80,17 @@ Gem::Specification.new do |s|
     lib/boom.rb
     lib/boom/color.rb
     lib/boom/command.rb
-    lib/boom/config.rb
     lib/boom/core_ext/symbol.rb
     lib/boom/item.rb
     lib/boom/list.rb
     lib/boom/platform.rb
     lib/boom/storage.rb
-    lib/boom/storage/base.rb
-    lib/boom/storage/gist.rb
-    lib/boom/storage/json.rb
-    lib/boom/storage/keychain.rb
-    lib/boom/storage/mongodb.rb
-    lib/boom/storage/redis.rb
-    test/examples/config_json.json
-    test/examples/test_json.json
-    test/examples/urls.json
-    test/helper.rb
-    test/test_color.rb
-    test/test_command.rb
-    test/test_config.rb
-    test/test_item.rb
-    test/test_list.rb
-    test/test_platform.rb
+    test/cli.sh
+    test/examples/data.json
+    test/item.sh
+    test/list.sh
+    test/roundup
+    test/run
   ]
   # = MANIFEST =
 
