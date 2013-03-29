@@ -41,7 +41,7 @@ module Boom
     #
     # Returns the current set of items.
     def add_item(item)
-      delete_item(item.value) if find_item(item.value)
+      delete_item(item.name) if find_item(item.name)
       @items << item
     end
 
@@ -76,16 +76,16 @@ module Boom
       previous != items.size
     end
 
-    # Public: finds an Item by value. If the value is typically truncated, also
+    # Public: finds an Item by name. If the name is typically truncated, also
     # allow a search based on that truncated name.
     #
-    # value - String name of the Item to find
+    # name - String name of the Item to find
     #
     # Returns the found item.
-    def find_item(value)
+    def find_item(name)
       items.find do |item|
-        item.value == value ||
-        item.short_value.gsub('…','') == value.gsub('…','')
+        item.name == name ||
+        item.short_name.gsub('…','') == name.gsub('…','')
       end
     end
 

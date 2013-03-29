@@ -15,5 +15,5 @@ it_adds_a_list() {
 }
 
 it_shows_a_list() {
-  $boom enemies | grep 'nadda'
+  $boom urls | grep 'zachholman'
 }
