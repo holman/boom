@@ -13,3 +13,7 @@ it_deletes_an_item() {
   yes | $boom urls google --delete | grep 'gone forever'
   $boom urls google | grep 'not found'
 }
+
+it_echos_an_item() {
+  $boom echo site | grep 'zachholman.com'
+}
