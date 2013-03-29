@@ -1,0 +1,17 @@
+{
+  "lists": [
+    {
+      "urls": [
+        { "blog":    "https://github.com/holman" },
+        { "twitter": "https://twitter.com/holman"},
+        { "site":    "http://zachholman.com"}
+      ]
+    },
+    {
+      "jokes": [
+        { "none":  "What do you call a cow with no legs? Ground beef." },
+        { "three": "What do you call a cow with three legs? Lean beef." }
+      ]
+    }
+  ]
+}

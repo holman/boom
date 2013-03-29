@@ -87,8 +87,6 @@ module Boom
       def delegate(command, major, minor)
         return all               if command == 'all'
         return edit              if command == 'edit'
-        return switch(major)     if command == 'switch'
-        return show_storage      if command == 'storage'
         return version           if command == "-v"
         return version           if command == "--version"
         return help              if command == 'help'
@@ -99,16 +97,16 @@ module Boom
 
         # if we're operating on a List
         if storage.list_exists?(command)
-          return delete_list(command) if major == 'delete'
+          return delete_list(command) if major == '--delete'
           return detail_list(command) unless major
-          unless minor == 'delete'
+          unless minor == '--delete'
             return add_item(command,major,minor) if minor
             return add_item(command,major,stdin.read) if stdin.stat.size > 0
             return search_list_for_item(command, major)
           end
         end
 
-        if minor == 'delete' and storage.item_exists?(major)
+        if minor == '--delete' and storage.item_exists?(major)
           return delete_item(command, major)
         end
 
@@ -116,25 +114,6 @@ module Boom
 
         return create_list(command, major, stdin.read) if !minor && stdin.stat.size > 0
         return create_list(command, major, minor)
-      end
-
-      # Public: shows the current user's storage.
-      #
-      # Returns nothing.
-      def show_storage
-        output "You're currently using #{Boom.config.attributes['backend']}."
-      end
-
-      # Public: switch to a new backend.
-      #
-      # backend - the String of the backend desired
-      #
-      # Returns nothing.
-      def switch(backend)
-        Storage.backend = backend
-        output "We've switched you over to #{backend}."
-      rescue NameError
-        output "We couldn't find that storage engine. Check the name and try again."
       end
 
       # Public: prints all Items over a List.
@@ -234,7 +213,7 @@ module Boom
       #
       # Returns nothing.
       def delete_list(name)
-        output "You sure you want to delete everything in #{yellow(name)}? (y/n):"
+        printf "You sure you want to delete everything in #{yellow(name)}? (y/n): "
         if $stdin.gets.chomp == 'y'
           List.delete(name)
           output "#{cyan("Boom!")} Deleted all your #{yellow(name)}."
@@ -336,11 +315,7 @@ module Boom
       #
       # Returns nothing.
       def edit
-        if storage.respond_to?("json_file")
-          output "#{cyan("Boom!")} #{Platform.edit(storage.json_file)}"
-        else
-          output "This storage backend does not store #{cyan("Boom!")} data on your computer"
-        end
+        output "#{cyan("Boom!")} #{Platform.edit(storage.json_file)}"
       end
 
       # Public: prints all the commands of boom.
@@ -354,12 +329,10 @@ module Boom
           boom all                      show all items in all lists
           boom edit                     edit the boom JSON file in $EDITOR
           boom help                     this help text
-          boom storage                  shows which storage backend you're using
-          boom switch <storage>         switches to a different storage backend
           
           boom <list>                   create a new list
           boom <list>                   show items for a list
-          boom <list> delete            deletes a list
+          boom <list> --delete          deletes a list
 
           boom <list> <name> <value>    create a new list item
           boom <name>                   copy item's value to clipboard
@@ -370,7 +343,7 @@ module Boom
           boom random <list>            open a random item's url for a list in browser
           boom echo <name>              echo the item's value without copying
           boom echo <list> <name>       echo the item's value without copying
-          boom <list> <name> delete     deletes an item
+          boom <list> <name> --delete   deletes an item
 
           all other documentation is located at:
             https://github.com/holman/boom
