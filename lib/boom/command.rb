@@ -234,7 +234,7 @@ module Boom
       #
       # Returns nothing.
       def delete_list(name)
-        output "You sure you want to delete everything in #{yellow(name)}? (y/n):"
+        printf "You sure you want to delete everything in #{yellow(name)}? (y/n): "
         if $stdin.gets.chomp == 'y'
           List.delete(name)
           output "#{cyan("Boom!")} Deleted all your #{yellow(name)}."
