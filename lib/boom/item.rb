@@ -6,7 +6,6 @@
 #
 module Boom
   class Item
-    
     # Public: the String name of the Item
     attr_accessor :name
 
@@ -54,7 +53,7 @@ module Boom
     end
 
     # Public: only return url part of value - if no url has been
-    # detected returns value.
+    # detected it'll return the value.
     #
     # Returns a String which preferably is a URL.
     def url
@@ -67,6 +66,5 @@ module Boom
     def to_hash
       { @name => @value }
     end
-
   end
 end

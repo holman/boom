@@ -45,11 +45,9 @@ end
 
 task :default => :test
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+desc "Run tests for boom"
+task :test do
+  exec "test/run"
 end
 
 desc "Open an irb session preloaded with this library"

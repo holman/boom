@@ -81,7 +81,7 @@ module Boom
     #
     # name - String name of the Item to find
     #
-    # Returns the found item
+    # Returns the found item.
     def find_item(name)
       items.find do |item|
         item.name == name ||

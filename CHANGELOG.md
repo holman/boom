@@ -1,6 +1,13 @@
 # boom changes
 ## head
 
+## 0.3.0
+- 0.3 removes all the Storage nonsense in favor of clean and easy JSON. Less
+  code is best code.
+- It also removes all the Ruby tests and instead does them in shell with roundup.
+- It also changes delete to use `--delete` so there's conceptually less of a
+  problem.
+
 ## 0.2.4
 - [@Dlom](https://github.com/Dlom) fixed some troubles in #49.
 - Some additional test coverage added by
