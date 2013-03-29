@@ -2,12 +2,12 @@
 
 ## About
 
-boom manages your text snippets. On the command line. I just blew your mind.
+boom manages your text snippets on your command line. You can stash away text
+like URLs, canned responses, and important notes and then quickly copy them
+onto your clipboard, ready for pasting.
 
 For more details about what boom is and how it works, check out
-[boom's website](http://holman.github.com/boom). For full usage details
-(including a complete list of commands), check out
-[boom's wiki](https://github.com/holman/boom/wiki).
+[boom's website](http://holman.github.com/boom).
 
 ## Install
 
@@ -18,11 +18,11 @@ For more details about what boom is and how it works, check out
     $ boom gifs
     Boom! Created a new list called "gifs".
 
-    $ boom gifs melissa http://cl.ly/3pAn/animated.gif
-    Boom! "melissa" in "gifs" is "http://cl.ly/3pAn/animated.gif". Got it.
+    $ boom gifs shirt http://cl.ly/NwCS/shirt.gif
+    Boom! "shirt" in "gifs" is "http://cl.ly/NwCS/shirt.gif". Got it.
 
-    $ boom melissa
-    Boom! Just copied http://cl.ly/3pAn/animated.gif to your clipboard.
+    $ boom shirt
+    Boom! Just copied http://cl.ly/NwCS/shirt.gif to your clipboard.
 
 And that's just a taste! I know, you're salivating, I can hear you from here.
 (Why your saliva is noisy is beyond me.) Check out the [full list of
@@ -37,8 +37,11 @@ your contributions, friend.
 Clone this repository, then run `bundle install`. That'll install all the gem
 dependencies. Make sure your methods are [TomDoc](http://tomdoc.org)'d
 properly, that existing tests pass (`rake`), and that any new functionality
-includes appropriate tests. Bonus points if you're not updating the gemspec or
-bumping boom's version.
+includes appropriate tests.
+
+The tests are written in shell for
+[roundup](https://github.com/bmizerany/roundup), since boom is basically just
+Ruby pretending to be shell. `rake` should run them all for you just fine.
 
 All good? Cool! Then [send me a pull request](https://github.com/holman/boom/pull/new/master)!
 
