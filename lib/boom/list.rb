@@ -93,7 +93,7 @@ module Boom
     #
     # Returns a Hash of its own data and its child Items.
     def to_hash
-      { name => items.collect(&:value) }
+      { name => items.collect(&:to_hash) }
     end
 
   end
