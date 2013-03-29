@@ -13,7 +13,6 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'boom/color'
 require 'boom/platform'
 require 'boom/command'
-require 'boom/config'
 require 'boom/item'
 require 'boom/list'
 require 'boom/storage'
