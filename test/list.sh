@@ -17,3 +17,9 @@ it_adds_a_list() {
 it_shows_a_list() {
   $boom urls | grep 'zachholman'
 }
+
+it_deletes_a_list() {
+  $boom | grep "enemies"
+  yes | $boom enemies --delete | grep "Deleted"
+  ! $boom | grep "enemies"
+}

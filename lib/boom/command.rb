@@ -99,16 +99,16 @@ module Boom
 
         # if we're operating on a List
         if storage.list_exists?(command)
-          return delete_list(command) if major == 'delete'
+          return delete_list(command) if major == '--delete'
           return detail_list(command) unless major
-          unless minor == 'delete'
+          unless minor == '--delete'
             return add_item(command,major,minor) if minor
             return add_item(command,major,stdin.read) if stdin.stat.size > 0
             return search_list_for_item(command, major)
           end
         end
 
-        if minor == 'delete' and storage.item_exists?(major)
+        if minor == '--delete' and storage.item_exists?(major)
           return delete_item(command, major)
         end
 
