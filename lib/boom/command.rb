@@ -92,7 +92,7 @@ module Boom
         return help              if command == 'help'
         return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
-        return quiet(major,minor) if command == 'quiet' || command == 'q'
+        return copy(major,minor) if command == 'copy' || command == 'c'
         return open(major,minor) if command == 'open' || command == 'o'
         return random(major)     if command == 'random' || command == 'rand' || command == 'r'
 
@@ -187,7 +187,7 @@ module Boom
       # Public: Copies to clipboard the Item's value without printing to screen
       #
       # Returns nothing
-      def quiet(major, minor)
+      def copy(major, minor)
         unless minor
           item = storage.items.detect do |item|
             item.name == major
@@ -361,8 +361,8 @@ module Boom
           boom random <list>            open a random item's url for a list in browser
           boom echo <name>              echo the item's value without copying
           boom echo <list> <name>       echo the item's value without copying
-          boom quiet <name>             copy the item's value without echo
-          boom quiet <list> <name>      copy the item's value without echo
+          boom copy <name>              copy the item's value without echo
+          boom copy <list> <name>       copy the item's value without echo
           boom <list> <name> --delete   deletes an item
 
           all other documentation is located at:
