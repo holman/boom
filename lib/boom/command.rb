@@ -92,6 +92,7 @@ module Boom
         return help              if command == 'help'
         return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
+        return copy(major,minor) if command == 'copy' || command == 'c'
         return open(major,minor) if command == 'open' || command == 'o'
         return random(major)     if command == 'random' || command == 'rand' || command == 'r'
 
@@ -181,6 +182,23 @@ module Boom
           return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
         end
         output item.value
+      end
+
+      # Public: Copies to clipboard the Item's value without printing to screen
+      #
+      # Returns nothing
+      def copy(major, minor)
+        unless minor
+          item = storage.items.detect do |item|
+            item.name == major
+          end
+          return output "#{yellow(major)} #{red("not found")}" unless item
+        else
+          list = List.find(major)
+          item = list.find_item(minor)
+          return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
+        end
+        Platform.copy(item)
       end
 
       # Public: add a new List.
@@ -343,6 +361,8 @@ module Boom
           boom random <list>            open a random item's url for a list in browser
           boom echo <name>              echo the item's value without copying
           boom echo <list> <name>       echo the item's value without copying
+          boom copy <name>              copy the item's value without echo
+          boom copy <list> <name>       copy the item's value without echo
           boom <list> <name> --delete   deletes an item
 
           all other documentation is located at:
