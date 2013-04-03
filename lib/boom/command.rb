@@ -351,7 +351,7 @@ module Boom
           
           boom <list>                   create a new list
           boom <list>                   show items for a list
-          boom <list> --delete          deletes a list
+          boom delete <list>            deletes a list
 
           boom <list> <name> <value>    create a new list item
           boom <name>                   copy item's value to clipboard
@@ -364,7 +364,7 @@ module Boom
           boom echo <list> <name>       echo the item's value without copying
           boom copy <name>              copy the item's value without echo
           boom copy <list> <name>       copy the item's value without echo
-          boom <list> <name> --delete   deletes an item
+          boom delete <list> <name>     deletes an item
 
           all other documentation is located at:
             https://github.com/holman/boom
