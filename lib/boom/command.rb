@@ -137,10 +137,10 @@ module Boom
           list = List.find(major)
           if minor
             item = storage.items.detect { |item| item.name == minor }
-            if item.nil?
-              output "Item #{yellow(minor)} not found"
-            else
+            if item
               output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+            else
+              output "Item #{yellow(minor)} not found"
             end
           else
             list.items.each { |item| Platform.open(item) }
@@ -148,10 +148,10 @@ module Boom
           end
         else
           item = storage.items.detect { |item| item.name == major }
-          if item.nil?
-            output "Item #{yellow(major)} not found"
-          else
+          if item
             output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+          else
+            output "Item #{yellow(major)} not found"
           end
         end
       end
