@@ -140,7 +140,7 @@ module Boom
             if item
               output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
             else
-              output "Item #{yellow(minor)} not found"
+              output "Couldn't find #{yellow(minor)}."
             end
           else
             list.items.each { |item| Platform.open(item) }
@@ -151,7 +151,7 @@ module Boom
           if item
             output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
           else
-            output "Item #{yellow(major)} not found"
+            output "Couldn't find #{yellow(major)}."
           end
         end
       end
