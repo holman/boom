@@ -137,17 +137,25 @@ module Boom
           list = List.find(major)
           if minor
             item = storage.items.detect { |item| item.name == minor }
-            output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+            if item.nil?
+              output "Item #{yellow(minor)} not found"
+            else
+              output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+            end
           else
             list.items.each { |item| Platform.open(item) }
             output "#{cyan("Boom!")} We just opened all of #{yellow(major)} for you."
           end
         else
           item = storage.items.detect { |item| item.name == major }
-          output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+          if item.nil?
+            output "Item #{yellow(major)} not found"
+          else
+            output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
+          end
         end
       end
-      
+
       # Public: Opens a random item
       #
       # Returns nothing.
@@ -162,9 +170,9 @@ module Boom
         else
           output "We couldn't find that list."
         end
-        open(item.name, nil) unless item.nil? 
+        open(item.name, nil) unless item.nil?
       end
-      
+
       # Public: echoes only the Item's value without copying
       #
       # item_name - the String term to search for in all Item names
@@ -283,7 +291,7 @@ module Boom
         end
       end
 
-      # Public: search for an Item in all lists by name. Drops the 
+      # Public: search for an Item in all lists by name. Drops the
       # corresponding entry into your clipboard.
       #
       # name - the String term to search for in all Item names
@@ -297,7 +305,7 @@ module Boom
         output "#{cyan("Boom!")} We just copied #{yellow(Platform.copy(item))} to your clipboard."
       end
 
-      # Public: search for an Item in a particular list by name. Drops the 
+      # Public: search for an Item in a particular list by name. Drops the
       # corresponding entry into your clipboard if found.
       #
       # list_name - the String name of the List in which to scope the search
@@ -347,7 +355,7 @@ module Boom
           boom all                      show all items in all lists
           boom edit                     edit the boom JSON file in $EDITOR
           boom help                     this help text
-          
+
           boom <list>                   create a new list
           boom <list>                   show items for a list
           boom <list> --delete          deletes a list
