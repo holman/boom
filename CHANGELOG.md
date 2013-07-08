@@ -1,5 +1,7 @@
 # boom changes
 ## head
+- Returns an error if you try to `open` something that doesn't exist.
+  ([@romainberger](https://github.com/romainberger), #90).
 
 ## 0.3.0
 - 0.3 removes all the Storage nonsense in favor of clean and easy JSON. Less
