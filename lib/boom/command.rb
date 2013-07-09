@@ -389,7 +389,8 @@ module Boom
       def find_closest(search)
         results = Array.new
         items = storage.items.each do |item|
-          # for now output the item that have 3 letters in common
+          # for now output the item that have the 3
+          # first letters in common
           if search[0, 3] == item.name[0, 3]
             results.push(item.name)
           end
