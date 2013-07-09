@@ -141,6 +141,7 @@ module Boom
               output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
             else
               output "Couldn't find #{yellow(minor)}."
+              find_closest(minor)
             end
           else
             list.items.each { |item| Platform.open(item) }
@@ -152,6 +153,7 @@ module Boom
             output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
           else
             output "Couldn't find #{yellow(major)}."
+            find_closest(major)
           end
         end
       end
@@ -378,6 +380,29 @@ module Boom
         }.gsub(/^ {8}/, '') # strip the first eight spaces of every line
 
         output text
+      end
+
+      # Public: output a "Did you mean this..."
+      # when an item is not found with open
+      #
+      # Returns nothing.
+      def find_closest(search)
+        results = Array.new
+        items = storage.items.each do |item|
+          # for now output the item that have 3 letters in common
+          if search[0, 3] == item.name[0, 3]
+            results.push(item.name)
+          end
+        end
+        if results.count == 1
+          output 'Did you mean this?'
+          output "    #{results[0]}"
+        elsif results.count > 1
+          output 'Did you mean one of these?'
+          results.each do |suggestion|
+            output "    #{suggestion}"
+          end
+        end
       end
 
     end
