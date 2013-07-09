@@ -202,11 +202,17 @@ module Boom
           item = storage.items.detect do |item|
             item.name == major
           end
-          return output "#{yellow(major)} #{red("not found")}" unless item
+          unless item
+            output "#{yellow(major)} #{red("not found")}"
+            return find_closest(major)
+          end
         else
           list = List.find(major)
           item = list.find_item(minor)
-          return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
+          unless item
+            output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}"
+            return find_closest(minor)
+          end
         end
         Platform.copy(item)
       end
