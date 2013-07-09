@@ -19,5 +19,10 @@ it_echos_an_item() {
 }
 
 it_handles_open_on_nonexistent_item() {
-  $boom open nadda | grep "nadda"
+  # searching "log" should suggest "blog"
+  $boom open log | grep "blog"
+}
+
+it_handles_copy_on_nonexistent_item() {
+  $boom copy log | grep "blog"
 }
