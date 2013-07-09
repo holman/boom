@@ -383,15 +383,15 @@ module Boom
       end
 
       # Public: output a "Did you mean this..."
-      # when an item is not found with open
+      # when the user search for a non-existing item
+      #
+      # search - item the user typped
       #
       # Returns nothing.
       def find_closest(search)
         results = Array.new
         items = storage.items.each do |item|
-          # for now output the item that have the 3
-          # first letters in common
-          if search[0, 3] == item.name[0, 3]
+          if Levenshtein.distance(search, item.name) < 7
             results.push(item.name)
           end
         end

@@ -7,6 +7,7 @@ end
 
 require 'fileutils'
 require 'yajl'
+require 'levenshtein'
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
