@@ -24,6 +24,9 @@ For more details about what boom is and how it works, check out
     $ boom shirt
     Boom! Just copied http://cl.ly/NwCS/shirt.gif to your clipboard.
 
+    $ boom delete gifs shirt
+    Boom! shirt is gone forever.
+
 And that's just a taste! I know, you're salivating, I can hear you from here.
 (Why your saliva is noisy is beyond me.) Check out the [full list of
 commands](https://github.com/holman/boom/wiki/Commands).
