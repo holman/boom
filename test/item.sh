@@ -10,7 +10,7 @@ it_adds_an_item() {
 }
 
 it_deletes_an_item() {
-  yes | $boom urls google --delete | grep 'gone forever'
+  yes | $boom delete urls google | grep 'gone forever'
   $boom urls google | grep 'not found'
 }
 

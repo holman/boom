@@ -96,19 +96,20 @@ module Boom
         return open(major,minor) if command == 'open' || command == 'o'
         return random(major)     if command == 'random' || command == 'rand' || command == 'r'
 
-        # if we're operating on a List
-        if storage.list_exists?(command)
-          return delete_list(command) if major == '--delete'
-          return detail_list(command) unless major
-          unless minor == '--delete'
-            return add_item(command,major,minor) if minor
-            return add_item(command,major,stdin.read) if stdin.stat.size > 0
-            return search_list_for_item(command, major)
+        if command == 'delete' || command == 'd'
+          if minor
+            return delete_item(major, minor)
+          else
+            return delete_list(major)
           end
         end
 
-        if minor == '--delete' and storage.item_exists?(major)
-          return delete_item(command, major)
+        # if we're operating on a List
+        if storage.list_exists?(command)
+          return detail_list(command) unless major
+          return add_item(command,major,minor) if minor
+          return add_item(command,major,stdin.read) if stdin.stat.size > 0
+          return search_list_for_item(command, major)
         end
 
         return search_items(command) if storage.item_exists?(command) and !major
@@ -358,7 +359,7 @@ module Boom
 
           boom <list>                   create a new list
           boom <list>                   show items for a list
-          boom <list> --delete          deletes a list
+          boom delete <list>            deletes a list
 
           boom <list> <name> <value>    create a new list item
           boom <name>                   copy item's value to clipboard
@@ -371,7 +372,7 @@ module Boom
           boom echo <list> <name>       echo the item's value without copying
           boom copy <name>              copy the item's value without echo
           boom copy <list> <name>       copy the item's value without echo
-          boom <list> <name> --delete   deletes an item
+          boom delete <list> <name>     deletes an item
 
           all other documentation is located at:
             https://github.com/holman/boom
