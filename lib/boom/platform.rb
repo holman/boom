@@ -75,8 +75,14 @@ module Boom
       #
       # Returns the String value of the Item.
       def copy(item)
-        IO.popen(copy_command,"w") {|cc|  cc.write(item.value)}
-        item.value
+        begin
+          IO.popen(copy_command,"w") {|cc|  cc.write(item.value)}
+          item.value
+        rescue Errno::ENOENT
+          puts item.value
+          puts "Please install #{copy_command[0..5]} to copy this item to your clipboard"
+          exit
+        end
       end
 
       # Public: opens the JSON file in an editor for you to edit. Uses the
