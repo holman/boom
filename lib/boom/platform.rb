@@ -14,7 +14,7 @@ module Boom
       #
       # Returns true if running on darwin (MacOS X), else false
       def darwin?
-        !!(RUBY_PLATFORM =~ /darwin/)
+        !!(RbConfig::CONFIG['host_os'] =~ /darwin/)
       end
 
       # Public: tests if currently running on windows.
@@ -23,7 +23,7 @@ module Boom
       #
       # Returns true if running on windows (win32/mingw32), else false
       def windows?
-        !!(RUBY_PLATFORM =~ /mswin|mingw/)
+        !!(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/)
       end
 
       # Public: returns the command used to open a file or URL
