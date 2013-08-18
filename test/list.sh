@@ -25,6 +25,6 @@ it_shows_a_list() {
 
 it_deletes_a_list() {
   $boom | grep "enemies"
-  yes | $boom enemies --delete | grep "Deleted"
+  yes | $boom delete enemies | grep "Deleted"
   ! $boom | grep "enemies"
 }
