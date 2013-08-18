@@ -1,5 +1,7 @@
 # boom changes
 ## head
+
+## 0.4.0
 - Returns an error if you try to `open` something that doesn't exist.
   ([@romainberger](https://github.com/romainberger), #90).
 - Removes `--delete` in favor of going to `boom delete x`
