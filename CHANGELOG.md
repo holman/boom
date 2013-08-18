@@ -2,6 +2,8 @@
 ## head
 - Returns an error if you try to `open` something that doesn't exist.
   ([@romainberger](https://github.com/romainberger), #90).
+- Removes `--delete` in favor of going to `boom delete x`
+  ([@eugeneius](https://github.com/holman/boom/pull/89), #89).
 
 ## 0.3.0
 - 0.3 removes all the Storage nonsense in favor of clean and easy JSON. Less
