@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.authors  = ["Zach Holman"]
   s.email    = 'zach@zachholman.com'
   s.homepage = 'https://github.com/holman/boom'
+  s.license  = 'MIT'
 
   ## This gets added to the $LOAD_PATH so that 'lib/NAME.rb' can be required as
   ## require 'NAME.rb' or'/lib/NAME/file.rb' can be as require 'NAME/file.rb'
