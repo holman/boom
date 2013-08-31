@@ -65,7 +65,7 @@ module Boom
 
     # Public: creates a Hash of the representation of the in-memory data
     # structure. This percolates down to Items by calling to_hash on the List,
-    # which in tern calls to_hash on individual Items.
+    # which in turn calls to_hash on individual Items.
     #
     # Returns a Hash of the entire data set.
     def to_hash
@@ -83,7 +83,7 @@ module Boom
       save
     end
 
-    # Take a JSON representation of data and explode it out into the consituent
+    # Take a JSON representation of data and explode it out into the constituent
     # Lists and Items for the given Storage instance.
     #
     # Returns nothing.
