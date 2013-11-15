@@ -106,6 +106,7 @@ module Boom
 
         # if we're operating on a List
         if storage.list_exists?(command)
+          return recent_list(command) if major == '--recent'
           return detail_list(command) unless major
           return add_item(command,major,minor) if minor
           return add_item(command,major,stdin.read) if stdin.stat.size > 0
@@ -126,6 +127,18 @@ module Boom
       def detail_list(name)
         list = List.find(name)
         list.items.sort{ |x,y| x.name <=> y.name }.each do |item|
+          output "    #{item.short_name}:#{item.spacer} #{item.value}"
+        end
+      end
+
+      # Public: prints all Items over a List sorted by newest first
+      #
+      # name - the List object to iterate over
+      #
+      # Returns nothing.
+      def recent_list(name)
+        list = List.find(name)
+        list.items.reverse.each do |item|
           output "    #{item.short_name}:#{item.spacer} #{item.value}"
         end
       end
@@ -359,6 +372,7 @@ module Boom
 
           boom <list>                   create a new list
           boom <list>                   show items for a list
+          boom <list> --recent          show items for list sorted by newest first
           boom delete <list>            deletes a list
 
           boom <list> <name> <value>    create a new list item
