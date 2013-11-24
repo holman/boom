@@ -7,7 +7,7 @@ _boom_complete() {
     local IFS=$'\n'
 
     if [ $COMP_CWORD -eq 1 ]; then
-        lists=`boom | sed 's/^  \(.*\) ([0-9]\+)$/\1/'`
+        lists=`boom | sed 's/^  \(.*\) ([0-9]\{1,\})$/\1/'`
         COMPREPLY=( $( compgen -W '${lists}' -- ${cur} ) )
     elif [ $COMP_CWORD -eq 2 ]; then
         items=`boom $curr_list | sed 's/^    \(.\{0,16\}\):.*$/\1/'`
