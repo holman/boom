@@ -28,3 +28,8 @@ it_deletes_a_list() {
   yes | $boom delete enemies | grep "Deleted"
   ! $boom | grep "enemies"
 }
+
+it_handles_delete_on_nonexistent_list() {
+  ! $boom | grep "enemies"
+  $boom delete "enemies" | grep "We couldn't find that list"
+}
