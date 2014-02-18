@@ -240,13 +240,17 @@ module Boom
       #
       # Returns nothing.
       def delete_list(name)
-        printf "You sure you want to delete everything in #{yellow(name)}? (y/n): "
-        if $stdin.gets.chomp == 'y'
-          List.delete(name)
-          output "#{cyan("Boom!")} Deleted all your #{yellow(name)}."
-          save
+        if storage.list_exists?(name)
+          printf "You sure you want to delete everything in #{yellow(name)}? (y/n): "
+          if $stdin.gets.chomp == 'y'
+            List.delete(name)
+            output "#{cyan("Boom!")} Deleted all your #{yellow(name)}."
+            save
+          else
+            output "Just kidding then."
+          end
         else
-          output "Just kidding then."
+          output "We couldn't find that list."
         end
       end
 
