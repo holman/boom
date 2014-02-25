@@ -77,7 +77,7 @@ module Boom
     #
     # Return true if successfully saved.
     def bootstrap
-      return if File.exist?(json_file)
+      return if File.exist?(json_file) and !File.zero?(json_file)
       FileUtils.touch json_file
       File.open(json_file, 'w') {|f| f.write(to_json) }
       save

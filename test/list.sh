@@ -33,3 +33,10 @@ it_handles_delete_on_nonexistent_list() {
   ! $boom | grep "enemies"
   $boom delete "enemies" | grep "We couldn't find that list"
 }
+
+it_handles_empty_boomfile() {
+  cp /dev/null test/examples/empty.json
+  export BOOMFILE=test/examples/empty.json
+  $boom heynow | grep "Created a new list"
+  export BOOMFILE=test/examples/data.json
+}  
