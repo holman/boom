@@ -1,0 +1,16 @@
+{
+  "lists": [
+    {
+      "urls": [
+        { "blog":    "https://github.com/holman" },
+        { "twitter": "https://twitter.com/holman"},
+        { "site":    "http://zachholman.com"}
+      ]
+    },
+    {
+      "diditimport": [
+        { "yep":  "It sure did." }
+      ]
+    }
+  ]
+}

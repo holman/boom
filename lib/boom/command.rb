@@ -81,6 +81,29 @@ module Boom
         end
       end
 
+      # Public: prints the boom file
+      #
+      # Prints to STDOUT
+      def export
+        puts storage.to_json
+      end
+
+      # Public: reads from STDIN and overrides the boom file
+      #
+      def import
+        abort "Couldn't find boom file!" unless File.exists?(storage.json_file)
+
+        input = STDIN.read
+
+        File.open(storage.json_file, "w") do |f|
+          f.puts input
+        end
+
+        puts "Imporded data"
+
+        exit
+      end
+
       # Public: allows main access to most commands.
       #
       # Returns output based on method calls.
@@ -89,6 +112,8 @@ module Boom
         return edit              if command == 'edit'
         return version           if command == "-v"
         return version           if command == "--version"
+        return export            if command == "--export"
+        return import            if command == "--import"
         return help              if command == 'help'
         return help              if command[0] == 45 || command[0] == '-' # any - dash options are pleas for help
         return echo(major,minor) if command == 'echo' || command == 'e'
