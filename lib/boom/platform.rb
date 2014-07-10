@@ -10,6 +10,13 @@
 module Boom
   class Platform
     class << self
+      # Public: tests if currently running on cygwin.
+      #
+      # Returns true if running on Cygwin, else false
+      def cygwin?
+        !!(RbConfig::CONFIG['host_os'] =~ /cygwin/)
+      end
+
       # Public: tests if currently running on darwin.
       #
       # Returns true if running on darwin (MacOS X), else false
@@ -37,6 +44,8 @@ module Boom
           'open'
         elsif windows?
           'start'
+        elsif cygwin?
+          'cygstart'
         else
           'xdg-open'
         end
@@ -63,7 +72,7 @@ module Boom
       def copy_command
         if darwin?
           'pbcopy'
-        elsif windows?
+        elsif windows? || cygwin?
           'clip'
         else
           'xclip -selection clipboard'
