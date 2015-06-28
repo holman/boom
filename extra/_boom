@@ -1,0 +1,32 @@
+#compdef boom
+
+local state expl ret=1
+local -a books commands
+
+books=( $(boom | awk '{print $1;}') )
+
+commands=(
+  'delete:delete a book/snippet'
+)
+
+_arguments \
+  '1:cmd:->cmds' \
+  '*::arg:->args' \
+&& ret=0
+
+case "$state" in
+  cmds)
+    _wanted books expl "books" compadd "$books[@]"
+    _describe -t commands 'commands' commands && ret=0
+  ;;
+  args)
+    case "$words[1]" in
+      delete)
+        _arguments \
+          "*:books:$books" && ret=0
+        ;;
+      *)
+        (( ret )) && _message 'no more arguments'
+        ;;
+    esac
+esac
