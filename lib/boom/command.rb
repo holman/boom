@@ -142,6 +142,7 @@ module Boom
               output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
             else
               output "Couldn't find #{yellow(minor)}."
+              find_closest(minor)
             end
           else
             list.items.each { |item| Platform.open(item) }
@@ -153,6 +154,7 @@ module Boom
             output "#{cyan("Boom!")} We just opened #{yellow(Platform.open(item))} for you."
           else
             output "Couldn't find #{yellow(major)}."
+            find_closest(major)
           end
         end
       end
@@ -201,11 +203,17 @@ module Boom
           item = storage.items.detect do |item|
             item.name == major
           end
-          return output "#{yellow(major)} #{red("not found")}" unless item
+          unless item
+            output "#{yellow(major)} #{red("not found")}"
+            return find_closest(major)
+          end
         else
           list = List.find(major)
           item = list.find_item(minor)
-          return output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}" unless item
+          unless item
+            output "#{yellow(minor)} #{red("not found in")} #{yellow(major)}"
+            return find_closest(minor)
+          end
         end
         Platform.copy(item)
       end
@@ -383,6 +391,30 @@ module Boom
         }.gsub(/^ {8}/, '') # strip the first eight spaces of every line
 
         output text
+      end
+
+      # Public: output a "Did you mean this..."
+      # when the user search for a non-existing item
+      #
+      # search - item the user typped
+      #
+      # Returns nothing.
+      def find_closest(search)
+        results = Array.new
+        items = storage.items.each do |item|
+          if Levenshtein.distance(search, item.name) < 7
+            results.push(item.name)
+          end
+        end
+        if results.count == 1
+          output 'Did you mean this?'
+          output "    #{results[0]}"
+        elsif results.count > 1
+          output 'Did you mean one of these?'
+          results.each do |suggestion|
+            output "    #{suggestion}"
+          end
+        end
       end
 
     end
