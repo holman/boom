@@ -2,14 +2,14 @@ PATH
   remote: .
   specs:
     boom (0.4.0)
-      yajl-ruby (~> 1.1.0)
+      yajl-ruby (~> 1.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
     mocha (0.9.12)
     rake (0.9.2)
-    yajl-ruby (1.1.0)
+    yajl-ruby (~> 1.1)
 
 PLATFORMS
   ruby
