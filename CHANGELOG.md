@@ -1,6 +1,9 @@
 # boom changes
 ## head
 
+## 0.5.0
+- Bump Ruby versions and gems. ([@wjzijderveld](https://github.com/holman/boom/pull/115), #115).
+
 ## 0.4.0
 - Returns an error if you try to `open` something that doesn't exist.
   ([@romainberger](https://github.com/romainberger), #90).
