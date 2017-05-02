@@ -46,7 +46,6 @@ Gem::Specification.new do |s|
 
   ## If your gem includes any executables, list them here.
   s.executables = ["boom"]
-  s.default_executable = 'boom'
 
   ## Specify any RDoc options here. You'll want to add your README and
   ## LICENSE files to the extra_rdoc_files list.
