@@ -19,6 +19,8 @@ require 'boom/storage'
 
 require 'boom/core_ext/symbol'
 
+# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 module Boom
   VERSION = '0.5.0'
 
