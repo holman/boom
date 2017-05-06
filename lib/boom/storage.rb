@@ -89,7 +89,17 @@ module Boom
     # Returns nothing.
     def populate
       file = File.new(json_file, 'r')
-      storage = Yajl::Parser.parse(file)
+      begin
+        storage = Yajl::Parser.parse(file)
+      rescue Yajl::ParseError
+        puts "Looks like your boom file (#{json_file}) is corrupted."
+        exit
+      end
+
+      if storage.nil? or storage.empty?
+        puts "Looks like your boom file (#{json_file}) is empty."
+        exit
+      end
 
       storage['lists'].each do |lists|
         lists.each do |list_name, items|
