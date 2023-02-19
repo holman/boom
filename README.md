@@ -7,7 +7,7 @@ like URLs, canned responses, and important notes and then quickly copy them
 onto your clipboard, ready for pasting.
 
 For more details about what boom is and how it works, check out
-[boom's website](http://holman.github.com/boom).
+[boom's website](https://zachholman.com/boom/).
 
 ## Install
 
